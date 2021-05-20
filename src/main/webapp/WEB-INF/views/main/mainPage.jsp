@@ -79,8 +79,7 @@
 
 <div class="flex flex-col w-screen min-h-screen p-10 text-gray-800 mb-6">       
 
-	<div class="container bg-grey-lightest mx-auto shadow rounded mt-8 pb-4 h-48 bg-cover" style="color:#606F7B;background-color: rgb(165, 182, 198);
-		background-image:url('https://lh3.googleusercontent.com/proxy/De7PQvaT-ofni_smwkWWw82utWXNkXmGS5IRNrCjX3vFZuCT29Yp7cMCqegviuyp6PJphcMbubEx_gADAD6QysZPRAxFV29sSxHxiwNPFPS6PEuuTgbBFajX_77Q1uaqZVAWOZL9NQ5JjVp_TTJ6qLsst_qyTwM_7-T6h2w4A76kD6TF');">
+	<div class="container bg-grey-lightest mx-auto shadow rounded mt-8 pb-4 h-48 bg-cover" style="background-image: url(./img/game.gif)">  
 	</div>
 
 	<!-- Component Start -->

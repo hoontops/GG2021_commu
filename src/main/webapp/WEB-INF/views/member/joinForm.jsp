@@ -14,6 +14,7 @@
 </head>
 
 <body>
+<form method="post" action="joinFormOk.do">
 <div class="bg-grey-lighter min-h-screen flex flex-col"
 	 style="background-image: url('img/joinFormBack.png')">
             <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -22,24 +23,29 @@
                     <input 
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="fullname"
-                        placeholder="이름" />
+                        name="M_ID" id="M_ID" 
+                        placeholder="아이디" />
+                        <input 
+                        type="text"
+                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        name="M_NAME" id="M_NAME" 
+                        placeholder="이름" /> 
 
                     <input 
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="email"
+                        name="M_EMAIL" id="M_EMAIL"
                         placeholder="이메일" />
 
                     <input 
                         type="password"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="password"
+                        name="M_PASSWD" id="M_PASSWD"
                         placeholder="패스워드" />
                     <input 
                         type="password"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="confirm_password"
+                        name="M_PASSWD_Confirm" id="M_PASSWD_Confirm"
                         placeholder="패스워드 확인" />
 					<div class="g-signin2" data-onsuccess="onSignIn"></div>
                     <button
@@ -64,5 +70,6 @@
                 </div>
             </div>
         </div>
+</form>        
 </body>
 </html>

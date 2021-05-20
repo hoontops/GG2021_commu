@@ -12,10 +12,12 @@ public class MainController {
 	public String main() {
 		return "main/mainPage";
 	}
-	@RequestMapping("joinForm.do")
+	
+	@RequestMapping("joinForm")
 	public String joinForm() {
-		return "member/joinForm";
+		return "member/joinForm"; 
 	}
+
 	@RequestMapping("loginForm.do")
 	public String loginForm() {
 		return "member/loginForm";

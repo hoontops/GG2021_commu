@@ -10,13 +10,9 @@
     </select>
     
     <!-- 회원저장 -->
-    <insert id="member_join" parameterType="member">
-     insert into join_member (join_code,join_id,join_pwd,join_name,
-     join_zip1,join_addr1,join_addr2,join_tel,join_phone,join_email,join_profile,
-     join_regdate,join_state) values(join_member_joincode_seq.nextval,
-     #{join_id},#{join_pwd},#{join_name},
-     #{join_zip1},#{join_addr1},#{join_addr2},#{join_tel},
-     #{join_phone},#{join_email},#{join_profile,jdbcType=VARCHAR},sysdate,1)
+    <insert id="joinFormOk" parameterType="member"> 
+     insert into member (M_ID, M_PASSWD, M_NAME,  M_EMAIL, M_SUBSCRIPTION_DATE) 
+     	values(#{M_ID}, #{M_PASSWD}, #{M_NAME}, #{M_EMAIL}, sysdate)  
     </insert>
     
     <!-- 로그인 인증 -->
