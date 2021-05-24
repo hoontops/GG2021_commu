@@ -2,9 +2,30 @@
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberns">
+	<insert id="memberJoin" parameterType="member">
+		insert into member (M_ID,M_PASSWD,M_NAME,M_EMAIL,M_SUBSCRIPTION_DATE,M_POINT)values 
+		(#{M_ID},#{M_PASSWD},#{M_NAME},#{M_EMAIL},sysdate,0)
+	</insert>
+	
+	<select id="idcheck" parameterType="String" resultType="member">
+		select * from member where M_ID=#{member}
+	</select>
+	
+	<!-- 회원삭제 -->
+    <delete id="memberDel" parameterType="member">
+   	delete from Member where M_ID=#{M_ID} and M_PASSWD=#{M_PASSWD}   
+    </delete>
     
-        
-   
+    <!-- 비번 검색 -->
+    <select id="pwdFind" resultType="member" parameterType="member">
+    select * from Member where M_ID=#{M_ID} and M_NAME=#{M_NAME} 
+    </select> 
+    
+    <!-- 회원수정 -->
+    <update id="updateMem"  parameterType="member">
+    update member set M_NAME=#{M_NAME}, M_EMAIL=#{M_EMAIL}, M_IMG=#{M_IMG, jdbcType=VARCHAR}  
+    	where M_ID=#{M_ID}  
+    </update>
     
 </mapper>
 

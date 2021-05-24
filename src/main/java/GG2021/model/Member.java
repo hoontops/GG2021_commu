@@ -12,7 +12,6 @@ public class Member {
 	private Date M_SUBSCRIPTION_DATE;
 	private Date M_ACCESS;
 	
-	
 	public String getM_ID() {
 		return M_ID;
 	}
@@ -61,5 +60,7 @@ public class Member {
 	public void setM_ACCESS(Date m_ACCESS) {
 		M_ACCESS = m_ACCESS;
 	}
-
+	
+	
+	
 }

@@ -10,8 +10,45 @@ import GG2021.model.Member;
 public class MemberDao {
 	
 	@Autowired
-	private SqlSession sqlSession;	
-	
-	
+	private SqlSession session;	
 
+	public int memberJoin(Member member) {
+		return session.insert("memberns.memberJoin",member);
+	}
+	
+	public Member idcheck(String member) {
+		return session.selectOne("idcheck", member);
+	}
+	
+	/* 회원삭제 */
+//	@Transactional
+	public void memberDel(Member delm) throws Exception {
+//		getSession();
+		session.delete("memberDel", delm); 
+	}
+	
+	/***** 아이디 중복 체크 *****/ 
+//	@Transactional
+	public int checkMemberId(String id) throws Exception {
+//		getSession();
+		int re = -1;	// 사용 가능한 ID 
+		Member mb = (Member) session.selectOne("idcheck", id); 
+		if (mb != null)
+			re = 1; 	// 중복id
+		return re;
+	}
+	
+	/* 비번 검색 */
+//	@Transactional
+	public Member pwdFind(Member pm) throws Exception {
+//		getSession();
+		return (Member) session.selectOne("pwdFind", pm);
+	}
+	
+	/* 회원수정 */
+//	@Transactional
+	public void memberUpdate(Member member) throws Exception {
+//		getSession();
+		session.update("updateMem", member);
+	}
 }
