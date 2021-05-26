@@ -1,6 +1,7 @@
 package GG2021.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import GG2021.model.All_Game;
 import GG2021.model.Member;
 import GG2021.service.MemberService;
 
@@ -20,7 +22,7 @@ public class MainController {
 	
 	@RequestMapping("main.do")
 	public String main() {
-		return "main/mainPage";
+		return "redirect:gameinfo.do";
 	}
 	
 	@RequestMapping("signUp.do")
@@ -60,9 +62,17 @@ public class MainController {
 		return "main/myPage";
 	}
 	
+	@RequestMapping("gameinfo.do")
+	public String gameinfo(Model model, All_Game game ) {
+		
+		/* List<All_Game> list = service.gameInfo(); */
+		
+		return "main/mainPage";
+	}
+	
 	@RequestMapping("adminMain.do")
 	public String adminMain() {
-		return "admin/adminMain";
+		return "admin/dashBoard";
 	}
 	
 }
