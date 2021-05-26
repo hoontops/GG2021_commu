@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias alias="member" type="GG2021.model.Member" />		
 		<typeAlias alias="board" type="GG2021.model.Board" />		
+		<typeAlias alias="allgame" type="GG2021.model.All_Game" />		
 	</typeAliases>
 
 	<!-- <environments default="development">

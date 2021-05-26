@@ -1,10 +1,15 @@
 package GG2021.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import GG2021.model.Member;
 import GG2021.service.AdminService;
+import GG2021.service.MemberService;
 
 @Controller
 public class AdminController {
@@ -19,7 +24,12 @@ public class AdminController {
 
 	// 회원관리
 	@RequestMapping("adminMemeberCon.do")
-	public String adminMemeberCon() {
+	public String adminMemeberCon(Member member, Model model) {
+		List<Member> list = service.getMemberList(); //멤버 전체목록을 뽑아온다.
+		int result= service.getMemberCount();// 전체 회원수를 구해온다.
+		System.out.println(list);
+		model.addAttribute("member", list);
+		model.addAttribute("result", result);
 		return "admin/memberCon";
 	}
 
