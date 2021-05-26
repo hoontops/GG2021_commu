@@ -1,5 +1,7 @@
 package GG2021.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -28,16 +30,16 @@ import GG2021.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService service;
-	
-	// ID중복검사 ajax함수로 처리부분 
-		@RequestMapping(value = "memberCheck.do", method = RequestMethod.POST)
-		public String memberCheck(@RequestParam("memId") String id, Model model) throws Exception {
 
-			int result = service.checkMemberId(id); 
-			model.addAttribute("result", result);
+	// ID중복검사 ajax함수로 처리부분
+	@RequestMapping(value = "memberCheck.do", method = RequestMethod.POST)
+	public String memberCheck(@RequestParam("memId") String id, Model model) throws Exception {
 
-			return "member/idcheckResult";
-		}
+		int result = service.checkMemberId(id);
+		model.addAttribute("result", result);
+
+		return "member/idcheckResult";
+	}
 
 	// 회원가입
 	@RequestMapping("memberJoin.do")
@@ -48,89 +50,98 @@ public class MemberController {
 	}
 
 	// 로그인
-	@RequestMapping("memberLogin.do") 
+	@RequestMapping("memberLogin.do")
 	public String memberLogin(Member member, Model model, HttpSession session) {
 		int result = 0;
 		Member old = service.idcheck(member.getM_ID());
-		if(old == null) {
+		if (old == null) {
 			result = 0;
-			
-			model.addAttribute("result", result);			
+
+			model.addAttribute("result", result);
 			return "member/loginResult";
 		}
 
 		if (old.getM_PASSWD().equals(member.getM_PASSWD())) {
 			session.setAttribute("id", member.getM_ID());
 			result = 1;
-		} else{
+		} else {
 			result = -1;
 		}
 		model.addAttribute("result", result);
 		return "member/loginResult";
 	}
-	
+
 	// 회원정보 수정 페이지 이동
 	@RequestMapping("memberModify.do")
-	public String memberModify(Model model, HttpSession session) {
+	public String memberModify(Member member, Model model, HttpSession session, HttpServletRequest request) {
 		String id = (String) session.getAttribute("id");
-		Member old = service.idcheck(id);
+		String admin="hth9876";
+		Member old = new Member();
+		if (id==admin) {
+			old = service.idcheck(id);
+		} else {
+			old = service.idcheck(request.getParameter("M_ID"));
+		}
 		String name = old.getM_NAME();
 		String email = old.getM_EMAIL();
+		model.addAttribute("member",member);
 		model.addAttribute("name", name);
+		System.out.println("name" + name);
 		model.addAttribute("email", email);
+		System.out.println("email" + email);
 		return "member/memberModify";
+
 	}
-	
+
 	// 회원정보 수정 완료
-	@RequestMapping(value="memberModifyOk.do", method = RequestMethod.POST)
-	public String memberModifyOk(@RequestParam("M_IMG01") MultipartFile mf, Member member, Model model, HttpSession session, 
-								 HttpServletRequest request) throws Exception {
-		
-		
-		String filename = mf.getOriginalFilename(); 
-		int size = (int) mf.getSize();		
-		
+	@RequestMapping(value = "memberModifyOk.do", method = RequestMethod.POST)
+	public String memberModifyOk(@RequestParam("M_IMG01") MultipartFile mf, Member member, Model model,
+			HttpSession session, HttpServletRequest request) throws Exception {
+
+		String filename = mf.getOriginalFilename();
+		int size = (int) mf.getSize();
+
 		String path = request.getRealPath("upload");
-		System.out.println("filename:"+filename);
-		int result=0;		
+		System.out.println("filename:" + filename);
+		int result = 0;
 		String file[] = new String[2];
-		
-		if(filename != ""){	 // 첨부파일이 전송된 경우					
+
+		if (filename != "") { // 첨부파일이 전송된 경우
 			StringTokenizer st = new StringTokenizer(filename, ".");
-			file[0] = st.nextToken();		
-			file[1] = st.nextToken();		// 확장자	
-			
-			if(size > 10000000){ 
-				result=1;
+			file[0] = st.nextToken();
+			file[1] = st.nextToken(); // 확장자
+
+			if (size > 10000000) {
+				result = 1;
 				model.addAttribute("result", result);
-				
+
 				return "member/uploadResult";
-				
-			}else if(!file[1].equals("jpg") &&
-					 !file[1].equals("gif") &&
-					 !file[1].equals("png") ){
-				
-				result=2;
+
+			} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
+
+				result = 2;
 				model.addAttribute("result", result);
-				
+
 				return "member/uploadResult";
-			}				
+			}
 		}
-			
+
 		if (size > 0) { // 첨부파일이 전송된 경우
-			mf.transferTo(new File(path + "/" + filename)); 
+			mf.transferTo(new File(path + "/" + filename));
 		}
 		
-		String id = (String) session.getAttribute("id");
-			
-		Member old = this.service.idcheck(id);
+		String id= request.getParameter("M_ID");
+		System.out.println("수정을 위해 입력되는 아이디 값: "+id);
 		
-		if (size > 0 ) { 			// 첨부 파일이 수정되면
-			member.setM_IMG(filename);			
-		} else { 					// 첨부파일이 수정되지 않으면
+			Member old = service.idcheck(id);
+		
+		
+		if (size > 0) { // 첨부 파일이 수정되면
+			member.setM_IMG(filename);
+		} else { // 첨부파일이 수정되지 않으면
 			member.setM_IMG(old.getM_IMG());
 		}
-		
+
 		/*
 		 * // 중복 값 제거 String filename02 = "clock.jpg"; String extension =
 		 * filename02.substring(filename02.lastIndexOf("."), filename02.length());
@@ -140,21 +151,20 @@ public class MemberController {
 		 * 
 		 * String newfilename = uuid.toString() + extension;
 		 * System.out.println("newfilename:"+newfilename);
-		 */ 
-				
-		member.setM_ID(id);
+		 */
 
-		service.memberUpdate(member);  
-		
-		
+		member.setM_ID(old.getM_ID());
+
+		service.memberUpdate(member);
+
 		model.addAttribute("M_EMAIl", member.getM_EMAIL());
 		model.addAttribute("M_POINT", member.getM_POINT());
-		model.addAttribute("M_SUBSCRIPTION_DATE", member.getM_SUBSCRIPTION_DATE()); 
-		model.addAttribute("M_IMG", filename);		
-						
-		return "redirect:myPage.do";       
+		model.addAttribute("M_SUBSCRIPTION_DATE", member.getM_SUBSCRIPTION_DATE());
+		model.addAttribute("M_IMG", filename);
+
+		return "redirect:myPage.do";
 	}
-		
+
 	// 탈퇴 폼 페이지 이동
 	@RequestMapping("memberDel.do")
 	public String memberDel(Model model, HttpSession session) {
@@ -166,9 +176,9 @@ public class MemberController {
 	}
 
 	/* 회원정보 삭제 완료 */
-	@RequestMapping(value = "memberDelOk.do")  
-	public String memberDelOk(@RequestParam(value="M_PASSWD", required=false) String pass,
-							    HttpSession session) throws Exception {
+	@RequestMapping(value = "memberDelOk.do")
+	public String memberDelOk(@RequestParam(value = "M_PASSWD", required = false) String pass, HttpSession session)
+			throws Exception {
 
 		String id = (String) session.getAttribute("id");
 		Member member = this.service.idcheck(id);
@@ -176,17 +186,16 @@ public class MemberController {
 		if (!member.getM_PASSWD().equals(pass)) {
 
 			return "member/deleteResult";
-			
+
 		} else {// 비번이 같은 경우
-			
+
 			String up = session.getServletContext().getRealPath("upload");
 			String fname = member.getM_IMG();
-			System.out.println("up:"+up);
-		
-			
+			System.out.println("up:" + up);
+
 			// 디비에 저장된 기존 이진파일명을 가져옴
 			if (fname != null) {// 기존 이진파일이 존재하면
-				File delFile = new File(up +"/"+fname);
+				File delFile = new File(up + "/" + fname);
 				delFile.delete();// 기존 이진파일을 삭제
 			}
 			Member delm = new Member();
@@ -195,22 +204,21 @@ public class MemberController {
 
 			service.memberDel(delm);// 삭제 메서드 호출
 
-			session.invalidate();	// 세션만료
+			session.invalidate(); // 세션만료
 
 			return "member/memberDelOk";
 		}
 	}
-	
+
 	/* 비번찾기 폼 */
 	@RequestMapping("pwdFind.do")
 	public String pwdFind() {
-		return "member/pwdFind";  
+		return "member/pwdFind";
 	}
-	
+
 	/* 비번찾기 완료 */
 	@RequestMapping(value = "pwdFindOk.do", method = RequestMethod.POST)
-	public String pwdFindOk(@ModelAttribute Member mem, HttpServletResponse response, Model model)
-			throws Exception {
+	public String pwdFindOk(@ModelAttribute Member mem, HttpServletResponse response, Model model) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
@@ -261,5 +269,5 @@ public class MemberController {
 
 		}
 	}
-	
+
 }

@@ -24,8 +24,8 @@
                     <input 
                         type="text"
                         class="block border border-gray-light w-full p-3 rounded mb-4 bg-gray-100"
-                        name="M_ID" id="M_ID" value="${id}"  
-                        disabled="disabled"/>
+                        name="M_ID" id="M_ID" value="${member.getM_ID()}"  
+                       readonly/>
                         <input 
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"

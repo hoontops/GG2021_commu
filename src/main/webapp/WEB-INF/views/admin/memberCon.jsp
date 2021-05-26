@@ -68,10 +68,10 @@
 						<tr>
 							<th
 								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-								이름</th>
+								아이디/이름</th>
 							<th
 								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-								이메일</th>
+								이메일/비밀번호</th>
 							<th
 								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 								포인트</th>
@@ -102,6 +102,7 @@
 
 							<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
 								<div class="text-center text-sm leading-5 text-gray-900">${member.getM_EMAIL()}</div>
+								<div class="text-center leading-5 text-gray-500">${member.getM_PASSWD()}</div>
 							</td>
 
 							<td class="text-center px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -117,7 +118,7 @@
 
 							<td
 								class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-								<a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+								<a href="memberModify.do?M_ID=${member.getM_ID() }" class="text-indigo-600 hover:text-indigo-900">Edit</a>
 							</td>
 						</tr>
 						</c:forEach>

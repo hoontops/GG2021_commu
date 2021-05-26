@@ -14,9 +14,9 @@ public class AdminDao {
 	private SqlSession session;
 	
 	public List<Member> getMemberList()	{
-		return session.selectList("getMemberList");
+		return session.selectList("admin.getMemberList");
 	}
 	public int getMemberCount() {
-		return session.selectOne("getMemberCount");
+		return session.selectOne("admin.getMemberCount");
 	}
 }
