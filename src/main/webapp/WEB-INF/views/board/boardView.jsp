@@ -30,7 +30,7 @@
 			<div class="mb-2">
 				<button
 					class="py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
-					onclick="location.href='boardlist.do'">목록</button>
+					>목록</button>
 			</div>
 		</div>
 

@@ -60,5 +60,9 @@ public class MainController {
 		return "main/myPage";
 	}
 	
+	@RequestMapping("adminMain.do")
+	public String adminMain() {
+		return "admin/adminMain";
+	}
 	
 }

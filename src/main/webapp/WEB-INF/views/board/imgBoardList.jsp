@@ -22,39 +22,15 @@
   display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
 }
 </style> 
+
+<script type="text/javascript">
+	$(function() {
+		$('#list').load("deptList.do table");
+	});
+</script>
 </head>
 <body>
-<!-- 최상단 이미지  -->
-	<div class="container bg-grey-lightest mx-auto shadow rounded mt-8 pb-4 bg-cover" style="color:#606F7B;background-color: rgb(165, 182, 198); background-image:url('https://68.media.tumblr.com/f6a4004f3092b0d664daeabb95d5d195/tumblr_oduyciOJNb1uhjffgo1_500.gif');">
-		<div class="mt-2 p-12 text-center">
-			<span class="text-4xl font-thin text-indigo-600">Good Gamer</span>
-			<span class="hidden sm:inline-block align-bottom text-xs text-indigo-700">( 2021 )</span>
-		</div>
-		
-	</div>
-	
-<!-- 분류  -->
-	<div class="flex justify-between mx-36 w-auto mt-10 border-b border-grey-light">   
-		<div class="flex"> 
-			<button onclick="location.href='boardList.do'" class="focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">자유게시판</button>
-			<button onclick="location.href='imgBoardList.do'" class="focus:outline-none py-2 px-6 hover:bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">이미지게시판</button>
-			<%-- <a href="deptView.do?deptno=${dept.deptno}"
-							   class="btn btn-info"> ${dept.dname}</a> --%>
-		</div>
-		<div class="mb-2">  
-			<select class="focus:outline-none text-sm pr-4"> 
-				<option>게임선택</option>
-				<option class=" text-right">롤</option> 
-				<option class=" text-right">배틀그라운드</option>
-				<option class=" text-right">오버워치</option>
-			</select>					    
-			<button class="py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
-					onclick="location.href='boardWrite.do'">글쓰기 
-			</button>
-		</div>
-	</div>
-			
-	
+
 	
 	
 	<!-- 테이블 -->  
@@ -65,7 +41,7 @@
 				<div id="table" class="pt-10 w-11/12 mx-auto">
 
 					<div class="mb-8">
-						<h2 class="text-4xl font-bold text-gray-600 px-4 py-4">자유게시판</h2>
+						<h2 class="text-4xl font-bold text-gray-600 px-4 py-4">이미지게시판</h2>
 					</div>
 
 					<!-- 준표형 테이블 -->
@@ -87,7 +63,7 @@
 									<tr class="border-b text-center">
 										<td class="w-1/12 py-2">1</td>
 										<td id="checked" class="w-6/12 py-2 font-thin text-sm"><a
-											href="boardView.do">자바스프링 강철맛 와우 아이셔 좋아좋아</a></td>
+											href="boardView.do"> 아이셔 좋아좋아</a></td>
 										<td class="w-2/12 py-2 font-thin text-sm">너이름</td>
 										<td class="w-1/12 py-2 font-thin text-sm">21.05.18</td>
 										<td class="w-1/12 py-2 font-thin text-sm">55</td>
@@ -96,7 +72,7 @@
 									<tr class="border-b text-center">
 										<td class="w-1/12 py-2">1</td>
 										<td id="checked" class="w-6/12 py-2 font-thin text-sm"><a
-											href="boardView.do">자바스프링 강철맛 와우 아이셔 좋아좋아</a></td>
+											href="boardView.do"> 아이셔 좋아좋아</a></td>
 										<td class="w-2/12 py-2 font-thin text-sm">너이름</td>
 										<td class="w-1/12 py-2 font-thin text-sm">21.05.18</td>
 										<td class="w-1/12 py-2 font-thin text-sm">55</td>
@@ -105,7 +81,7 @@
 									<tr class="border-b text-center">
 										<td class="w-1/12 py-2">1</td>
 										<td id="checked" class="w-6/12 py-2 font-thin text-sm"><a
-											href="boardView.do">자바스프링 강철맛 와우 아이셔 좋아좋아</a></td>
+											href="boardView.do"> 아이셔 좋아좋아</a></td>
 										<td class="w-2/12 py-2 font-thin text-sm">너이름</td>
 										<td class="w-1/12 py-2 font-thin text-sm">21.05.18</td>
 										<td class="w-1/12 py-2 font-thin text-sm">55</td>
@@ -114,7 +90,7 @@
 									<tr class="border-b text-center">
 										<td class="w-1/12 py-2">1</td>
 										<td id="checked" class="w-6/12 py-2 font-thin text-sm"><a
-											href="boardView.do">자바스프링 강철맛 와우 아이셔 좋아좋아</a></td>
+											href="boardView.do"> 아이셔 좋아좋아</a></td>
 										<td class="w-2/12 py-2 font-thin text-sm">너이름</td>
 										<td class="w-1/12 py-2 font-thin text-sm">21.05.18</td>
 										<td class="w-1/12 py-2 font-thin text-sm">55</td>
@@ -179,7 +155,7 @@
 						</div>
 
 					</div>
-
+<div id="list"></div>
 					<!-- 글 리스트 -->
 
 				</div>
