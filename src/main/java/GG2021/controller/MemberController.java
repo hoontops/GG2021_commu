@@ -72,108 +72,85 @@ public class MemberController {
 	}
 
 	// 회원정보 수정 페이지 이동
-	@RequestMapping("memberModify.do")
-	public String memberModify(Member member, Model model, HttpSession session, HttpServletRequest request) {
-		String id = (String) session.getAttribute("id");
-		String admin="hth9876";
-		Member old = new Member();
-		if (id==admin) {
-			old = service.idcheck(id);
-		} else {
-			old = service.idcheck(request.getParameter("M_ID"));
+		@RequestMapping("memberModify.do")
+		public String memberModify(Model model, HttpSession session) {
+			String id = (String) session.getAttribute("id");
+			Member old = service.idcheck(id);
+			String name = old.getM_NAME();
+			String email = old.getM_EMAIL();
+			model.addAttribute("mid", id);
+			model.addAttribute("name", name);
+			model.addAttribute("email", email);
+			return "member/memberModify";
 		}
-		String name = old.getM_NAME();
-		String email = old.getM_EMAIL();
-		model.addAttribute("member",member);
-		model.addAttribute("name", name);
-		System.out.println("name" + name);
-		model.addAttribute("email", email);
-		System.out.println("email" + email);
-		return "member/memberModify";
+		
+		// 회원정보 수정 완료
+		@RequestMapping(value="memberModifyOk.do", method = RequestMethod.POST)
+		public String memberModifyOk(@RequestParam("M_IMG01") MultipartFile mf, Member member, Model model, HttpSession session, 
+									 HttpServletRequest request) throws Exception {
+			
+			
+			String filename = mf.getOriginalFilename(); 
+			int size = (int) mf.getSize();		
+			
+			String path = request.getRealPath("upload");
+			System.out.println("filename:"+filename);
+			int result=0;		
+			String file[] = new String[2];
+			
+			if(filename != ""){	 // 첨부파일이 전송된 경우					
+				StringTokenizer st = new StringTokenizer(filename, ".");
+				file[0] = st.nextToken();		
+				file[1] = st.nextToken();		// 확장자	
+				
+				if(size > 10000000){ 
+					result=1;
+					model.addAttribute("result", result);
+					
+					return "member/uploadResult";
+					
+				}else if(!file[1].equals("jpg") &&
+						 !file[1].equals("gif") &&
+						 !file[1].equals("png") ){
+					
+					result=2;
+					model.addAttribute("result", result);
+					
+					return "member/uploadResult";
+				}				
+			}
+				
+			if (size > 0) { // 첨부파일이 전송된 경우
+				mf.transferTo(new File(path + "/" + filename)); 
+			}
+			
+			String id = (String) session.getAttribute("id");
+			
+				
+			Member old = this.service.idcheck(id);
+			
+			if (size > 0 ) { 			// 첨부 파일이 수정되면
+				member.setM_IMG(filename);			
+			} else { 					// 첨부파일이 수정되지 않으면
+				member.setM_IMG(old.getM_IMG());
+			}
+			
+			member.setM_ID(member.getM_ID());
 
-	}
-
-	// 회원정보 수정 완료
-	@RequestMapping(value = "memberModifyOk.do", method = RequestMethod.POST)
-	public String memberModifyOk(@RequestParam("M_IMG01") MultipartFile mf, Member member, Model model,
-			HttpSession session, HttpServletRequest request) throws Exception {
-
-		String filename = mf.getOriginalFilename();
-		int size = (int) mf.getSize();
-
-		String path = request.getRealPath("upload");
-		System.out.println("filename:" + filename);
-		int result = 0;
-		String file[] = new String[2];
-
-		if (filename != "") { // 첨부파일이 전송된 경우
-			StringTokenizer st = new StringTokenizer(filename, ".");
-			file[0] = st.nextToken();
-			file[1] = st.nextToken(); // 확장자
-
-			if (size > 10000000) {
-				result = 1;
-				model.addAttribute("result", result);
-
-				return "member/uploadResult";
-
-			} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
-
-				result = 2;
-				model.addAttribute("result", result);
-
-				return "member/uploadResult";
+			service.memberUpdate(member);  
+			
+			
+			model.addAttribute("M_EMAIl", member.getM_EMAIL());
+			model.addAttribute("M_POINT", member.getM_POINT());
+			model.addAttribute("M_SUBSCRIPTION_DATE", member.getM_SUBSCRIPTION_DATE()); 
+			model.addAttribute("M_IMG", filename);	
+			String admin="hth9876";
+			if(id.equals(admin)) {
+				return "redirect:adminMemeberCon.do";
+			}else {
+				return "redirect:myPage.do";       
 			}
 		}
-
-		if (size > 0) { // 첨부파일이 전송된 경우
-			mf.transferTo(new File(path + "/" + filename));
-		}
-		
-		String id= request.getParameter("M_ID");
-		System.out.println("수정을 위해 입력되는 아이디 값: "+id);
-		
-			Member old = service.idcheck(id);
-		
-		
-		if (size > 0) { // 첨부 파일이 수정되면
-			member.setM_IMG(filename);
-		} else { // 첨부파일이 수정되지 않으면
-			member.setM_IMG(old.getM_IMG());
-		}
-
-		/*
-		 * // 중복 값 제거 String filename02 = "clock.jpg"; String extension =
-		 * filename02.substring(filename02.lastIndexOf("."), filename02.length());
-		 * System.out.println("extension:"+extension);
-		 * 
-		 * UUID uuid = UUID.randomUUID(); System.out.println("uuid:"+uuid);
-		 * 
-		 * String newfilename = uuid.toString() + extension;
-		 * System.out.println("newfilename:"+newfilename);
-		 */
-
-		member.setM_ID(old.getM_ID());
-
-		service.memberUpdate(member);
-
-		model.addAttribute("M_EMAIl", member.getM_EMAIL());
-		model.addAttribute("M_POINT", member.getM_POINT());
-		model.addAttribute("M_SUBSCRIPTION_DATE", member.getM_SUBSCRIPTION_DATE());
-		model.addAttribute("M_IMG", filename);
-
-		return "redirect:myPage.do";
-	}
-
-	// 탈퇴 폼 페이지 이동
-	@RequestMapping("memberDel.do")
-	public String memberDel(Model model, HttpSession session) {
-		String id = (String) session.getAttribute("id");
-		Member old = service.idcheck(id);
-		String name = old.getM_NAME();
-		model.addAttribute("name", name);
-		return "member/memberDel";
-	}
 
 	/* 회원정보 삭제 완료 */
 	@RequestMapping(value = "memberDelOk.do")
