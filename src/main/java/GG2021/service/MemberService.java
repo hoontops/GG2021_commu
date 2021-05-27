@@ -35,4 +35,8 @@ public class MemberService {
 	public void memberUpdate(Member member) throws Exception{
 		dao.memberUpdate(member);
 	}
+	
+	public void getPoint(String member) throws Exception{
+		dao.getPoint(member);
+	}
 }

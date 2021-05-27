@@ -11,10 +11,10 @@
 	<script>
 	
 		function del(){
-			window.open("http://www.naver.net", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no" );  
+			var  result =confirm("탈퇴 처리 하겠습니까?");
 			if(result){
+				location.href="memberDelOk.do?M_ID=jang&M_PASSWD=1234"; //값을 강제로 넣어야 된다.
 				alert("탈퇴하였습니다.");
-				location.href=""
 			}else{
 				alert("취소하였습니다.");	
 				
@@ -99,6 +99,7 @@
 
 					<tbody class="bg-white">
 					<c:forEach items="${member}" var="member">
+					<c:set var="mid" value="${member.getM_NAME() }"/>
 						<tr>
 							<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
 								<div class="flex items-center">
@@ -134,7 +135,7 @@
 							<td
 								class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
 								<a href="adminMemberModify.do?M_ID=${member.getM_ID() }"><i class="fas fa-edit text-indigo-500 pr-2"></i></a>
-								<button onclick="del()" id="del" value="${member.getM_ID() }"><i class="far fa-trash-alt text-red-600"></i></button>
+								<button onclick="del()" id="del" name="del" value="${member.getM_ID() }"><i class="far fa-trash-alt text-red-600"></i></button>
 							</td>
 						</tr>
 						</c:forEach>

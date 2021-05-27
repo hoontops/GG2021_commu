@@ -1,12 +1,8 @@
 package GG2021.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.StringTokenizer;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,7 +46,7 @@ public class MemberController {
 
 	// 로그인
 	@RequestMapping("memberLogin.do")
-	public String memberLogin(Member member, Model model, HttpSession session) {
+	public String memberLogin(Member member, Model model, HttpSession session) throws Exception {
 		int result = 0;
 		Member old = service.idcheck(member.getM_ID());
 		if (old == null) {
@@ -68,6 +63,8 @@ public class MemberController {
 			result = -1;
 		}
 		model.addAttribute("result", result);
+		System.out.println("로그이한 아이디? : " + member.getM_ID() );
+		service.getPoint(member.getM_ID());
 		return "member/loginResult";
 	}
 
@@ -165,9 +162,12 @@ public class MemberController {
 		/* 회원정보 삭제 완료 */
 		@RequestMapping(value = "memberDelOk.do")  
 		public String memberDelOk(@RequestParam(value="M_PASSWD", required=false) String pass,
-								    HttpSession session) throws Exception {
-
-			String id = (String) session.getAttribute("id");
+								    HttpSession session, @RequestParam("M_ID") String M_ID) throws Exception {
+			String mid=M_ID;
+			String id =(String) session.getAttribute("id");
+			
+			
+			
 			Member member = this.service.idcheck(id);
 
 			if (!member.getM_PASSWD().equals(pass)) {
