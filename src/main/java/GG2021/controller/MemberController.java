@@ -162,12 +162,9 @@ public class MemberController {
 		/* 회원정보 삭제 완료 */
 		@RequestMapping(value = "memberDelOk.do")  
 		public String memberDelOk(@RequestParam(value="M_PASSWD", required=false) String pass,
-								    HttpSession session, @RequestParam("M_ID") String M_ID) throws Exception {
-			String mid=M_ID;
-			String id =(String) session.getAttribute("id");
-			
-			
-			
+								    HttpSession session) throws Exception {
+
+			String id = (String) session.getAttribute("id");
 			Member member = this.service.idcheck(id);
 
 			if (!member.getM_PASSWD().equals(pass)) {
@@ -197,8 +194,6 @@ public class MemberController {
 				return "member/memberDelOk";
 			}
 		}
-		
-
 	/* 비번찾기 폼 */
 	@RequestMapping("pwdFind.do")
 	public String pwdFind() {

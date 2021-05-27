@@ -20,4 +20,8 @@ public class AdminService {
 	public int getMemberCount() {
 		return dao.getMemberCount();
 	}
+	
+	public int  adminDel(String id) {
+		return dao.adminDel(id);
+	}
 }

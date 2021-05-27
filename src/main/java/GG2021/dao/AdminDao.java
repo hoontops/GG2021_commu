@@ -19,4 +19,8 @@ public class AdminDao {
 	public int getMemberCount() {
 		return session.selectOne("admin.getMemberCount");
 	}
+	
+	public int  adminDel(String id) {
+		return session.delete("admin.adminDel", id);
+	}
 }

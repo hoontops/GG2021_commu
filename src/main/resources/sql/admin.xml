@@ -8,6 +8,9 @@
    <select id="getMemberCount" resultType="int">
    		select count(*) from member
    </select>
+   <delete id="adminDel" parameterType="String">
+   		delete from Member where M_ID=#{M_ID}
+   	</delete>
     
 </mapper>
 

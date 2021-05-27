@@ -67,9 +67,17 @@ public class AdminController {
 		model.addAttribute("name", name);
 		model.addAttribute("email", email);
 		model.addAttribute("mid", id);
-
+		
 		return "member/memberModify";
-
+	}
+	
+	@RequestMapping("adminMemberDel.do")
+	public String adminMemberDel(Member member, Model model) {
+		String id= member.getM_ID();
+		System.out.println("삭제할 아이디 : "+ id);
+		int result = service.adminDel(id);
+		model.addAttribute("result", result);
+		return "admin/adminMemberDelOK";
 	}
 
 }
