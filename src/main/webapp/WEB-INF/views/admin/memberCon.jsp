@@ -7,7 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+	<!-- <script type="text/javascript">
+		function check(){
+			var check  = confirm("삭제하시겠습니까?");
+			if(check){
+				alert("삭제하였습니다.");
+			}else{
+				alert("취소하였습니다.");
+				event.stopPropagation();
+			}
+		}
+	</script> -->
+	
 </head>
 <body>
 	<%@ include file="adminCase.jsp"%>
@@ -121,7 +132,7 @@
 							<td
 								class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
 								<a href="adminMemberModify.do?M_ID=${member.getM_ID() }"><i class="fas fa-edit text-indigo-500 pr-2"></i></a>
-								<a href="adminMemberDel.do?M_ID=${member.getM_ID() }"><i class="far fa-trash-alt text-red-600"></i></button>
+								<a onclick ="check()" href="adminMemberDel.do?M_ID=${member.getM_ID() }"><i class="far fa-trash-alt text-red-600"></i></button>
 							</td>
 						</tr>
 						</c:forEach>
