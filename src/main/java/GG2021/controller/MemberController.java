@@ -152,40 +152,52 @@ public class MemberController {
 			}
 		}
 
-	/* 회원정보 삭제 완료 */
-	@RequestMapping(value = "memberDelOk.do")
-	public String memberDelOk(@RequestParam(value = "M_PASSWD", required = false) String pass, HttpSession session)
-			throws Exception {
-
-		String id = (String) session.getAttribute("id");
-		Member member = this.service.idcheck(id);
-
-		if (!member.getM_PASSWD().equals(pass)) {
-
-			return "member/deleteResult";
-
-		} else {// 비번이 같은 경우
-
-			String up = session.getServletContext().getRealPath("upload");
-			String fname = member.getM_IMG();
-			System.out.println("up:" + up);
-
-			// 디비에 저장된 기존 이진파일명을 가져옴
-			if (fname != null) {// 기존 이진파일이 존재하면
-				File delFile = new File(up + "/" + fname);
-				delFile.delete();// 기존 이진파일을 삭제
-			}
-			Member delm = new Member();
-			delm.setM_ID(id);
-			delm.setM_PASSWD(pass);
-
-			service.memberDel(delm);// 삭제 메서드 호출
-
-			session.invalidate(); // 세션만료
-
-			return "member/memberDelOk";
+		// 탈퇴 폼 페이지 이동
+		@RequestMapping("memberDel.do")
+		public String memberDel(Model model, HttpSession session) {
+			String id = (String) session.getAttribute("id");
+			Member old = service.idcheck(id);
+			String name = old.getM_NAME();
+			model.addAttribute("name", name);
+			return "member/memberDel";
 		}
-	}
+
+		/* 회원정보 삭제 완료 */
+		@RequestMapping(value = "memberDelOk.do")  
+		public String memberDelOk(@RequestParam(value="M_PASSWD", required=false) String pass,
+								    HttpSession session) throws Exception {
+
+			String id = (String) session.getAttribute("id");
+			Member member = this.service.idcheck(id);
+
+			if (!member.getM_PASSWD().equals(pass)) {
+
+				return "member/deleteResult";
+				
+			} else {// 비번이 같은 경우
+				
+				String up = session.getServletContext().getRealPath("upload");
+				String fname = member.getM_IMG();
+				System.out.println("up:"+up);
+			
+				
+				// 디비에 저장된 기존 이진파일명을 가져옴
+				if (fname != null) {// 기존 이진파일이 존재하면
+					File delFile = new File(up +"/"+fname);
+					delFile.delete();// 기존 이진파일을 삭제
+				}
+				Member delm = new Member();
+				delm.setM_ID(id);
+				delm.setM_PASSWD(pass);
+
+				service.memberDel(delm);// 삭제 메서드 호출
+
+				session.invalidate();	// 세션만료
+
+				return "member/memberDelOk";
+			}
+		}
+		
 
 	/* 비번찾기 폼 */
 	@RequestMapping("pwdFind.do")
