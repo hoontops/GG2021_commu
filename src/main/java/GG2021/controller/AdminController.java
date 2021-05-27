@@ -61,7 +61,6 @@ public class AdminController {
 		Member old = mservice.idcheck(request.getParameter("M_ID"));
 
 		String id = request.getParameter("M_ID");
-		System.out.println("관리자 아이디 수정 에서 받아온 아이디값은? : "+id);
 		String name = old.getM_NAME();
 		String email = old.getM_EMAIL();
 		model.addAttribute("member", member);
