@@ -138,7 +138,7 @@ input[type="submit"] {
 		<ul class="flex items-center justify-center pb-2">
 			<li><a href="main.do"
 				class=" text-xs p-1 border-b-2 hover:border-indigo-600">HOME</a></li>
-			<li><a href="#"
+			<li><a href="boardInfo.do"
 				class="text-xs p-1 border-b-2 hover:border-indigo-600">NEWS</a></li>
 			<li><a
 				href="http://prod.danawa.com/list/?cate=112758&15main_11_02"
