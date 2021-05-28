@@ -25,5 +25,9 @@ public class BoardController {
 	public String boardView() {
 		return "board/boardView";
 	}
+	@RequestMapping("boardInfo.do")
+	public String boardInfo() {
+		return "board/boardInfo";
+	}
 	
 }
