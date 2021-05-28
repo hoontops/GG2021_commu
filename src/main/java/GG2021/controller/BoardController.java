@@ -118,17 +118,26 @@ public class BoardController {
 
 	// 게시판 상세
 	@RequestMapping(value = "boardView.do")
-	public String boardView(@RequestParam("BO_NUM") int BO_NUM, @RequestParam("page") String page,
+	public String boardView(@RequestParam("BO_NUM") int BO_NUM, @RequestParam("page") int page,
 			@RequestParam("state") String state, Model model) throws Exception {
-
 		if (state.equals("cont")) {
 			service.hit(BO_NUM);
 		}
 		Board board = service.boardView(BO_NUM);
-
+		
+		//전, 후 글 객체생성
+		Board before = service.boardView(BO_NUM-1);
+		System.out.println("before객체 : "+before);
+		Board after = service.boardView(BO_NUM+1);
+		System.out.println("after객체 : "+after);
+		
+		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
+		
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("before", before);
+		model.addAttribute("after", after);
 		model.addAttribute("bcont", board);
 		model.addAttribute("page", page);
-
 		if (state.equals("cont")) {
 			return "board/boardView";
 		} else if (state.equals("edit")) { // 수정 폼으로

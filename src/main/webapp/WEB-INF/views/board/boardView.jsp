@@ -9,9 +9,11 @@
 <title>Insert title here</title>
 
 <script>
-	/* 글 삭제 창 */   
-	function boardDelete() {   
-		window.open("boardView.do?BO_NUM=${bcont.BO_NUM}&page=${page}&state=del","게시글 삭제","width=660,height=380");
+	/* 글 삭제 창 */
+	function boardDelete() {
+		window.open(
+				"boardView.do?BO_NUM=${bcont.BO_NUM}&page=${page}&state=del",
+				"게시글 삭제", "width=660,height=380");
 	}
 
 	/* $(function() { 
@@ -43,7 +45,6 @@
 			$('#slist').html(data);
 		});
 	} */
-		
 </script>
 
 </head>
@@ -69,79 +70,72 @@
 			<div class="mb-2">
 				<button
 					class="py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
-					onclick="location.href='boardList.do'">목록 
-				</button>
+					onclick="location.href='boardList.do'">목록</button>
 			</div>
 		</div>
 
-		<div class="mt-12 mx-36 border-b-4 border-indigo-300"> 
+		<div class="mt-12 mx-36 border-b-4 border-indigo-300">
 			<div id="title" class="flex justify-between">
-				<h1 class="font-bold text-2xl text-gray-800">${bcont.BO_TITLE }</h1> 
-				
-			<!-- 작성자 클릭시 수정 삭제 버튼 -->	
-			<c:if test="${sessionScope.id == bcont.MO_ID }">        	   
-				<div class="">
-				<button Onclick="location='boardView.do?BO_NUM=${bcont.BO_NUM}&page=${page}&state=edit'"  
-						class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
-						수정
-				</button> 
-				<button onclick="boardDelete()"     
-						class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
-						삭제
-				</button>
-				</div>
-			</c:if>	
-			
-			<!-- 비로그인자 클릭시 -->	
-			<c:if test="${sessionScope.id == null }">	
-				 
-			</c:if>
-			
-			</div> 
-			<div id="under" class="flex items-center justify-between px-4"> 
+				<h1 class="font-bold text-2xl text-gray-800">${bcont.BO_TITLE }</h1>
+
+				<!-- 작성자 클릭시 수정 삭제 버튼 -->
+				<c:if test="${sessionScope.id == bcont.MO_ID }">
+					<div class="">
+						<button
+							Onclick="location='boardView.do?BO_NUM=${bcont.BO_NUM}&page=${page}&state=edit'"
+							class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
+							수정</button>
+						<button onclick="boardDelete()"
+							class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
+							삭제</button>
+					</div>
+				</c:if>
+
+			</div>
+			<div id="under" class="flex items-center justify-between px-4">
 				<div class="nick & date flex items-center">
 					<div class="font-thin mr-3 text-gray-400 border-r pr-3">${bcont.MO_ID}</div>
-					<div class="font-thin text-gray-400"> 
-						<fmt:formatDate value="${bcont.BO_DATE }" pattern="yyyy-MM-dd HH:mm:ss"/>
+					<div class="font-thin text-gray-400">
+						<fmt:formatDate value="${bcont.BO_DATE }"
+							pattern="yyyy-MM-dd HH:mm:ss" />
 					</div>
 				</div>
 				<div id="view" class="font-semibold text-indigo-700">
-					<i class="far fa-eye pr-2"></i>${bcont.BO_VIEW } 
+					<i class="far fa-eye pr-2"></i>${bcont.BO_VIEW }
 				</div>
 			</div>
 		</div>
 
 		<!-- 내용 -->
-		<div class="w-11/12 mx-auto py-8 pl-28">
-			<p class="text-base">${bcont.BO_CONTENT }</p>     
+		<div class="w-11/12 mx-auto py-10 pl-28">
+			<p class="text-base">${bcont.BO_CONTENT }</p>
 		</div>
 
-		
+
 		<!-- 댓글 -->
 		<div
-			class="w-9/12 flex pb-20 mx-auto mt-10 mb-24 border-b-2 border-indigo-600">
-			<c:if test="${sessionScope.id == null }">	
-			<textarea rows="3" cols="100" style="resize: none;" readonly="readonly"
-				class="bg-indigo-50 focus:outline-none p-5"
-				placeholder="로그인 후 글쓰기 가능"></textarea>
-				<button onclick="chk()"
-				class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
-				value="등록">등록</button>	 
-			</c:if>
-			<c:if test="${sessionScope.id != null }">	
+			class="w-9/12 flex pb-20 mx-auto mt-10 mb-12 border-b-2 border-indigo-600">
+			<c:if test="${sessionScope.id == null }">
 				<textarea rows="3" cols="100" style="resize: none;"
-				class="bg-indigo-50 focus:outline-none p-5"
-				placeholder="댓글을 입력하세요"></textarea> 
-			<button onclick="chk()"
-				class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
-				value="등록">등록</button>
+					readonly="readonly" class="bg-indigo-50 focus:outline-none p-5"
+					placeholder="로그인 후 글쓰기 가능"></textarea>
+				<button onclick="chk()"
+					class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
+					value="등록">등록</button>
 			</c:if>
-			
+			<c:if test="${sessionScope.id != null }">
+				<textarea rows="3" cols="100" style="resize: none;"
+					class="bg-indigo-50 focus:outline-none p-5" placeholder="댓글을 입력하세요"></textarea>
+				<button onclick="chk()"
+					class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
+					value="등록">등록</button>
+			</c:if>
+
 		</div>
 
 		<div class="flex mx-36 w-auto mt-10 border-b">
-				<div
-					class="focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-black text-xl font-bold">최신순</div>
+			<div
+				class="focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-black text-xl font-bold">최신순</div>
 		</div>
 		<div class="mx-36 bg-indigo-50 mb-3">
 			<div id="댓글"
@@ -154,11 +148,13 @@
 					</div>
 				</div>
 				<div class="flex items-center mt-10">
-					<div id="date" class="text-gray-500 text-sm">21.05.18</div>
+					<div id="date" class="text-gray-500 text-sm">${bcont.getBO_DATE() }</div>
 					<div id="수정삭제" class="flex">
-						<button  
+						<button
 							class="ml-8 mr-5 text-indigo-600 font-bold rounded focus:outline-none edit">
-								<div class="edit"><i class="far fa-edit"></i></div>  
+							<div class="edit">
+								<i class="far fa-edit"></i>
+							</div>
 						</button>
 						<button
 							class="text-indigo-600 font-bold rounded focus:outline-none">
@@ -176,10 +172,10 @@
 				</div>
 
 			</div> -->
-			
-		<!-- 페이징  -->
+
+			<!-- 페이징  -->
 		</div>
-		<div class="flex justify-center mb-16 mt-20"> 
+		<div class="flex justify-center mb-16 mt-20">
 			<a href="#" class="px-3"> 이전 </a> <a href="#" class="px-3"> 1 </a> <a
 				href="#" class="px-3"> 2 </a> <a href="#" class="px-3"> 3 </a> <a
 				href="#" class="px-3"> 다음 </a>
@@ -187,19 +183,42 @@
 
 		<!-- 이전글,다음글 -->
 		<div class="mx-36 mb-10">
-			<div class="border-t-4 border-b border-indigo-100 py-3">
-				<a href="#"><span><i class="fas fa-chevron-up px-3"></i>
-						<i class="pr-4">이전글</i> 제목인가요 </span></a>
-			</div>
 			<div class="border-b-4 py-3 border-indigo-100">
-				<a href="#"><span><i class="fas fa-chevron-down px-3"></i>
-						<i class="pr-4">다음글</i> 목제인가요 </span></a>
+				<c:if test="${after != null }">
+					<a
+						href="boardView.do?BO_NUM=${bcont.getBO_NUM() +1 }&page=${startPage}&state=cont"><span><i
+							class="fas fa-chevron-up px-3"></i> <i class="pr-4">다음글</i>
+							${after.getBO_TITLE() } </span></a>
+				</c:if>
+				<c:if test="${after == null }">
+					<span><i
+							class="fas fa-chevron-up px-3"></i> <i class="pr-4">다음글</i>
+							해당 글이 없습니다 </span>
+				</c:if>
 			</div>
+			<div class="border-t-4 border-b border-indigo-100 py-3">
+
+				<!-- 이전글이 있으면? -->
+				<c:if test="${ before != null}">
+					<a
+						href="boardView.do?BO_NUM=${bcont.getBO_NUM() -1 }&page=${startPage}&state=cont"><span><i
+							class="fas fa-chevron-down px-3"></i> <i class="pr-4">이전글</i>
+							${before.getBO_TITLE() } </span></a>
+				</c:if>
+				<!-- 이전글이 없으면?-->
+				<c:if test="${ before == null}">
+					<span><i class="fas fa-chevron-down px-3"></i> <i class="pr-4">이전글</i> 해당
+							글이 없습니다</span>
+				</c:if>
+
+
+			</div>
+
 		</div>
 
 		<!-- 뷰페이지끝 게시판 다시 시작 -->
 
-		
+
 
 	</div>
 </body>
