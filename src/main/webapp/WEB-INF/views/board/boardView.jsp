@@ -7,6 +7,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script>
+	/* 글 삭제 창 */   
+	function boardDelete() {   
+		window.open("boardView.do?BO_NUM=${bcont.BO_NUM}&page=${page}&state=del","게시글 삭제","width=660,height=380");
+	}
+
+	/* $(function() { 
+		$('.edit').click(function() {
+			var id  = $(this).attr('id');  // rno
+			var txt = $('#div_'+id).text(); // replytext
+			$('#div_'+id).html("<textarea rows='3' cols='30' class='focus:outline-none m-3' style='resize: none;'
+					id='div_" +id+ "'>" 
+					+txt+"</textarea>");
+			$('#btn_'+id).html(
+			   "<input type='button' value='확인' onclick='up("+id+")'> "
+			  +"<input type='button' value='취소' onclick='lst()'>");
+		});
+	});
+	function up(id) {
+		var replytext = $('#tt_'+id).val();
+		var formData = "rno="+id+'&replytext='+replytext
+			+"&bno=${board.num}";
+		$.post('${path}/repUpdate',formData, function(data) {
+			$('#slist').html(data);
+		});
+	}
+	function lst() {
+		$('#slist').load('${path}/slist/num/${board.num}');
+	}
+	function del(rno,bno) {
+		var formData="rno="+rno+"&bno="+bno;
+		$.post("${path}/repDelete",formData, function(data) {
+			$('#slist').html(data);
+		});
+	} */
+		
+</script>
+
 </head>
 <body>
 	<div
@@ -30,50 +69,54 @@
 			<div class="mb-2">
 				<button
 					class="py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
-					>목록</button>
+					onclick="location.href='boardList.do'">목록 
+				</button>
 			</div>
 		</div>
 
-		<div class="mt-12 mx-36 border-b-4 border-indigo-300">
-			<div id="title" class="">
-				<h1 class="font-bold text-2xl text-gray-800">자바스프링테일윈드마우스</h1>
-			</div>
-			<div id="under" class="flex items-center justify-between px-4">
+		<div class="mt-12 mx-36 border-b-4 border-indigo-300"> 
+			<div id="title" class="flex justify-between">
+				<h1 class="font-bold text-2xl text-gray-800">${bcont.BO_TITLE }</h1> 
+				
+			<!-- 작성자 클릭시 수정 삭제 버튼 -->	
+			<c:if test="${sessionScope.id == bcont.MO_ID }">        	   
+				<div class="">
+				<button Onclick="location='boardView.do?BO_NUM=${bcont.BO_NUM}&page=${page}&state=edit'"  
+						class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
+						수정
+				</button> 
+				<button onclick="boardDelete()"     
+						class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
+						삭제
+				</button>
+				</div>
+			</c:if>	
+			
+			<!-- 비로그인자 클릭시 -->	
+			<c:if test="${sessionScope.id == null }">	
+				 
+			</c:if>
+			
+			</div> 
+			<div id="under" class="flex items-center justify-between px-4"> 
 				<div class="nick & date flex items-center">
-					<div class="font-thin mr-3 text-gray-400 border-r pr-3">z1존건무법1사1</div>
-					<div class="font-thin text-gray-400">2021.05.19</div>
+					<div class="font-thin mr-3 text-gray-400 border-r pr-3">${bcont.MO_ID}</div>
+					<div class="font-thin text-gray-400"> 
+						<fmt:formatDate value="${bcont.BO_DATE }" pattern="yyyy-MM-dd HH:mm:ss"/>
+					</div>
 				</div>
 				<div id="view" class="font-semibold text-indigo-700">
-					<i class="far fa-eye pr-2"></i>115
+					<i class="far fa-eye pr-2"></i>${bcont.BO_VIEW } 
 				</div>
 			</div>
 		</div>
 
 		<!-- 내용 -->
 		<div class="w-11/12 mx-auto py-8 pl-28">
-			<p class="text-base">제목인가요를 눌르면 내용이 나오는거에요 뭘까요</p>
+			<p class="text-base">${bcont.BO_CONTENT }</p>     
 		</div>
 
-		<!-- 추천 비추천 -->
-		<div>
-			<div class="flex justify-center mt-32">
-				<div class="border-b-2 p-6">
-					<span class="font-semibold">51</span>
-					<button
-						class="mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
-						style="width: 52px;">
-						<i class="far fa-thumbs-up"></i>
-					</button>
-					<button
-						class="mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
-						style="width: 52px;">
-						<i class="far fa-thumbs-down"></i>
-					</button>
-					<span class="font-semibold">11</span>
-				</div>
-			</div>
-		</div>
-
+		
 		<!-- 댓글 -->
 		<div
 			class="w-9/12 flex pb-20 mx-auto mt-10 mb-24 border-b-2 border-indigo-600">
@@ -102,14 +145,18 @@
 				<div class="flex items-center mt-10">
 					<div id="date" class="text-gray-500 text-sm">21.05.18</div>
 					<div id="수정삭제" class="flex">
+						<button  
+							class="ml-8 mr-5 text-indigo-600 font-bold rounded focus:outline-none edit">
+								<div class="edit"><i class="far fa-edit"></i></div>  
+						</button>
 						<button
-							class="px-3 text-indigo-600 font-bold rounded focus:outline-none">
+							class="text-indigo-600 font-bold rounded focus:outline-none">
 							<i class="far fa-window-close"></i>
 						</button>
 					</div>
 				</div>
 			</div>
-			<div id="대댓글"class="border-2 border-indigo-600 flex items-end  pl-10">
+			<!-- <div id="대댓글"class="border-2 border-indigo-600 flex items-end  pl-10">
 				<div class="">
 					<textarea rows="3" cols="90" class="focus:outline-none m-3" style="resize: none;"></textarea>
 				</div>
@@ -117,7 +164,7 @@
 					<button class="bg-indigo-600 rounded text-white px-3 py-1 mb-5">등록</button>
 				</div>
 
-			</div>
+			</div> -->
 			
 		<!-- 페이징  -->
 		</div>

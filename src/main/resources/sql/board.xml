@@ -1,10 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="memberns">
-    
-   
-    
+<mapper namespace="boardrns">   
+	<resultMap type="board" id="boardResult">
+		<result property="B_NUM"		column="B_NUM"/>
+		<result property="B_TITLE"		column="B_TITLE"/>
+		<result property="B_CONTENT"	column="B_CONTENT"/>
+		<result property="B_IMG"		column="B_IMG"/>
+		<result property="B_VIEW"		column="B_VIEW"/>
+		<result property="B_GOOD"		column="B_GOOD"/>
+		<result property="B_BAD"		column="B_BAD"/>
+		<result property="B_DATE"		column="B_DATE"/>
+		<result property="B_NOTICE1"	column="B_NOTICE1"/>
+		<result property="M_ID"			column="M_ID"/>
+		<result property="G_NAME"		column="G_NAME"/>
+	</resultMap>
+
+	<!-- 게시판 저장 -->
+	<insert id="boardInsert" parameterType="board">     
+	insert into board values(b_num_seq.nextval, #{B_TITLE}, #{B_CONTENT},
+		#{B_IMG, jdbcType=VARCHAR}, 0, 0, 0, sysdate, #{B_NOTICE1, jdbcType=VARCHAR}, #{M_ID, jdbcType=VARCHAR}, 
+		#{G_NAME, jdbcType=VARCHAR},#{G_TYPE, jdbcType=VARCHAR})        
+	</insert>
+	
+	<!-- 게시글 총 갯수 -->
+	<select id="boardCount" resultType="int">
+	select count(B_NUM) from board
+	</select>
+	
+	<!-- 게시판 목록  -->
+	<select id="boardList" parameterType="int" resultType="board">
+	<![CDATA[
+	select * from (select rownum rnum 
+		, B_NUM 		AS BO_NUM
+		, B_TITLE 		AS BO_TITLE
+		, B_CONTENT 	AS BO_CONTENT
+		, B_IMG 		AS BO_IMG
+		, B_VIEW 		AS BO_VIEW
+		, B_GOOD		AS BO_GOOD
+		, B_BAD 		AS BO_BAD
+		, B_DATE 		AS BO_DATE
+		, B_NOTICE1 	AS BO_NOTICE1
+		, M_ID 			AS MO_ID
+		, G_NAME 		AS GO_NAME
+		, G_TYPE		AS GO_TYPE   					
+	from (select * from board order by B_NUM desc))       
+	where rnum>=((#{page}-1)*10+1) and rnum<=(#{page}*10)
+	]]>
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="hit" parameterType="int">  
+	update board set B_VIEW = B_VIEW+1    
+	where B_NUM = #{B_NUM}   
+	</update>
+	
+	<!-- 게시판 상세 --> 
+	<select id="boardView" parameterType="int" resultType="board">
+	select   B_NUM       AS BO_NUM
+	       , B_TITLE     AS BO_TITLE
+	       , B_CONTENT   AS BO_CONTENT
+	       , B_IMG       AS BO_IMG
+	       , B_VIEW      AS BO_VIEW
+	       , B_GOOD      AS BO_GOOD
+	       , B_BAD       AS BO_BAD
+	       , B_DATE      AS BO_DATE
+	       , B_NOTICE1   AS BO_NOTICE1
+	       , M_ID        AS MO_ID
+	       , G_NAME      AS GO_NAME
+	       , G_TYPE		 AS GO_TYPE
+	from board 
+	where B_NUM = #{BO_NUM}     
+	</select>
+	
+	<!-- 게시글 수정  -->
+	<update id="edit" parameterType="board">
+	update board set 
+		  B_TITLE=#{B_TITLE, jdbcType=VARCHAR} 
+		, B_CONTENT=#{B_CONTENT, jdbcType=VARCHAR}
+		, B_IMG=#{B_IMG, jdbcType=VARCHAR}
+		, G_TYPE=#{G_TYPE, jdbcType=VARCHAR} 
+	where B_NUM=#{BO_NUM} 	 
+	</update> 
+	
+	<!-- 게시글 삭제 -->
+	<delete id="boardDel" parameterType="int">
+	delete from board where B_NUM=#{B_NUM} 
+	</delete>
+	
 </mapper>
 
 
