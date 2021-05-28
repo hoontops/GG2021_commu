@@ -2,19 +2,36 @@
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="admin">
-    <select id="getMemberList" parameterType="int" resultType="member">
+
+
+<!-- 멤버 sql -->
+    <select id="getAdminMemberList" parameterType="int" resultType="member">
     	<![CDATA[select * from(
     		select rownum rnum, member.* from(
     			select * from member order by M_ID asc) member)
     			where rnum >= ((#{page}-1) * 10+1)  and rnum <= (#{page} * 10)
     	]]>
     </select>
-   <select id="getMemberCount" resultType="int">
+   <select id="getAdminMemberCount" resultType="int">
    		select count(*) from member
    </select>
    <delete id="adminDel" parameterType="String">
    		delete from Member where M_ID=#{M_ID}
    	</delete>
+   	
+   	
+   	
+   <!-- 게시판 sql -->	
+   <select id="getAdminBoardCount" resultType="int">
+   		select count(*) from board
+   </select>
+   	<select id="getAdminBoardList" parameterType="int" resultType="board">
+    	<![CDATA[select * from(
+    		select rownum rnum, board.* from(
+    			select * from board order by B_NUM desc) board)
+    			where rnum >= ((#{page}-1) * 10+1)  and rnum <= (#{page} * 10)
+    	]]>
+    </select>
     
 </mapper>
 

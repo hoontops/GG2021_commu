@@ -9,4 +9,5 @@ import GG2021.dao.BoardDao;
 public class BoardService {
 	@Autowired
 	private BoardDao dao;
+	
 }

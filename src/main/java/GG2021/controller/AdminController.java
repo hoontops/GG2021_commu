@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import GG2021.model.Board;
 import GG2021.model.Member;
 import GG2021.service.AdminService;
 import GG2021.service.MemberService;
-import scala.collection.generic.BitOperations.Int;
 
 @Controller
 public class AdminController {
@@ -40,8 +40,8 @@ public class AdminController {
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		int listCount = service.getMemberCount(); //전체 회원수
-		memberList = service.getMemberList(page); // 멤버 목록 1~10 까지를 뽑아온다.
+		int listCount = service.getAdminMemberCount(); //전체 회원수
+		memberList = service.getAdminMemberList(page); // 멤버 목록 1~10 까지를 뽑아온다.
 		int maxPage = (int)((double)listCount/limit+0.95);
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
 		int endPage = maxPage;
@@ -61,7 +61,32 @@ public class AdminController {
 
 	// 게시판관리
 	@RequestMapping("adminBoardCon.do")
-	public String adminBoardCon() {
+	public String adminBoardCon(Model model, HttpServletRequest request, Board board) {
+		List<Board> boardList = new ArrayList<Board>();
+
+		int page= 1;
+		int limit = 10;
+		
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		int listCount = service.getAdminBoardCount(); //전체 회원수
+		boardList = service.getAdminBoardList(page); // 멤버 목록 1~10 까지를 뽑아온다.
+		System.out.println("boardList : "+boardList);
+		int maxPage = (int)((double)listCount/limit+0.95);
+		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
+		int endPage = maxPage;
+		
+		if (endPage > startPage + 10 - 1)
+			endPage = startPage + 10 - 1;
+
+		model.addAttribute("page", page);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("maxPage", maxPage);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("boardList", boardList);
+		
 		return "admin/boardCon";
 	}
 
