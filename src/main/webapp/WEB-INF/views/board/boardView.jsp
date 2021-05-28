@@ -120,12 +120,23 @@
 		<!-- 댓글 -->
 		<div
 			class="w-9/12 flex pb-20 mx-auto mt-10 mb-24 border-b-2 border-indigo-600">
-			<textarea rows="3" cols="100" style="resize: none;"
+			<c:if test="${sessionScope.id == null }">	
+			<textarea rows="3" cols="100" style="resize: none;" readonly="readonly"
 				class="bg-indigo-50 focus:outline-none p-5"
 				placeholder="로그인 후 글쓰기 가능"></textarea>
-			<button
+				<button onclick="chk()"
+				class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
+				value="등록">등록</button>	 
+			</c:if>
+			<c:if test="${sessionScope.id != null }">	
+				<textarea rows="3" cols="100" style="resize: none;"
+				class="bg-indigo-50 focus:outline-none p-5"
+				placeholder="댓글을 입력하세요"></textarea> 
+			<button onclick="chk()"
 				class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
 				value="등록">등록</button>
+			</c:if>
+			
 		</div>
 
 		<div class="flex mx-36 w-auto mt-10 border-b">
