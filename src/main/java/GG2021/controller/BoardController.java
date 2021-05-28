@@ -26,4 +26,9 @@ public class BoardController {
 		return "board/boardView";
 	}
 	
+	@RequestMapping("imgBoardList.do")
+	public String imgBoardList() {
+		return "board/imgBoardList";
+	}
+	
 }

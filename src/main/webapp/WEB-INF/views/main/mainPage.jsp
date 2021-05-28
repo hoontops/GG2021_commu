@@ -13,7 +13,16 @@
 	    display: flex;
 	}
 </style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(function(){
+		$("#G_TYPE").change(function(){
+//			$.post("", ,);
+			
+		});
+	});
 
+</script>
 </head>
 <body id="main_body">
 	<main>
@@ -76,7 +85,13 @@
 		</div>
 
 <!-- 여기부터 작업하세요 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ --> 
-
+<select name="G_TYPE" id="G_TYPE">
+	<option value="Role-Playing" >롤플레잉</option>
+	<option></option>
+	<option></option>
+	<option></option>
+	<option></option>
+</select>
 <div class="flex flex-col w-screen min-h-screen p-10 text-gray-800 mb-6">       
 
 	<div class="container bg-grey-lightest mx-auto shadow rounded mt-8 pb-4 h-48 bg-cover" style="background-image: url(./img/game.gif)">  

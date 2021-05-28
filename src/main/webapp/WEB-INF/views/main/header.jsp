@@ -19,6 +19,7 @@
 	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
 	integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
 	crossorigin="anonymous">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
 <style>
 
 .hover-trigger .hover-target {
@@ -101,21 +102,8 @@ input[type="submit"] {
 
 				</form>
 			</div>
-			<c:if test="${sessionScope.id != null }">
 			<div id="login/signUp">
-				<button Onclick="location.href='myPage.do'"
-					class="focus:outline-none bg-white bg-transparent  text-indigo-500 hover:text-white hover:bg-indigo-500 text-xs  py-1 px-3 rounded border border-solid border-indigo-500 mr-2 transition-colors duration-300">
-					마이페이지</button>
-				<button Onclick="location.href='logout.do'"
-					class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
-					로그아웃</button>
-				<!-- <a href="#" class="text-indigo-500 hover:text-blue-800 font-bold">LogIn</a>
-                    &nbsp;
-                    <a href="#" class="text-yellow-600 hover:text-red-600 font-bold">SIgnUp</a> -->
-			</div>
-			</c:if>
 			<c:if test="${sessionScope.id == null }"> 			
-				<div id="login/signUp">
 					<button Onclick="location.href='login.do'" 
 						class="focus:outline-none bg-white bg-transparent  text-indigo-500 hover:text-white hover:bg-indigo-500 text-xs  py-1 px-3 rounded border border-solid border-indigo-500 mr-2 transition-colors duration-300">
 						로그인</button>  
@@ -125,8 +113,25 @@ input[type="submit"] {
 					<!-- <a href="#" class="text-indigo-500 hover:text-blue-800 font-bold">LogIn</a>
 	                    &nbsp;
 	                    <a href="#" class="text-yellow-600 hover:text-red-600 font-bold">SIgnUp</a> -->
-				</div>	
 			</c:if>
+			<c:if test="${sessionScope.id == 'hth9876' && sessionScope.id !=null}">
+					<button Onclick="location.href='adminMain.do'" 
+						class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
+						관리자페이지</button>
+			</c:if>
+			<c:if test="${sessionScope.id != null }">
+				<button Onclick="location.href='myPage.do'"
+					class="focus:outline-none bg-white bg-transparent  text-indigo-500 hover:text-white hover:bg-indigo-500 text-xs  py-1 px-3 rounded border border-solid border-indigo-500 mr-2 transition-colors duration-300">
+					마이페이지</button>
+				<button Onclick="location.href='logout.do'"
+					class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
+					로그아웃</button>
+				<!-- <a href="#" class="text-indigo-500 hover:text-blue-800 font-bold">LogIn</a>
+                    &nbsp;
+                    <a href="#" class="text-yellow-600 hover:text-red-600 font-bold">SIgnUp</a> -->
+			</c:if>
+			
+			
 		</div>
 	</header>
 	<nav id="main_nav" class="p-2 border-b border-gray-100 pb-5">
