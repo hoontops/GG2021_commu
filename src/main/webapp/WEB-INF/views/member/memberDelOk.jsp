@@ -7,4 +7,5 @@
   alert("회원탈퇴 성공");
   self.close();
   opener.location.href="main.do"; 
+  location.href="main.do";
 </script> 

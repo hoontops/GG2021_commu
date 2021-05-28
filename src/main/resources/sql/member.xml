@@ -27,6 +27,10 @@
     	where M_ID=#{M_ID}  
     </update>
     
+    <!-- 로그인시 포인트 -->
+    <update id="getPoint" parameterType="int">
+    	update member set M_POINT=M_POINT+1 where M_ID=#{member}
+    </update>
 </mapper>
 
 

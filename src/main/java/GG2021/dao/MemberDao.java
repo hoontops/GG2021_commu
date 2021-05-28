@@ -51,4 +51,8 @@ public class MemberDao {
 //		getSession();
 		session.update("updateMem", member);
 	}
+	/* 로그인시 포인트*/
+	public void getPoint(String member) throws Exception{
+		session.update("getPoint",member);
+	}
 }

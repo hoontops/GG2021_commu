@@ -30,4 +30,9 @@ public class BoardController {
 		return "board/boardInfo";
 	}
 	
+	@RequestMapping("imgBoardList.do")
+	public String imgBoardList() {
+		return "board/imgBoardList";
+	}
+	
 }
