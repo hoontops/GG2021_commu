@@ -1,8 +1,7 @@
 package GG2021.controller;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,13 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import GG2021.model.Member;
 import GG2021.service.AdminService;
 import GG2021.service.MemberService;
+import scala.collection.generic.BitOperations.Int;
 
 @Controller
 public class AdminController {
@@ -34,12 +31,31 @@ public class AdminController {
 
 	// 회원관리
 	@RequestMapping("adminMemeberCon.do")
-	public String adminMemeberCon(Member member, Model model) {
-		List<Member> list = service.getMemberList(); // 멤버 전체목록을 뽑아온다.
-		int result = service.getMemberCount();// 전체 회원수를 구해온다.
-		System.out.println(list);
-		model.addAttribute("member", list);
-		model.addAttribute("result", result);
+	public String adminMemeberCon(Member member, Model model, HttpServletRequest request) {
+		List<Member> memberList = new ArrayList<Member>();
+
+		int page= 1;
+		int limit = 10;
+		
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		int listCount = service.getMemberCount(); //전체 회원수
+		memberList = service.getMemberList(page); // 멤버 목록 1~10 까지를 뽑아온다.
+		int maxPage = (int)((double)listCount/limit+0.95);
+		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
+		int endPage = maxPage;
+		
+		if (endPage > startPage + 10 - 1)
+			endPage = startPage + 10 - 1;
+
+		model.addAttribute("page", page);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("maxPage", maxPage);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("memberList", memberList);
+		
 		return "admin/memberCon";
 	}
 

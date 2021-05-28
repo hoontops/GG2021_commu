@@ -1,24 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<!-- <script type="text/javascript">
-		function check(){
+<script type="text/javascript">
+		function check(mid){
 			var check  = confirm("삭제하시겠습니까?");
 			if(check){
+				location.href="adminMemberDel.do?M_ID="+mid
 				alert("삭제하였습니다.");
 			}else{
 				alert("취소하였습니다.");
-				event.stopPropagation();
+				return false;
 			}
 		}
-	</script> -->
-	
+	</script>
+
 </head>
 <body>
 	<%@ include file="adminCase.jsp"%>
@@ -34,7 +35,7 @@
 					</div>
 
 					<div class="mx-5">
-						<h4 class="text-2xl font-semibold text-gray-700">${result }</h4>
+						<h4 class="text-2xl font-semibold text-gray-700">${listCount }</h4>
 						<div class="text-gray-500">회원 수</div>
 					</div>
 				</div>
@@ -95,51 +96,82 @@
 					</thead>
 
 					<tbody class="bg-white">
-					<c:forEach items="${member}" var="member">
-					<c:set var="mid" value="${member.getM_NAME() }"/>
-						<tr>
-							<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-								<div class="flex items-center">
-									<div class="flex-shrink-0 h-10 w-10">
-										<img class="h-10 w-10 rounded-full"
-											src="<%=request.getContextPath() %>/upload/${M_IMG}"
-											alt="">
+						<c:set var="num" value="${listCount-(page-1)*10}" />
+
+						<c:forEach items="${memberList}" var="member">
+							<c:set var="mid" value="${member.getM_NAME() }" />
+							<tr>
+								<td
+									class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+									<div class="flex items-center">
+										<div class="flex-shrink-0 h-10 w-10">
+											<!-- 번호 출력 부분 -->
+											<c:out value="${num}" />
+											<c:set var="num" value="${num-1}" />
+										</div>
+
+										<div class="ml-4">
+											<div class="text-sm leading-5 font-medium text-gray-900">${member.getM_ID() }</div>
+											<div class="text-sm leading-5 text-gray-500">${member.getM_NAME() }</div>
+										</div>
 									</div>
-
-									<div class="ml-4">
-										<div class="text-sm leading-5 font-medium text-gray-900">${member.getM_ID() }</div>
-										<div class="text-sm leading-5 text-gray-500">${member.getM_NAME() }</div>
-									</div>
-								</div>
-							</td>
-
-							<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-								<div class="text-center text-sm leading-5 text-gray-900">${member.getM_EMAIL()}</div>
-								<div class="text-center leading-5 text-gray-500">${member.getM_PASSWD()}</div>
-							</td>
-
-							<td class="text-center px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-								<span
-								class="text-center px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${member.getM_POINT() }</span>
-							</td>
-
-							<td
-								class="text-center px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-								<fmt:formatDate value="${member.getM_SUBSCRIPTION_DATE() }"
-								 pattern="yyy-MM-dd HH:mm:ss"/>
 								</td>
 
-							<td
-								class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-								<a href="adminMemberModify.do?M_ID=${member.getM_ID() }"><i class="fas fa-edit text-indigo-500 pr-2"></i></a>
-								<a onclick ="check()" href="adminMemberDel.do?M_ID=${member.getM_ID() }"><i class="far fa-trash-alt text-red-600"></i></button>
-							</td>
-						</tr>
+								<td
+									class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+									<div class="text-center text-sm leading-5 text-gray-900">${member.getM_EMAIL()}</div>
+									<div class="text-center leading-5 text-gray-500">${member.getM_PASSWD()}</div>
+								</td>
+
+								<td
+									class="text-center px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+									<span
+									class="text-center px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${member.getM_POINT() }</span>
+								</td>
+
+								<td
+									class="text-center px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+									<fmt:formatDate value="${member.getM_SUBSCRIPTION_DATE() }"
+										pattern="yyy-MM-dd HH:mm:ss" />
+								</td>
+
+								<td
+									class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+									<a href="adminMemberModify.do?M_ID=${member.getM_ID() }"><i
+										class="fas fa-edit text-indigo-500 pr-2"></i></a> <a
+									href="javascript:check('${member.getM_ID()}')"><i
+										class="far fa-trash-alt text-red-600"></i></a>
+								</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<div id="pagging" class="flex justify-center text-indigo-500">
+					<c:if test="${page <=1 }">
+				[이전]&nbsp;
+			</c:if>
+
+					<c:if test="${page > 1 }">
+						<a href="memberList.do?page=${page-1}">[이전]</a>&nbsp;
+			</c:if>
+
+					<c:forEach var="a" begin="${startPage}" end="${endPage}">
+						<c:if test="${a == page }">
+					[<span class="font-bold text-indigo-600">${a}</span>]
+				</c:if>
+						<c:if test="${a != page }">
+							<a href="memberList.do?page=${a}">[${a}]</a>&nbsp;
+				</c:if>
+					</c:forEach>
+
+					<c:if test="${page >= maxPage }">
+				[다음] 
+			</c:if>
+					<c:if test="${page < maxPage }">
+						<a href="memberList.do?page=${page+1}">[다음]</a>
+					</c:if>
+				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

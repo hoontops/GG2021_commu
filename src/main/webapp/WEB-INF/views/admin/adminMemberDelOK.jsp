@@ -10,7 +10,7 @@
 <body>
 <c:if test="${result ==1 }">
 	<script>
-		alert("회원 삭제 성공");
+	//	alert("회원 삭제 성공");
 		location.href="adminMemeberCon.do";
 	</script>
 </c:if>

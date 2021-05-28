@@ -13,8 +13,8 @@ public class AdminDao {
 	@Autowired
 	private SqlSession session;
 	
-	public List<Member> getMemberList()	{
-		return session.selectList("admin.getMemberList");
+	public List<Member> getMemberList(int page)	{
+		return session.selectList("admin.getMemberList", page);
 	}
 	public int getMemberCount() {
 		return session.selectOne("admin.getMemberCount");

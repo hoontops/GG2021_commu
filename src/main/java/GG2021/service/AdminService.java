@@ -13,8 +13,8 @@ public class AdminService {
 	@Autowired
 	private AdminDao dao;
 	
-	public List<Member> getMemberList()	{
-		return dao.getMemberList();
+	public List<Member> getMemberList(int page)	{
+		return dao.getMemberList(page);
 	}
 	
 	public int getMemberCount() {
