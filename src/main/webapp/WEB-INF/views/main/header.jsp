@@ -151,7 +151,7 @@ input[type="submit"] {
                     </div>
                   </div></li>
 		
-			<li><a href="#"
+			<li><a href="event.do"
 				class="text-xs  p-1 border-b-2 hover:border-indigo-600">EVENT</a></li>
 			<li><a href="#"
 				class="text-xs text-red-600 p-1 border-b-2 hover:border-indigo-600">Q&A</a></li>

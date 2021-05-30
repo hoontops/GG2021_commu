@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="./css/style.css" />
 <title>TETRIS</title>
 <script>
-import BLOCKS from "./js/blocks.js"
+import BLOCKS from "./blocks.js"
 
 //DOM
 const playground = document.querySelector(".playground > ul");
@@ -114,8 +114,6 @@ childNodes.forEach(child=>{
     prependNewLine();
     score++;
     scoreDisplay.innerText = score;
-    document.login_form.form_name.value=score;
-    //자스 코드 score 를 자바의 변수로 쓰기
   }
 })
 
@@ -188,30 +186,21 @@ switch(e.keyCode){
 
 })
 
-restartButton.addEventListener("click",()=>{
-playground.innerHTML="";
-gameText.style.display="none";
-init();
-})
+
 </script>
 </head>
 <body>
-<form method="post" action="tetirspoint.do" name="login_form">
     <div class="wrapper">
-       	<div class="score">
-       	
-       		<input type="hidden" value=""  name="form_name" >${M_POINT }
-       </div>
         <div class="game-text">
             게임종료
-        <input type="button" name="dd" value="게임종료" onclick=login_form.submit();>
-
+        <button>다시 시작</button>
         </div>
+        <div class="score">0</div>
         <div class="playground">
             <ul></ul>
         </div>
     </div>
     <script src="./js/tetris.js" type="module"></script>
-</form>
+
 </body>
 </html>

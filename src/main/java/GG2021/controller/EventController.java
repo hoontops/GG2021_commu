@@ -20,17 +20,6 @@ public class EventController {
 	@Autowired
 	private MemberService service;
 	
-	// 포인트추가
-	@RequestMapping(value="tetirspoint.do", method = RequestMethod.POST)
-	public String memberModifyOk(Member member, String form_name, Model model, HttpSession session, 
-								 HttpServletRequest request) throws Exception {
-		String id = (String) session.getAttribute("id");
-		member.setM_ID(id);
-		
-		service.updatepoint(member);  
-		return "main/miniGame";       
-	}
-	
 	@RequestMapping("event.do") 
 	public String eventForm() {
 		return "main/miniGame";
