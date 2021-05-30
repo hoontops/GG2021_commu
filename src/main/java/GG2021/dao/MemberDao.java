@@ -55,4 +55,10 @@ public class MemberDao {
 	public void getPoint(String member) throws Exception{
 		session.update("getPoint",member);
 	}
+	/* 테트리스 포인트 추가 */
+//	@Transactional
+	public void updatepoint(Member member) throws Exception {
+//		getSession();
+		session.update("updatepoint", member);
+	}
 }
