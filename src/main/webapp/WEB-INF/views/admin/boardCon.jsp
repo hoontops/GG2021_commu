@@ -121,7 +121,7 @@ function del(bnum){
 
 								<td
 									class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-									<div class="text-center text-sm leading-5 text-gray-900">${board.getB_TITLE()}</div>
+									<div class="text-center text-sm leading-5 text-gray-900"><a href="boardView.do?BO_NUM=${board.getB_NUM() }&page=${page }&state=cont" >${board.getB_TITLE()}</a></div>
 								</td>
 
 								<td
@@ -138,7 +138,7 @@ function del(bnum){
 
 								<td
 									class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-									<a href="adminMemberModify.do?M_ID=${member.getM_ID() }"><i
+									<a href="boardView.do?BO_NUM=${board.getB_NUM() }&page=${page }&state=edit"><i
 										class="fas fa-edit text-indigo-500 pr-2"></i></a> 
 										
 									<a href="javascript:del('${board.getB_NUM()}')">
