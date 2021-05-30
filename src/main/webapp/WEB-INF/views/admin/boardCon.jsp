@@ -121,7 +121,7 @@ function del(bnum){
 
 								<td
 									class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-									<div class="text-center text-sm leading-5 text-gray-900"><a href="boardView.do?BO_NUM=${board.getB_NUM() }&page=${page }&state=cont" >${board.getB_TITLE()}</a></div>
+									<div class="text-center text-sm leading-5 text-gray-900"><a class="hover:text-indigo-500" href="boardView.do?BO_NUM=${board.getB_NUM() }&page=${page }&state=cont" >${board.getB_TITLE()}</a></div>
 								</td>
 
 								<td
