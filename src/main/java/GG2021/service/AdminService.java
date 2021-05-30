@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import GG2021.dao.AdminDao;
 import GG2021.model.Board;
+import GG2021.model.Comments;
 import GG2021.model.Member;
 
 @Service
@@ -32,5 +33,13 @@ public class AdminService {
 
 	public List<Board> getAdminBoardList(int page) {
 		return dao.getAdminBoardList(page);
+	}
+	
+	public int getAdminCommentsCount() {
+		return dao.getAdminCommentsCount();
+	}
+	
+	public List<Comments> getAdminCommentsList(int page) {
+		return dao.getAdminCommentsList(page);
 	}
 }

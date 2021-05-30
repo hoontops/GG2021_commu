@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import GG2021.model.Board;
+import GG2021.model.Comments;
 import GG2021.model.Member;
 import GG2021.service.AdminService;
 import GG2021.service.MemberService;
@@ -22,72 +24,75 @@ public class AdminController {
 	private AdminService service;
 	@Autowired
 	private MemberService mservice;
-
+	
+	
 	// 대시보드
-	@RequestMapping("adminDashBoardCon.do")
-	public String adminDashBoardCon() {
-		return "admin/dashBoard";
-	}
-
-	// 회원관리
-	@RequestMapping("adminMemeberCon.do")
-	public String adminMemeberCon(Member member, Model model, HttpServletRequest request) {
-		List<Member> memberList = new ArrayList<Member>();
-
-		int page= 1;
-		int limit = 10;
-		
-		if(request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
-		}
-		int listCount = service.getAdminMemberCount(); //전체 회원수
-		memberList = service.getAdminMemberList(page); // 멤버 목록 1~10 까지를 뽑아온다.
-		int maxPage = (int)((double)listCount/limit+0.95);
-		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
-		int endPage = maxPage;
-		
-		if (endPage > startPage + 10 - 1)
-			endPage = startPage + 10 - 1;
-
-		model.addAttribute("page", page);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("maxPage", maxPage);
-		model.addAttribute("listCount", listCount);
-		model.addAttribute("memberList", memberList);
-		
-		return "admin/memberCon";
-	}
-
-	// 게시판관리
-	@RequestMapping("adminBoardCon.do")
-	public String adminBoardCon(Model model, HttpServletRequest request, Board board) {
+	@RequestMapping("admin.do")
+	public String adminDashBoardCon(String state, Model model,HttpServletRequest request) {
 		List<Board> boardList = new ArrayList<Board>();
-
-		int page= 1;
-		int limit = 10;
-		
+		List<Member> memberList = new ArrayList<Member>();
+		List<Comments> commentnsList = new ArrayList<Comments>();
+		int result  = 0;
+		int page = 1;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		int listCount = service.getAdminBoardCount(); //전체 회원수
-		boardList = service.getAdminBoardList(page); // 멤버 목록 1~10 까지를 뽑아온다.
-		System.out.println("boardList : "+boardList);
-		int maxPage = (int)((double)listCount/limit+0.95);
+		int limit = 10;
+		
+		memberList =service.getAdminMemberList(page);
+		boardList = service.getAdminBoardList(page);
+		commentnsList= service.getAdminCommentsList(page);
+		int memberCount = service.getAdminMemberCount(); //총 회원 수
+		int boardCount = service.getAdminBoardCount(); //총 게시글 수
+		int commentsCount = service.getAdminCommentsCount(); //총 댓글 수
+		
+		int listCount=0;
+		if(state.equals("member")) {
+			 listCount = memberCount;
+		}else if(state.equals("board")) {
+			listCount = boardCount;
+		}else{
+			listCount = commentsCount;
+		}
+		int maxPage = (int) ((double) listCount / limit + 0.95);
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
 		int endPage = maxPage;
-		
 		if (endPage > startPage + 10 - 1)
 			endPage = startPage + 10 - 1;
-
+		System.out.println("state:" + state);
 		model.addAttribute("page", page);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("maxPage", maxPage);
-		model.addAttribute("listCount", listCount);
-		model.addAttribute("boardList", boardList);
-		
-		return "admin/boardCon";
+		if (state.equals("dash")) {
+			result=1;
+			model.addAttribute("memberCount", memberCount);
+			model.addAttribute("boardCount", boardCount);
+			model.addAttribute("commentsCount", commentsCount);
+			model.addAttribute("resutl", result);
+			return "admin/dashBoard";
+		}
+		if (state.equals("member")) {
+			result=2;
+			model.addAttribute("memberCount", memberCount);
+			model.addAttribute("memberList", memberList);
+			model.addAttribute("resutl", result);
+			return "admin/memberCon";
+		}
+		if (state.equals("board")) {
+			result=3;
+			model.addAttribute("boardCount", boardCount);
+			model.addAttribute("boardList", boardList);
+			model.addAttribute("resutl", result);
+			return "admin/boardCon";
+		}
+		if (state.equals("comments")) {
+			result=4;
+			model.addAttribute("commentsCount", commentsCount);
+			model.addAttribute("commentnsList", commentnsList);
+			return "admin/commentCon";
+		}
+		return null;
 	}
 
 	// 댓글관리
@@ -108,17 +113,17 @@ public class AdminController {
 		model.addAttribute("name", name);
 		model.addAttribute("email", email);
 		model.addAttribute("mid", id);
-		
+
 		return "member/memberModify";
 	}
-	
+
 	@RequestMapping("adminMemberDel.do")
 	public String adminMemberDel(Member member, Model model) {
-		String id= member.getM_ID();
-		System.out.println("삭제할 아이디 : "+ id);
+		String id = member.getM_ID();
+		System.out.println("삭제할 아이디 : " + id);
 		int result = service.adminDel(id);
 		model.addAttribute("result", result);
-		return "admin/adminMemberDelOK";
+		return "redirect:admin.do?state=member";
 	}
-
+	
 }

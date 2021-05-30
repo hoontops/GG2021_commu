@@ -69,9 +69,10 @@ public class MainController {
 	 * 
 	 * return "main/mainPage"; }
 	 */
+	
 	@RequestMapping("adminMain.do")
 	public String adminMain() {
-		return "admin/dashBoard";
+		return "redirect:admin.do?state=dash";
 	}
 
 }

@@ -33,6 +33,18 @@
     	]]>
     </select>
     
+    <!-- 댓글 sql -->
+    <select id="getAdminCommentsCount" resultType="int">
+    	select count(*) from comments 
+    </select>
+    
+    <select id="getAdminCommentsList" parameterType="int" resultType="comments">
+    	<![CDATA[select * from(
+    		select rownum rnum, comments.* from(
+    			select * from Comments order by C_NUM desc) comments)
+    			where rnum >= ((#{page}-1) * 10+1)  and rnum <= (#{page} * 10)
+    	]]>
+    </select>
 </mapper>
 
 

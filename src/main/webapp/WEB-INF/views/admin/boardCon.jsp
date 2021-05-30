@@ -8,16 +8,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-		function check(mid){
-			var check  = confirm("삭제하시겠습니까?");
-			if(check){
-				location.href="adminMemberDel.do?M_ID="+mid
-				alert("삭제하였습니다.");
-			}else{
-				alert("취소하였습니다.");
-				return false;
-			}
-		}
+function del(bnum){
+	var check  = confirm("삭제하시겠습니까?");
+	if(check){
+		location.href="boardDel.do?BO_NUM="+bnum;
+	}else{
+		alert("취소하였습니다.");
+		return false;
+	}
+}
+
 	</script>
 </head>
 <body>
@@ -34,7 +34,7 @@
 					</div>
 
 					<div class="mx-5">
-						<h4 class="text-2xl font-semibold text-gray-700">${listCount }</h4>
+						<h4 class="text-2xl font-semibold text-gray-700">${boardCount }</h4>
 						<div class="text-gray-500">게시글 수</div>
 					</div>
 				</div>
@@ -99,7 +99,7 @@
 					</thead>
 
 					<tbody class="bg-white">
-						<c:set var="num" value="${listCount-(page-1)*10}" />
+						<c:set var="num" value="${boardCount-(page-1)*10}" />
 
 						<c:forEach items="${boardList}" var="board">
 							<c:set var="mid" value="${board.getB_NUM() }" />
@@ -138,10 +138,12 @@
 
 								<td
 									class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-									<a href="adminMemberModify.do?M_ID=${board.getB_NUM() }"><i
-										class="fas fa-edit text-indigo-500 pr-2"></i></a> <a
-									href="javascript:check('${board.getB_NUM()}')"><i
-										class="far fa-trash-alt text-red-600"></i></a>
+									<a href="adminMemberModify.do?M_ID=${member.getM_ID() }"><i
+										class="fas fa-edit text-indigo-500 pr-2"></i></a> 
+										
+									<a href="javascript:del('${board.getB_NUM()}')">
+									 	<i class="far fa-trash-alt text-red-600"></i>
+									 </a>
 								</td>
 							</tr>
 						</c:forEach>

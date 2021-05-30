@@ -35,7 +35,7 @@
 					</div>
 
 					<div class="mx-5">
-						<h4 class="text-2xl font-semibold text-gray-700">${listCount }</h4>
+						<h4 class="text-2xl font-semibold text-gray-700">${memberCount }</h4>
 						<div class="text-gray-500">회원 수</div>
 					</div>
 				</div>
@@ -96,7 +96,7 @@
 					</thead>
 
 					<tbody class="bg-white">
-						<c:set var="num" value="${listCount-(page-1)*10}" />
+						<c:set var="num" value="${memberCount-(page-1)*10}" />
 
 						<c:forEach items="${memberList}" var="member">
 							<c:set var="mid" value="${member.getM_NAME() }" />

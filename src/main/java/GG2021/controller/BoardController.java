@@ -151,7 +151,7 @@ public class BoardController {
 	}
 
 	// 글 수정
-	@RequestMapping(value = "boardModify.do", method = RequestMethod.POST)
+	@RequestMapping(value = "boardModify.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String boardModify(@RequestParam("B_IMG02") MultipartFile mf, @ModelAttribute Board b,
 			@RequestParam("page") String page, HttpServletRequest request, Model model) throws Exception {
 
@@ -191,10 +191,9 @@ public class BoardController {
 	}
 
 	// 게시글 삭제
-	@RequestMapping(value = "boardDel.do", method = RequestMethod.POST)
-	public String boardDel(@RequestParam("BO_NUM") int BO_NUM, @RequestParam("page") int page, Model model)
+	@RequestMapping(value = "boardDel.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String boardDel(int BO_NUM, Model model)
 			throws Exception {
-
 		Board board = service.boardView(BO_NUM);
 
 		service.boardDel(BO_NUM);

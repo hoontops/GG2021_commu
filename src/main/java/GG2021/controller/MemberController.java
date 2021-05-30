@@ -143,7 +143,7 @@ public class MemberController {
 			model.addAttribute("M_IMG", filename);	
 			String admin="hth9876";
 			if(id.equals(admin)) {
-				return "redirect:adminMemeberCon.do";
+				return "redirect:admin.do?state=member";
 			}else {
 				return "redirect:myPage.do";       
 			}

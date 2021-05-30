@@ -9,12 +9,14 @@ public class Comments {
 	private String C_IMG;
 	private int C_POINT;
 	private int B_NUM;
+	
 	public int getC_NUM() {
 		return C_NUM;
 	}
 	public void setC_NUM(int c_NUM) {
 		C_NUM = c_NUM;
 	}
+	
 	public String getC_ID() {
 		return C_ID;
 	}

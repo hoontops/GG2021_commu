@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import GG2021.model.Board;
+import GG2021.model.Comments;
 import GG2021.model.Member;
 
 @Repository
@@ -31,6 +32,13 @@ public class AdminDao {
 	
 	public List<Board>getAdminBoardList(int page){
 		return session.selectList("getAdminBoardList", page);
+	}
+	public int getAdminCommentsCount() {
+		return session.selectOne("getAdminCommentsCount");
+	}
+	
+	public List<Comments> getAdminCommentsList(int page) {
+		return session.selectList("getAdminCommentsList", page);
 	}
 	
 }
