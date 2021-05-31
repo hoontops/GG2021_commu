@@ -66,14 +66,6 @@ public class MainController {
 		return "main/myPage";
 	}
 
-	/*
-	 * @RequestMapping("gameinfo.do") public String gameinfo(Model model, All_Game
-	 * game ) {
-	 * 
-	 * List<All_Game> list = service.gameInfo();
-	 * 
-	 * return "main/mainPage"; }
-	 */
 	
 	@RequestMapping("adminMain.do")
 	public String adminMain() {

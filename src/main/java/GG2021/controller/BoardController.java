@@ -2,33 +2,31 @@ package GG2021.controller;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sun.java.accessibility.util.GUIInitializedListener;
-
+import GG2021.model.All_Game;
 import GG2021.model.Board;
-import GG2021.model.Member;
 import GG2021.service.BoardService;
+import GG2021.service.GameService;
 
 @Controller
 public class BoardController {
 	@Autowired
 	private BoardService service;
+	@Autowired
+	private GameService gservice;
 
 	// 글 게시판 목록(페이지)
 	@RequestMapping(value = "boardList.do")
@@ -210,5 +208,22 @@ public class BoardController {
 	public String imgBoardList() {
 		return "board/imgBoardList";
 	}
+	
+	@RequestMapping(value = "tile.do")
+	public String tile(String state, Model model) {
+		System.out.println("state:"+ state);
+		 List<All_Game> gameList = new ArrayList<All_Game>(); 
+		 gameList = gservice.getGameList(state);
+		 model.addAttribute("gameList",gameList);
+		 
+		return "board/tile";
+	}
+	
+	@RequestMapping("tiler.do")
+	public String  tiler(String state, Model model) {
+		
+		return "redirect:tile.do?state="+state;
+	}
+	
 
 }

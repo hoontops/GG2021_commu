@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gamens">
+
+	<select id="getGameList" parameterType="String" resultType="game">
+		select * from ALL_GAME where G_TYPE=#{state}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+

@@ -130,7 +130,6 @@ public class AdminController {
 	@RequestMapping("insertLink.do")
 	public String insertLink(String link) {
 		int result = service.insertLink(link);
-		System.out.println("링크 삽입 성공? : "+result);
 		return "redirect:admin.do?state=dash";
 	}
 }
