@@ -42,4 +42,12 @@ public class AdminService {
 	public List<Comments> getAdminCommentsList(int page) {
 		return dao.getAdminCommentsList(page);
 	}
+	
+	public int insertLink(String link) {
+		return dao.insertLink(link);
+	}
+	
+	public String getlink() {
+		return dao.getlink();
+	}
 }

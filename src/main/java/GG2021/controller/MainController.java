@@ -12,15 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import GG2021.model.All_Game;
 import GG2021.model.Member;
+import GG2021.service.AdminService;
 import GG2021.service.MemberService;
 
 @Controller
 public class MainController {
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private AdminService aservice;
 
 	@RequestMapping("main.do")
-	public String main() {
+	public String main(Model model) {
+		String link= aservice.getlink();
+		model.addAttribute("link", link);
 		return "main/mainPage";
 		/* return "redirect:gameinfo.do"; */
 	}

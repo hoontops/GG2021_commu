@@ -38,7 +38,7 @@ public class AdminController {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		int limit = 10;
-		
+		String link= service.getlink();
 		memberList =service.getAdminMemberList(page);
 		boardList = service.getAdminBoardList(page);
 		commentnsList= service.getAdminCommentsList(page);
@@ -64,6 +64,7 @@ public class AdminController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("maxPage", maxPage);
+		model.addAttribute("link", link);
 		if (state.equals("dash")) {
 			result=1;
 			model.addAttribute("memberCount", memberCount);
@@ -126,4 +127,10 @@ public class AdminController {
 		return "redirect:admin.do?state=member";
 	}
 	
+	@RequestMapping("insertLink.do")
+	public String insertLink(String link) {
+		int result = service.insertLink(link);
+		System.out.println("링크 삽입 성공? : "+result);
+		return "redirect:admin.do?state=dash";
+	}
 }

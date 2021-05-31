@@ -177,7 +177,7 @@ $(document).ready(function(){
 					<div
 						class="block h-full w-full bg-black text-white text-5xl text-center w-fu">
 						<iframe class="m-auto" width="700" height="425"
-							src="https://www.youtube.com/embed/z2HE_the-A0?autoplay=1&mute=1"
+							src="${link }?autoplay=1&mute=1"
 							title="YouTube video player" frameborder="0"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowfullscreen></iframe>
