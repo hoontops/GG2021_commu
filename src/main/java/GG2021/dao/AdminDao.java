@@ -41,4 +41,11 @@ public class AdminDao {
 		return session.selectList("getAdminCommentsList", page);
 	}
 	
+	public int insertLink(String link) {
+		return session.update("insertLink", link);
+	}
+	
+	public String getlink() {
+		return session.selectOne("getlink");
+	}
 }

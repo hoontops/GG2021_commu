@@ -3,6 +3,14 @@
 
 <mapper namespace="admin">
 
+<!-- 대시보드 -->
+	<update id="insertLink" parameterType="String">
+	 	update ADMINPAGE set YOUTUBE=#{link}
+	</update>
+	
+	<select id="getlink" resultType="String">
+		select YOUTUBE from ADMINPAGE
+	</select>
 
 <!-- 멤버 sql -->
     <select id="getAdminMemberList" parameterType="int" resultType="member">

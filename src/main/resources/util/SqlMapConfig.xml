@@ -8,6 +8,7 @@
 		<typeAlias alias="board" type="GG2021.model.Board" />		
 		<typeAlias alias="allgame" type="GG2021.model.All_Game" />		
 		<typeAlias alias="comments" type="GG2021.model.Comments" />		
+		<typeAlias alias="adminp" type="GG2021.model.Adminpage" />		
 	</typeAliases>
 
 	<!-- <environments default="development">
