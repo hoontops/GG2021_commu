@@ -9,6 +9,12 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
         $(function () {
+        	$("#writeBoard").submit(function(){
+        		var selec = $("#selec").val();
+        		alert(selec);
+        		location.href="boardWriteOk.do?state="+selec;
+        	});
+        	
             $('#cancle').click(function () {
                 var result = confirm('작성을 취소하겠습니까?');
                 if (result) { //yes 
@@ -38,15 +44,15 @@
                 <div class=" max-w-6xl mx-auto sm:px-6 lg:px-8">
                     <div class=" overflow-hidden sm:rounded-lg">
                         <div class="">
-                            <form method="POST" action="boardWriteOk.do" enctype="multipart/form-data"> 
+                            <form id="writeBoard" method="POST" action="boardWriteOk.do?state=${ state}" enctype="multipart/form-data"> 
                                 <div class="mb-5 border-b-4 border-indigo-400"> 
                                 <input type="hidden" name="M_ID" id="M_ID" value="${id }">
                                     <span>작성자:</span>
                                     <span>${id}</span>  
                                 </div>     
-                                 
+                                  
                                 <div class="mb-4 text-white font-samibold"><span class="text-black mr-2">게임 종류</span>
-                                	<select id="G_TYPE" name="G_TYPE" class="py-1 px-4 rounded border bg-indigo-400 focus:outline-none"> 
+                                	<select id="selec" name="state" class="py-1 px-4 rounded border bg-indigo-400 focus:outline-none"> 
                                 		<option value="Action">게임선택</option> 
 										<option value="Action" class=" text-right">Action</option> 
 										<option value="Beat_Em_Up" class=" text-right">Beat_Em_Up</option> 					
@@ -76,9 +82,9 @@
                                      
                                     <input type="file"  class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02" required="required"> 
                                 </div>
-                                <div class="flex justify-end mb-10">
+                                <div class="flex justify-end mb-10"> 
                                     <button class="bg-gray-100 px-3 py-1 rounded border-2 hover:bg-white" id="cancle">취소</button>
-                                    <button role="submit" class="bg-blue-500 px-3 py-1 rounded border-2  ml-2 text-white hover:bg-blue-400"
+                                    <button id="writeBoard" value=${state }class="bg-blue-500 px-3 py-1 rounded border-2  ml-2 text-white hover:bg-blue-400"
                                         >등록</button>
                                 </div>
                             </form>

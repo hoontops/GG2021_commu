@@ -10,7 +10,8 @@
 <body>
 	<c:if test="${result01 ==1 }">
 	<script>
-		location.href="boardList.do";
+	alert(${state});
+		location.href="boardList.do?state="+${state}; ///이거 해결하기 
 	</script> 
 	</c:if>
 	

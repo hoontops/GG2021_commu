@@ -68,7 +68,9 @@ public class BoardController {
 
 	// 글쓰기 페이지
 	@RequestMapping("boardWrite.do")
-	public String boardWrite() {
+	public String boardWrite(String state, Model model) {
+		System.out.println("state 어그로를 끌어보장 : "+ state);
+		model.addAttribute("state", state);
 		return "board/boardWrite";
 	}
 
@@ -77,7 +79,7 @@ public class BoardController {
 	public String boardWriteOk(@RequestParam("B_IMG02") MultipartFile mf, Model model, Board board, String M_ID,
 			String state, HttpServletRequest request) throws Exception {
 		System.out.println("mf:" + mf);
-
+		
 		int result01 = 0;
 
 		String filename = mf.getOriginalFilename();
@@ -117,6 +119,7 @@ public class BoardController {
 		result01 = service.insert(board);
 		
 		
+		model.addAttribute("state", state);
 		model.addAttribute("result01", result01);
 
 		return "board/boardWriteOk";

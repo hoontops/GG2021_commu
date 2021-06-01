@@ -160,7 +160,7 @@ input[type="submit"] {
 			<li>
 				<div
 					class="relative z-10 hover-trigger mt-1 border-b-2 hover:border-indigo-600">
-					<a href="boardList.do" class="text-xs pb-1 ">COMMNUNITY</a>
+					<a href="boardList.do?state=Action" class="text-xs pb-1 ">COMMNUNITY</a>
 					<div class="absolute w-28 h-6 p-3 hover-target">
 						<div>
 							<div
