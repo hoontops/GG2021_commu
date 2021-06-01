@@ -8,9 +8,9 @@
 	location.href="boardList.do";  
 </script>
 </c:if>
-<c:if test="${session.id !='hth9876' }">
+<c:if test="${session.id == bcont.getM_ID() }"> 
 	<script>
 	alert("삭제 성공")
-	location.href="admin.do?state=board";  
+	location.href="boardList.do";   
 </script>
-</c:if>
+</c:if> 
