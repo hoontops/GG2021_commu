@@ -13,6 +13,12 @@ public class BoardService {
 	@Autowired
 	private BoardDao dao;
 	
+	// public List<Board> list(int startRow, int endRow) 
+	public List<Board> list(Board board) {
+		return dao.list(board);
+	// return dao.list(startRow, endRow)
+	}
+	
 	// 글쓰기 완료 
 	public int insert(Board board) throws Exception {
 		return dao.insert(board); 
@@ -48,5 +54,14 @@ public class BoardService {
 	public void boardDel(int BO_NUM) throws Exception {
 		dao.boardDel(BO_NUM);
 	}
+	
+	// 검색
+	public Board boardSearch(int BO_NUM) throws Exception {
+		Board board = dao.boardSearch(BO_NUM);
+		return board;
+	}
 
+	public int getTotal(Board board) {
+		return dao.getTotal(board);
+	}
 }

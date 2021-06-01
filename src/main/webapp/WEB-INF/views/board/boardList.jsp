@@ -197,15 +197,15 @@
 			</c:if>
 			
 			<c:if test="${page > 1 }">
-				<a href="boardList.do?page=${page-1}">이전</a> 
+				<a href="boardList.do?page=${page-1}&keyword=${keyword}">이전</a> 
 			</c:if>			
 
 			<c:forEach var="a" begin="${startPage}" end="${endPage}">
 				<c:if test="${a == page }">
 					${a}
 				</c:if>
-				<c:if test="${a != page }">   
-					<a href="boardList.do?page=${a}">[${a}]</a>&nbsp;
+				<c:if test="${a != page }">   // 
+					<a href="boardList.do?page=${a}&keyword=${keyword}">[${a}]</a>&nbsp;
 				</c:if> 
 			</c:forEach>			
 			
@@ -213,7 +213,7 @@
 				다음 
 			</c:if>
 			<c:if test="${page < maxPage }"> 
-				<a href="boardList.do?page=${page+1}">다음</a>
+				<a href="boardList.do?page=${page+1}&keyword=${keyword}">다음</a>
 			</c:if>
 	</div>
 </body>

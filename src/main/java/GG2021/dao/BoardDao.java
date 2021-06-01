@@ -12,6 +12,11 @@ import GG2021.model.Board;
 public class BoardDao {
 	@Autowired SqlSession session;
 	
+	// public List<Board> list(int startRow, int endRow) 
+		public List<Board> list(Board board) {
+			return session.selectList("boardSearch",board);
+		}
+		
 	// 글쓰기 완료
 	public int insert(Board board) throws Exception {
 		return session.insert("boardInsert", board);  
@@ -49,5 +54,13 @@ public class BoardDao {
 	public void boardDel(int BO_NUM) throws Exception {
 		session.delete("boardDel", BO_NUM);
 	}
+	
+ 	// 검색
+	public Board boardSearch(int BO_NUM) throws Exception {
+		return (Board) session.selectOne("boardSearch",BO_NUM);
+	}
 
+	public int getTotal(Board board) {
+		return session.selectOne("boardSearch.getTotal",board);
+	}
 }

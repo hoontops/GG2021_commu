@@ -24,6 +24,7 @@ import com.sun.java.accessibility.util.GUIInitializedListener;
 import GG2021.model.Board;
 import GG2021.model.Member;
 import GG2021.service.BoardService;
+import GG2021.service.PagingPgm;
 
 @Controller
 public class BoardController {
@@ -209,6 +210,40 @@ public class BoardController {
 	@RequestMapping("imgBoardList.do")
 	public String imgBoardList() {
 		return "board/imgBoardList";
+	}
+	
+	// 검색 
+	@RequestMapping(value="boardSearch.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String boardSearch(String pageNum, Board board, Model model) {
+		final int rowPerPage = 10; // 화면에 출력할 데이터 갯수
+		if(pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum); // 현재 페이지 번호
+		
+		//int total = bs.getTotal();
+		int total = service.getTotal(board); // 검색(데이터 갯수)
+		
+		int startRow = (currentPage -1) * rowPerPage +1;
+		int endRow = startRow + rowPerPage -1;
+		
+		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
+		board.setStartRow(startRow);
+		board.setEndRow(endRow);
+		
+		int no = total - startRow +1; // 화면 출력 번호
+		List<Board> list = service.list(board);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("no",no);
+		model.addAttribute("pp", pp);
+		// 검색
+		model.addAttribute("search", board.getSearch());
+		model.addAttribute("keyword", board.getKeyword());
+		
+		
+		
+		return "board/boardSearch";
 	}
 
 }
