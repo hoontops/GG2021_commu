@@ -269,12 +269,9 @@ public class BoardController {
 		int maxPage = (int) ((double) listcount / limit + 0.95);
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
 		int endPage = maxPage;
-		
-		System.out.println("제발요 " +boardlist);
-		System.out.println("게임종류 state 는?? :"+ state);
 		if (endPage > startPage + 10 - 1)
 			endPage = startPage + 10 - 1;
-
+		model.addAttribute("state", state);
 		model.addAttribute("page", page);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);

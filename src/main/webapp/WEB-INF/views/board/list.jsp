@@ -17,7 +17,7 @@
 				<div id="table" class="pt-10 w-11/12 mx-auto">
 
 					<div class="mb-8">
-						<h2 class="text-4xl font-bold text-gray-600 px-4 py-4">자유게시판</h2>
+						<h2 class="text-4xl font-bold text-gray-600 px-2">${state} <sapn class="text-2xl">게시판</sapn></h2>  
 					</div>
 
 
