@@ -123,6 +123,8 @@ public class BoardController {
 		}
 		Board board = service.boardView(BO_NUM);
 		
+		
+		
 		//전, 후 글 객체생성
 		Board before = service.boardView(BO_NUM-1);
 		System.out.println("before객체 : "+before);
@@ -215,7 +217,6 @@ public class BoardController {
 		 List<All_Game> gameList = new ArrayList<All_Game>(); 
 		 gameList = gservice.getGameList(state);
 		 model.addAttribute("gameList",gameList);
-		 
 		return "board/tile";
 	}
 	
@@ -225,5 +226,24 @@ public class BoardController {
 		return "redirect:tile.do?state="+state;
 	}
 	
+	@RequestMapping("boardThumbsUp.do")
+	public String boardThumbsUp(int BO_NUM, int like, Model model) throws Exception {
+			service.boardThumbsUp(BO_NUM); //좋아요 1업데이트
+		Board board = service.boardView(BO_NUM); //상세정보 불러와서
+		like = board.getBO_GOOD();
+		model.addAttribute("thumbs", like);
+		return "board/boardViewThumbs";
+	}
+	
+	@RequestMapping("boardThumbsDown.do")
+	public String boardThumbsDown(int BO_NUM, int dislike, Model model) throws Exception {
+		System.out.println("싫어요: "+ dislike);
+		System.out.println("글번호 : "+BO_NUM);
+		service.boardThumbsDown(BO_NUM); //싫어요 1업데이트 
+		Board board = service.boardView(BO_NUM); //상세정보 불러와서
+		dislike = board.getBO_BAD();
+		model.addAttribute("thumbs", dislike);
+		return "board/boardViewThumbs";
+	}
 
 }

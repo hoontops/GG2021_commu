@@ -88,6 +88,21 @@
 	delete from board where B_NUM=#{B_NUM} 
 	</delete>
 	
+	
+	<!-- 좋아요 -->
+	<update id="boardThumbsUp" parameterType="int">
+		update board set 
+		B_GOOD=B_GOOD+1
+		where B_NUM = #{BO_NUM}
+	</update>
+	<!-- 싫어요 -->
+	<update id="boardThumbsDown" parameterType="int">
+		update board set B_BAD = B_BAD+1
+		where B_NUM = #{BO_NUM}
+		
+	<!-- 	update board set B_VIEW = B_VIEW+1    
+	where B_NUM = #{B_NUM}    -->
+	</update>
 </mapper>
 
 

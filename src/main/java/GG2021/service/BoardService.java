@@ -48,5 +48,13 @@ public class BoardService {
 	public void boardDel(int BO_NUM) throws Exception {
 		dao.boardDel(BO_NUM);
 	}
-
+	
+	//좋아요
+	public void boardThumbsUp(int BO_NUM) {
+		 dao.boardThumbsUp(BO_NUM);
+	}
+	//싫어요
+	public void boardThumbsDown(int BO_NUM) {
+		dao.boardThumbsDown(BO_NUM);
+	}
 }

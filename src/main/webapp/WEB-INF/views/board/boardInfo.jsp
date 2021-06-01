@@ -9,7 +9,7 @@
 <script>
 	$(function() {
  	
- 	$("#tile").load("tile.do?state=action"); // 1. 로드 함수로 타일.jsp 불러옴
+ 	$("#tile").load("tile.do?state=Action");
 	
  	$("#sel").change(function(){
  		var sel = $("#sel").val()
@@ -19,7 +19,6 @@
  	 	} );
  	});
  	
- 
 	});
 </script>
 </head>
@@ -120,11 +119,11 @@
 					d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
 					clip-rule="evenodd" />
           </svg>
-			<option value="">선택</option>
-			<option value="Action">액션</option>
+			<option value="Action">선택</option>
 			<option value="Beat Em Up">어드벤처</option>
 			<option value="City setlement">도시건설</option>
 			<option value="Role-Playing">롤플레잉</option>
+			<option value="Action">액션</option>
 			<option value="Action Rogue_like">로그라이크</option>
 			<option value="Card board">카드보드</option>
 			<option value="Strategy">전략</option>

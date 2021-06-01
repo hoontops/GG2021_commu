@@ -15,6 +15,20 @@
 				"boardView.do?BO_NUM=${bcont.BO_NUM}&page=${page}&state=del",
 				"게시글 삭제", "width=660,height=380");
 	}
+	$(function() {
+		$("#up").click(function() {
+			var thumbsUp = $("#up").val();
+			$.post("boardThumbsUp.do?BO_NUM=${bcont.BO_NUM}", {"like" : thumbsUp}, function(data) {
+				$("#thumbsUp").html(data);
+			});
+		});
+		$("#down").click(function() {
+			var thumbsDown = $("#down").val();
+			$.post("boardThumbsDown.do?BO_NUM=${bcont.BO_NUM}", {"dislike" : thumbsDown}, function(data) {
+				$("#thumbsDown").html(data);
+			});
+		});
+	});
 
 	/* $(function() { 
 		$('.edit').click(function() {
@@ -111,7 +125,25 @@
 			<p class="text-base">${bcont.BO_CONTENT }</p>
 		</div>
 
-
+		<!-- 추천비추천 -->
+		<div>
+			<div class="flex justify-center mt-32">
+				<div class="border-b-2 p-6">
+					<span class="font-semibold" id="thumbsUp">${bcont.BO_GOOD }</span>
+					<button id="up" value="${bcont.BO_GOOD }"
+						class="mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
+						style="width: 52px;">
+						<i class="far fa-thumbs-up"></i>
+					</button>
+					<button id="down" value="${bcont.BO_BAD }"
+						class="mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
+						style="width: 52px;">
+						<i class="far fa-thumbs-down"></i>
+					</button>
+					<span class="font-semibold" id="thumbsDown">${bcont.BO_BAD }</span>
+				</div>
+			</div>
+		</div>
 		<!-- 댓글 -->
 		<div
 			class="w-9/12 flex pb-20 mx-auto mt-10 mb-12 border-b-2 border-indigo-600">
@@ -191,9 +223,8 @@
 							${after.getBO_TITLE() } </span></a>
 				</c:if>
 				<c:if test="${after == null }">
-					<span><i
-							class="fas fa-chevron-up px-3"></i> <i class="pr-4">다음글</i>
-							해당 글이 없습니다 </span>
+					<span><i class="fas fa-chevron-up px-3"></i> <i class="pr-4">다음글</i>
+						해당 글이 없습니다 </span>
 				</c:if>
 			</div>
 			<div class="border-t-4 border-b border-indigo-100 py-3">
@@ -207,8 +238,8 @@
 				</c:if>
 				<!-- 이전글이 없으면?-->
 				<c:if test="${ before == null}">
-					<span><i class="fas fa-chevron-down px-3"></i> <i class="pr-4">이전글</i> 해당
-							글이 없습니다</span>
+					<span><i class="fas fa-chevron-down px-3"></i> <i
+						class="pr-4">이전글</i> 해당 글이 없습니다</span>
 				</c:if>
 
 

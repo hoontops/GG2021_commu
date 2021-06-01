@@ -49,5 +49,11 @@ public class BoardDao {
 	public void boardDel(int BO_NUM) throws Exception {
 		session.delete("boardDel", BO_NUM);
 	}
-
+	
+	public int boardThumbsUp(int BO_NUM) {
+		return session.update("boardThumbsUp", BO_NUM);
+	}
+	public void boardThumbsDown(int BO_NUM) {
+		session.update("boardThumbsDown", BO_NUM);
+	}
 }
