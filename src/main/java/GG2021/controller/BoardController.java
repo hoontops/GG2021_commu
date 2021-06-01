@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import GG2021.model.All_Game;
 import GG2021.model.Board;
+import GG2021.model.Comments;
 import GG2021.service.BoardService;
+import GG2021.service.CommentsService;
 import GG2021.service.GameService;
 
 @Controller
@@ -27,6 +29,8 @@ public class BoardController {
 	private BoardService service;
 	@Autowired
 	private GameService gservice;
+	@Autowired
+	private CommentsService cms;
 
 	// 글 게시판 목록(페이지)
 	@RequestMapping(value = "boardList.do")
@@ -198,6 +202,7 @@ public class BoardController {
 		Board board = service.boardView(B_NUM);
 
 		service.boardDel(B_NUM);
+		
 
 		return "board/boardDelOk";
 	}
