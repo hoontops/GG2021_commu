@@ -70,8 +70,6 @@ public class BoardController {
 	@RequestMapping(value = "boardWriteOk.do", method = RequestMethod.POST)
 	public String boardWriteOk(@RequestParam("B_IMG02") MultipartFile mf, Model model, Board board, String M_ID,
 			HttpServletRequest request) throws Exception {
-		System.out.println("mf:" + mf);
-
 		int result01 = 0;
 
 		String filename = mf.getOriginalFilename();

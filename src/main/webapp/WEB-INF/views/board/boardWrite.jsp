@@ -73,9 +73,9 @@
                                     <textarea name="B_CONTENT" id="B_CONTENT" rows="6" cols="117" style="resize:none"class="p-7 border border-indigo-600 rounded my-3 focus:outline-none"></textarea> 
                                     		               	 
                                      
-                                    <input type="file"  class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02" required="required"> 
+                                    <input type="file" class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02"> 
                                 </div>
-                                <div class="flex justify-end mb-10">
+                                <div class="flex justify-end mb-10"> 
                                     <button class="bg-gray-100 px-3 py-1 rounded border-2 hover:bg-white" id="cancle">취소</button>
                                     <button role="submit" class="bg-blue-500 px-3 py-1 rounded border-2  ml-2 text-white hover:bg-blue-400"
                                         >등록</button>

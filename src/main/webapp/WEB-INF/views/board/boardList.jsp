@@ -45,7 +45,7 @@
 			<button class="focus:outline-none py-2 px-6 hover:bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">이미지게시판</button>
 		</div>
 		<div class="mb-2">  
-			<select class="focus:outline-none text-sm pr-4"> 
+			<select class="focus:outline-none text-sm pr-2 border-2 py-2 rounded border-indigo-200"> 
 				<option>게임선택</option>
 				<option class=" text-right">Action</option> 
 				<option class=" text-right">Action Rogue_like</option>
@@ -59,7 +59,7 @@
 				<option class=" text-right">Strategy</option>
 				<option class=" text-right">sport</option> 
 			</select>					    
-			<button class="py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
+			<button class="border-2 py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
 					onclick="location.href='boardWrite.do'">글쓰기 
 			</button>
 		</div>

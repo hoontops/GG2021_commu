@@ -5,7 +5,6 @@
 
 <c:if test="${result == 1}">
 	<script>
-		alert("로그인성공!");
 		location.href="main.do";
 	</script>
 </c:if>   

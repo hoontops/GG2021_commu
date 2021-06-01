@@ -74,7 +74,7 @@
 			</div>
 			<div class="mb-2">
 				<button
-					class="py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
+					class="py-2 border-2  px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
 					onclick="location.href='boardList.do'">목록</button>
 			</div>
 		</div>
@@ -111,14 +111,17 @@
 			</div>
 		</div>
 
-		<!-- 내용 -->
+		<!-- 내용 --> 
+		
 		<div class="w-11/12 mx-auto py-10 pl-28">
-			<p class="text-base">${bcont.getB_CONTENT() }</p>
-		</div>
+			<div><img src="<%=request.getContextPath() %>/upload/${bcont.getB_IMG()}" height="150" width="150" /></div>
+		
+			<div class="text-base pt-16">${bcont.getB_CONTENT() }</div> 
+		</div> 
 
 		<!-- 추천비추천 -->
 		<div>
-			<div class="flex justify-center mt-32">
+			<div class="flex justify-center mt-16">
 				<div class="border-b-2 p-6">
 					<span class="font-semibold" id="thumbsUp">${bcont.getB_GOOD() }</span>
 					<button id="up" value="${bcont.getB_GOOD() }"

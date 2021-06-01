@@ -10,7 +10,7 @@
 </c:if>
 <c:if test="${session.id == bcont.getM_ID() }"> 
 	<script>
-	alert("삭제 성공")
-	location.href="boardList.do";   
+	self.close();
+	opener.location.href="boardList.do"
 </script>
 </c:if> 
