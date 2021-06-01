@@ -28,6 +28,26 @@
 	select count(B_NUM) from board
 	</select>
 	
+	<!-- 검색결과 총 갯수 -->
+	<select id="keywordCount" parameterType="String"  resultType="int">
+	select count(*) from All_Game where G_TYPE like '%' || #{keyword} || '%'
+	</select>
+	
+	
+	<!-- 검색 목록  -->
+	<select id="keywordlist" parameterType="allgame" resultType="allgame">	
+		select * from (select rownum rnum, game.*		 					
+			from (select * from All_Game
+		<where>
+			<if test="keyword != null">
+				G_TYPE like '%'||#{keyword}||'%'
+			</if>			
+		</where>	
+		order by g_name asc) game)       
+		where rnum between #{startRow} and #{endRow}	
+	</select>
+	
+	
 	<!-- 게시판 목록  -->
 	<select id="boardList" parameterType="int" resultType="board">
 	<![CDATA[

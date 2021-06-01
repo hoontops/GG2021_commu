@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import GG2021.dao.BoardDao;
+import GG2021.model.All_Game;
 import GG2021.model.Board;
 
 @Service
@@ -28,6 +29,17 @@ public class BoardService {
 	public int getListCount() throws Exception {
 		return dao.getListCount();
 	}
+	
+	// 검색결과 갯수
+	public int getKeywordCount(String keyword) throws Exception {
+			return dao.getKeywordCount(keyword);
+	}
+	
+	// 검색결과 리스트
+	public List<All_Game> getResultList(All_Game game) throws Exception {
+		return dao.getResultList(game);
+	}
+	
 	
 	// 게시판 리스트
 	public List getBoardList(int page) throws Exception {

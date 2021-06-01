@@ -95,22 +95,22 @@ input[type="submit"] {
 			</a>
 			<c:if test="${sessionScope.id == 'hth9876' && sessionScope.id !=null}" >
 				<div id="searchBar" class="mt-5 ml-32">
-					<form method="POST" action="#">
-						<input type="text"
+					<form method="POST" action="keyword.do">
+						<input type="text" name="keyword"
 							class="bg-gray-100 text-gray-800 font-bold rounded  px-10 py-1 focus:outline-none shadow-lg"
-							size="30" placeholder="search" autofocus> <input
-							type="submit" value="&#xf002;" class="cursor-pointer">
+							size="30" placeholder="search" autofocus> 
+						<input type="submit" value="&#xf002;" class="cursor-pointer">
 
 					</form>
 				</div>
 			</c:if>
 			<c:if test="${sessionScope.id != 'hth9876'}" >
 				<div id="searchBar" class="mt-5 ml-5">
-					<form method="POST" action="#">
-						<input type="text"
+					<form method="POST" action="keyword.do">
+						<input type="text" name="keyword"
 							class="bg-gray-100 text-gray-800 font-bold rounded  px-10 py-1 focus:outline-none shadow-lg"
-							size="30" placeholder="search" autofocus> <input
-							type="submit" value="&#xf002;" class="cursor-pointer">
+							size="30" placeholder="search" autofocus> 
+						<input type="submit" value="&#xf002;" class="cursor-pointer">
 
 					</form>
 				</div>

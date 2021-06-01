@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import GG2021.model.All_Game;
 import GG2021.model.Board;
 
 @Repository
@@ -28,6 +29,19 @@ public class BoardDao {
 		count = ((Integer) session.selectOne("boardCount")).intValue();
 		return count;
 	}
+	
+	// 검색결과 갯수
+	public int getKeywordCount(String keyword) throws Exception {
+		return session.selectOne("keywordCount", keyword);
+	}
+	
+	// 검색결과 리스트
+	public List<All_Game> getResultList(All_Game game) throws Exception {
+		List<All_Game> boardlist = session.selectList("keywordlist",game);
+		return boardlist;
+	}
+	
+	
 	
 	// 게시판 리스트
 	public List<Board> getBoardList(int page) throws Exception {

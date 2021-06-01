@@ -12,6 +12,13 @@ public class All_Game {
 	private int G_GRADE;
 	private String G_URL;
 	private Date G_DATE;
+	
+	private int startRow;
+	private int endRow;  
+		
+	private String search;
+	private String keyword;
+	
 	public String getG_NAME() {
 		return G_NAME;
 	}
@@ -65,6 +72,30 @@ public class All_Game {
 	}
 	public void setG_DATE(Date g_DATE) {
 		G_DATE = g_DATE;
+	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 }

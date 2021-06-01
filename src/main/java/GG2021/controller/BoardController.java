@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sun.java.accessibility.util.GUIInitializedListener;
 
+import GG2021.model.All_Game;
 import GG2021.model.Board;
 import GG2021.model.Member;
 import GG2021.service.BoardService;
@@ -63,11 +64,59 @@ public class BoardController {
 		return "board/boardList";
 	}
 
+	
+	// 검색목록 페이지
+		@RequestMapping(value = "keyword.do")
+		public String search(String pageNum, All_Game game,Model model, HttpServletRequest request) throws Exception {
+			System.out.println("keyword:"+game.getKeyword());
+
+			final int limit = 10; // 화면에 출력할 데이터 갯수
+			if(pageNum == null || pageNum.equals("")) {
+				pageNum = "1";
+			}
+			int currentPage = Integer.parseInt(pageNum);
+			
+			
+			List<All_Game> boardlist = new ArrayList<All_Game>();
+			
+			
+			int startRow = (currentPage -1) * limit +1;
+			int endRow = startRow + limit -1;
+			
+			game.setStartRow(startRow);
+			game.setEndRow(endRow);			
+			
+			int listcount = service.getKeywordCount(game.getKeyword()); // 총 글 수
+			boardlist = service.getResultList(game); //
+			System.out.println("listcount:"+listcount);
+			System.out.println("boardlist:"+boardlist);
+			
+			
+			int maxPage = (int) ((double) listcount / limit + 0.95);
+			int startPage = (((int) ((double) currentPage / 10 + 0.9)) - 1) * 10 + 1;
+			int endPage = maxPage;
+
+			if (endPage > startPage + 10 - 1)
+				endPage = startPage + 10 - 1;
+
+			model.addAttribute("page", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("maxPage", maxPage);
+			model.addAttribute("listcount", listcount);
+			model.addAttribute("boardlist", boardlist);
+			model.addAttribute("keyword", game.getKeyword());
+
+			return "board/boardSearchResult";
+		}
+
+		
 	// 글쓰기 페이지
 	@RequestMapping("boardWrite.do")
 	public String boardWrite() {
 		return "board/boardWrite";
 	}
+	
 
 	// 글쓰기 완료
 	@RequestMapping(value = "boardWriteOk.do", method = RequestMethod.POST)
@@ -210,40 +259,6 @@ public class BoardController {
 	@RequestMapping("imgBoardList.do")
 	public String imgBoardList() {
 		return "board/imgBoardList";
-	}
-	
-	// 검색 
-	@RequestMapping(value="boardSearch.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String boardSearch(String pageNum, Board board, Model model) {
-		final int rowPerPage = 10; // 화면에 출력할 데이터 갯수
-		if(pageNum == null || pageNum.equals("")) {
-			pageNum = "1";
-		}
-		int currentPage = Integer.parseInt(pageNum); // 현재 페이지 번호
-		
-		//int total = bs.getTotal();
-		int total = service.getTotal(board); // 검색(데이터 갯수)
-		
-		int startRow = (currentPage -1) * rowPerPage +1;
-		int endRow = startRow + rowPerPage -1;
-		
-		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-		board.setStartRow(startRow);
-		board.setEndRow(endRow);
-		
-		int no = total - startRow +1; // 화면 출력 번호
-		List<Board> list = service.list(board);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("no",no);
-		model.addAttribute("pp", pp);
-		// 검색
-		model.addAttribute("search", board.getSearch());
-		model.addAttribute("keyword", board.getKeyword());
-		
-		
-		
-		return "board/boardSearch";
 	}
 
 }
