@@ -28,7 +28,7 @@
 	<div class="mt-4">
 		<div class="flex flex-wrap -mx-6">
 			<div class="w-full px-6 sm:w-1/2 xl:w-1/3">
-				<div
+				<div 
 					class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
 					<div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
 						<i class="fas fa-users text-white text-2xl"></i>
@@ -36,7 +36,7 @@
 
 					<div class="mx-5">
 						<h4 class="text-2xl font-semibold text-gray-700">${memberCount }</h4>
-						<div class="text-gray-500">회원 수</div>
+						<div class="text-gray-500  w-20">회원 수</div>
 					</div>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 
 					<div class="mx-5">
 						<h4 class="text-2xl font-semibold text-gray-200">200,521</h4>
-						<div class="text-gray-200">게시글 수</div>
+						<div class="text-gray-200 w-24">게시글 수</div>
 					</div>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 
 					<div class="mx-5">
 						<h4 class="text-2xl font-semibold text-gray-200">215,542</h4>
-						<div class="text-gray-200">댓글 수</div>
+						<div class="text-gray-200 w-10">댓글 수</div>
 					</div>
 				</div>
 			</div>
