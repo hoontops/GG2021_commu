@@ -29,13 +29,13 @@ public class BoardService {
 	}
 	
 	// 조회수 증가
-	public void hit(int BO_NUM) throws Exception {
-		dao.hit(BO_NUM);
+	public void hit(int B_NUM) throws Exception {
+		dao.hit(B_NUM);
 	}
 	
 	// 게시글 상세
-	public Board boardView(int BO_NUM) throws Exception {
-		Board board = dao.boardView(BO_NUM);
+	public Board boardView(int B_NUM) throws Exception {
+		Board board = dao.boardView(B_NUM);
 		return board;
 	}
 	
@@ -45,16 +45,16 @@ public class BoardService {
 	}
 	
 	// 게시글 삭제
-	public void boardDel(int BO_NUM) throws Exception {
-		dao.boardDel(BO_NUM);
+	public void boardDel(int B_NUM) throws Exception {
+		dao.boardDel(B_NUM);
 	}
 	
 	//좋아요
-	public void boardThumbsUp(int BO_NUM) {
-		 dao.boardThumbsUp(BO_NUM);
+	public void boardThumbsUp(int B_NUM) {
+		 dao.boardThumbsUp(B_NUM);
 	}
 	//싫어요
-	public void boardThumbsDown(int BO_NUM) {
-		dao.boardThumbsDown(BO_NUM);
+	public void boardThumbsDown(int B_NUM) {
+		dao.boardThumbsDown(B_NUM);
 	}
 }

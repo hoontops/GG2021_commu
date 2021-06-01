@@ -17,12 +17,12 @@
 </head>
 <body class="bg-gray-50">
 	<div class="flex justify-center"> 
-	</div> 
+	</div>  
 	
 	<div class="w-8/12 flex justify-center items-center my-8 ml-32"> 
 		<form method="post" action="boardDel.do" enctype="multipart/form-data"
 			class="px-20 py-8 bg-indigo-50 rounded flex justify-center items-center flex-col shadow-md">
-		<input type="hidden" name="BO_NUM" value="${bcont.BO_NUM}" />
+		<input type="hidden" name="B_NUM" value="${bcont.getB_NUM()}" />
 		<input type="hidden" name="page" value="${page}" />
 			<i class="fab fa-battle-net fa-5x pb-5"></i> 
 			<div class="flex justify-center mb-5 p-3 w-80 focus:border-purple-700 text-2xl font-thin">정말 삭제 하시겠어요?</div>

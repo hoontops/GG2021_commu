@@ -31,13 +31,13 @@ public class BoardDao {
 	}
 	
 	// 조회수 증가
-	public void hit(int BO_NUM) throws Exception {
-		session.update("hit", BO_NUM);
+	public void hit(int B_NUM) throws Exception {
+		session.update("hit", B_NUM);
 	}
 	
 	// 게시판 상제
-	public Board boardView(int BO_NUM) throws Exception {
-		return (Board) session.selectOne("boardView", BO_NUM);
+	public Board boardView(int B_NUM) throws Exception {
+		return (Board) session.selectOne("boardView", B_NUM);
 	}
 	
 	// 게시판 수정
@@ -46,14 +46,14 @@ public class BoardDao {
 	}
 	
 	// 게시글 삭제
-	public void boardDel(int BO_NUM) throws Exception {
-		session.delete("boardDel", BO_NUM);
+	public void boardDel(int B_NUM) throws Exception {
+		session.delete("boardDel", B_NUM);
 	}
 	
-	public int boardThumbsUp(int BO_NUM) {
-		return session.update("boardThumbsUp", BO_NUM);
+	public int boardThumbsUp(int B_NUM) {
+		return session.update("boardThumbsUp", B_NUM);
 	}
-	public void boardThumbsDown(int BO_NUM) {
-		session.update("boardThumbsDown", BO_NUM);
+	public void boardThumbsDown(int B_NUM) {
+		session.update("boardThumbsDown", B_NUM);
 	}
 }

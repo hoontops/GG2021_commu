@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -46,9 +47,17 @@
 		<div class="mb-2">  
 			<select class="focus:outline-none text-sm pr-4"> 
 				<option>게임선택</option>
-				<option class=" text-right">롤</option> 
-				<option class=" text-right">배틀그라운드</option>
-				<option class=" text-right">오버워치</option>
+				<option class=" text-right">Action</option> 
+				<option class=" text-right">Action Rogue_like</option>
+				<option class=" text-right">Adventure RPG</option>
+				<option class=" text-right">Arcade and Rhythm</option>
+				<option class=" text-right">Beat Em Up</option>
+				<option class=" text-right">Card board</option>
+				<option class=" text-right">City setlement</option>
+				<option class=" text-right">Life & Immersive Sims</option>
+				<option class=" text-right">Role-Playing</option>
+				<option class=" text-right">Strategy</option>
+				<option class=" text-right">sport</option> 
 			</select>					    
 			<button class="py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
 					onclick="location.href='boardWrite.do'">글쓰기 
@@ -93,16 +102,16 @@
 						<tr class="border-b text-center">   
 							<td class="w-1/12 py-2">  
 								<c:out value="${num}"/>  
-								<c:set var="num" value="${num-1}"/> <%-- <span>${b.GO_TYPE}</span>  --%> 
+								<c:set var="num" value="${num-1}"/> 
 							</td>
 							<td id="checked" class="w-5/12 py-2 font-thin text-sm">      
-								<a href="boardView.do?BO_NUM=${b.BO_NUM}&page=${page}&state=cont">${b.BO_TITLE }</a></td>  
-							<td class="w-2/12 py-2 font-thin text-sm">${b.MO_ID}</td>   
+								<a href="boardView.do?B_NUM=${b.getB_NUM()}&page=${page}&state=cont">${b.getB_TITLE() }</a></td>  
+							<td class="w-2/12 py-2 font-thin text-sm">${b.getM_ID()}</td>   
 							<td class="w-2/12 py-2 font-thin text-sm"> 
-								<fmt:formatDate value="${b.BO_DATE }" pattern="yyyy-MM-dd"/>
+								<fmt:formatDate value="${b.getB_DATE() }" pattern="yyyy-MM-dd"/>
 							</td>
-							<td class="w-1/12 py-2 font-thin text-sm">${b.BO_GOOD }</td>
-							<td class="w-1/12 py-2 font-thin text-sm">${b.BO_VIEW }</td>  
+							<td class="w-1/12 py-2 font-thin text-sm">${b.getB_GOOD() }</td>
+							<td class="w-1/12 py-2 font-thin text-sm">${b.getB_VIEW() }</td>  
 						</tr>
 					</c:forEach>
 					</tbody>

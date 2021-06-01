@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -12,53 +13,43 @@
 	/* 글 삭제 창 */
 	function boardDelete() {
 		window.open(
-				"boardView.do?BO_NUM=${bcont.BO_NUM}&page=${page}&state=del",
+				"boardView.do?B_NUM=${bcont.getB_NUM()}&page=${page}&state=del", 
 				"게시글 삭제", "width=660,height=380");
-	}
+	} 
+	
+	$(function() {
+		$('#slist').load('slist.do?B_NUM=${bcont.getB_NUM()}') 
+		$('#repInsert').click(function() {
+			if(!frm.C_CONTENT.value) {
+				alert('댓글 입력후에 클릭 하세요.');
+				frm.C_CONTENT.focus();
+				return false;
+			}
+			var frmData = $('form').serialize();
+			$.post('sInsert.do', frmData, function(data) {
+				$('#slist').html(data);
+				frm.C_CONTENT.value = '';
+			});
+		});
+	});
+	
 	$(function() {
 		$("#up").click(function() {
 			var thumbsUp = $("#up").val();
-			$.post("boardThumbsUp.do?BO_NUM=${bcont.BO_NUM}", {"like" : thumbsUp}, function(data) {
+			$.post("boardThumbsUp.do?B_NUM=${bcont.getB_NUM()}", {"like" : thumbsUp}, function(data) {
 				$("#thumbsUp").html(data);
 			});
 		});
 		$("#down").click(function() {
-			var thumbsDown = $("#down").val();
-			$.post("boardThumbsDown.do?BO_NUM=${bcont.BO_NUM}", {"dislike" : thumbsDown}, function(data) {
+			var thumbsDown = $("#down").val(); 
+			$.post("boardThumbsDown.do?B_NUM=${bcont.getB_NUM()}", {"dislike" : thumbsDown}, function(data) {
 				$("#thumbsDown").html(data);
 			});
 		});
 	});
-
-	/* $(function() { 
-		$('.edit').click(function() {
-			var id  = $(this).attr('id');  // rno
-			var txt = $('#div_'+id).text(); // replytext
-			$('#div_'+id).html("<textarea rows='3' cols='30' class='focus:outline-none m-3' style='resize: none;'
-					id='div_" +id+ "'>" 
-					+txt+"</textarea>");
-			$('#btn_'+id).html(
-			   "<input type='button' value='확인' onclick='up("+id+")'> "
-			  +"<input type='button' value='취소' onclick='lst()'>");
-		});
-	});
-	function up(id) {
-		var replytext = $('#tt_'+id).val();
-		var formData = "rno="+id+'&replytext='+replytext
-			+"&bno=${board.num}";
-		$.post('${path}/repUpdate',formData, function(data) {
-			$('#slist').html(data);
-		});
-	}
-	function lst() {
-		$('#slist').load('${path}/slist/num/${board.num}');
-	}
-	function del(rno,bno) {
-		var formData="rno="+rno+"&bno="+bno;
-		$.post("${path}/repDelete",formData, function(data) {
-			$('#slist').html(data);
-		});
-	} */
+	
+	
+	
 </script>
 
 </head>
@@ -90,13 +81,13 @@
 
 		<div class="mt-12 mx-36 border-b-4 border-indigo-300">
 			<div id="title" class="flex justify-between">
-				<h1 class="font-bold text-2xl text-gray-800">${bcont.BO_TITLE }</h1>
+				<h1 class="font-bold text-2xl text-gray-800">${bcont.getB_TITLE() }</h1>
 
 				<!-- 작성자 클릭시 수정 삭제 버튼 -->
-				<c:if test="${sessionScope.id == bcont.MO_ID }">
+				<c:if test="${sessionScope.id == bcont.getM_ID() }">
 					<div class="">
 						<button
-							Onclick="location='boardView.do?BO_NUM=${bcont.BO_NUM}&page=${page}&state=edit'"
+							Onclick="location='boardView.do?B_NUM=${bcont.getB_NUM()}&page=${page}&state=edit'"
 							class="focus:outline-none bg-indigo-600 hover:bg-white hover:text-indigo-500  text-white text-xs py-1 px-3 rounded border border-solid border-indigo-600 hover:border-indigo-700 transition-colors duration-300">
 							수정</button>
 						<button onclick="boardDelete()"
@@ -108,79 +99,90 @@
 			</div>
 			<div id="under" class="flex items-center justify-between px-4">
 				<div class="nick & date flex items-center">
-					<div class="font-thin mr-3 text-gray-400 border-r pr-3">${bcont.MO_ID}</div>
+					<div class="font-thin mr-3 text-gray-400 border-r pr-3">${bcont.getM_ID()}</div>
 					<div class="font-thin text-gray-400">
-						<fmt:formatDate value="${bcont.BO_DATE }"
+						<fmt:formatDate value="${bcont.getB_DATE() }"
 							pattern="yyyy-MM-dd HH:mm:ss" />
 					</div>
 				</div>
 				<div id="view" class="font-semibold text-indigo-700">
-					<i class="far fa-eye pr-2"></i>${bcont.BO_VIEW }
+					<i class="far fa-eye pr-2"></i>${bcont.getB_VIEW() }
 				</div>
 			</div>
 		</div>
 
 		<!-- 내용 -->
 		<div class="w-11/12 mx-auto py-10 pl-28">
-			<p class="text-base">${bcont.BO_CONTENT }</p>
+			<p class="text-base">${bcont.getB_CONTENT() }</p>
 		</div>
 
 		<!-- 추천비추천 -->
 		<div>
 			<div class="flex justify-center mt-32">
 				<div class="border-b-2 p-6">
-					<span class="font-semibold" id="thumbsUp">${bcont.BO_GOOD }</span>
-					<button id="up" value="${bcont.BO_GOOD }"
+					<span class="font-semibold" id="thumbsUp">${bcont.getB_GOOD() }</span>
+					<button id="up" value="${bcont.getB_GOOD() }"
 						class="mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
 						style="width: 52px;">
 						<i class="far fa-thumbs-up"></i>
 					</button>
-					<button id="down" value="${bcont.BO_BAD }"
+					<button id="down" value="${bcont.getB_BAD() }"
 						class="mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
 						style="width: 52px;">
 						<i class="far fa-thumbs-down"></i>
 					</button>
-					<span class="font-semibold" id="thumbsDown">${bcont.BO_BAD }</span>
+					<span class="font-semibold" id="thumbsDown">${bcont.getB_BAD() }</span>
 				</div>
 			</div>
 		</div>
-		<!-- 댓글 -->
-		<div
-			class="w-9/12 flex pb-20 mx-auto mt-10 mb-12 border-b-2 border-indigo-600">
-			<c:if test="${sessionScope.id == null }">
-				<textarea rows="3" cols="100" style="resize: none;"
-					readonly="readonly" class="bg-indigo-50 focus:outline-none p-5"
-					placeholder="로그인 후 글쓰기 가능"></textarea>
-				<button onclick="chk()"
-					class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
-					value="등록">등록</button>
-			</c:if>
-			<c:if test="${sessionScope.id != null }">
-				<textarea rows="3" cols="100" style="resize: none;"
-					class="bg-indigo-50 focus:outline-none p-5" placeholder="댓글을 입력하세요"></textarea>
-				<button onclick="chk()"
-					class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
-					value="등록">등록</button>
-			</c:if>
 
-		</div>
 
-		<div class="flex mx-36 w-auto mt-10 border-b">
+		<!-- 댓글 --><%--  <c:if test=""> --%>
+		<form name="frm" id="frm"> 
+		<input type="hidden" name="C_ID" value="${id}">   
+		<input type="hidden" name="B_NUM" value="${bcont.getB_NUM()}"> 
+		<input type="hidden" name="page" value="${page}">  
+		<input type="hidden" name="state" value="${cont}">   
+			<div
+				class="w-9/12 flex pb-20 mx-auto mt-10 mb-12 border-b-2 border-indigo-600">
+				<c:if test="${sessionScope.id == null }">
+					<textarea rows="3" cols="100" style="resize: none;" 
+						readonly="readonly" class="bg-indigo-50 focus:outline-none p-5"
+						placeholder="로그인 후 글쓰기 가능"></textarea>
+					<button 
+						class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
+						value="등록">등록</button>
+				</c:if>
+				<c:if test="${sessionScope.id != null }">
+					<textarea rows="3" cols="100" style="resize: none;" name="C_CONTENT"
+						class="bg-indigo-50 focus:outline-none p-5" placeholder="댓글을 입력하세요"></textarea>
+					<button id="repInsert"
+						class="bg-indigo-200 w-32 focus:outline-none text-indigo-800 font-bold hover:bg-indigo-400"
+						value="등록">등록</button>
+				</c:if>
+			</div>
+		</form>	
+		
+		<!-- 댓글 보여지는 곳 -->
+		<div id="slist"></div> 
+
+<%-- 		<div class="flex mx-36 w-auto mt-10 border-b">
 			<div
 				class="focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-black text-xl font-bold">최신순</div>
 		</div>
 		<div class="mx-36 bg-indigo-50 mb-3">
+		
+		<c:forEach var="rb" items="${slist}">
 			<div id="댓글"
 				class="flex justify-between border-b border-gray-500 pl-12 pr-8 py-4">
 				<div>
-					<div class="font-bold  text-indigo-600">아이디 님</div>
+					<div class="font-bold  text-indigo-600">${rb.C_ID}</div>
 					<div class="font-thin pt-3">
-						<button id="reply" class="focus:outline-none">햄버거 먹고싶다
-							롯데리아 사각새우 버거에요~~~</button>
+						<button id="reply" class="focus:outline-none">${rb.C_CONTENT }</button>
 					</div>
 				</div>
-				<div class="flex items-center mt-10">
-					<div id="date" class="text-gray-500 text-sm">${bcont.getBO_DATE() }</div>
+				<div class="flex items-center mt-10"> 
+					<div id="date" class="text-gray-500 text-sm">${rb.C_DATE }</div>
 					<div id="수정삭제" class="flex">
 						<button
 							class="ml-8 mr-5 text-indigo-600 font-bold rounded focus:outline-none edit">
@@ -195,6 +197,7 @@
 					</div>
 				</div>
 			</div>
+		</c:forEach>	
 			<!-- <div id="대댓글"class="border-2 border-indigo-600 flex items-end  pl-10">
 				<div class="">
 					<textarea rows="3" cols="90" class="focus:outline-none m-3" style="resize: none;"></textarea>
@@ -204,42 +207,43 @@
 				</div>
 
 			</div> -->
+		</div> --%>
 
-			<!-- 페이징  -->
-		</div>
+		<!-- 	페이징 
 		<div class="flex justify-center mb-16 mt-20">
 			<a href="#" class="px-3"> 이전 </a> <a href="#" class="px-3"> 1 </a> <a
 				href="#" class="px-3"> 2 </a> <a href="#" class="px-3"> 3 </a> <a
 				href="#" class="px-3"> 다음 </a>
-		</div>
+		</div> -->
 
 		<!-- 이전글,다음글 -->
 		<div class="mx-36 mb-10">
 			<div class="border-b-4 py-3 border-indigo-100">
-				<c:if test="${after != null }">
+				<c:if test="${after != null }"> 
 					<a
-						href="boardView.do?BO_NUM=${bcont.getBO_NUM() +1 }&page=${startPage}&state=cont"><span><i
+						href="boardView.do?B_NUM=${bcont.getB_NUM() +1 }&page=${startPage}&state=cont"><span><i
 							class="fas fa-chevron-up px-3"></i> <i class="pr-4">다음글</i>
-							${after.getBO_TITLE() } </span></a>
+							${after.getB_TITLE() } </span></a>
 				</c:if>
 				<c:if test="${after == null }">
-					<span><i class="fas fa-chevron-up px-3"></i> <i class="pr-4">다음글</i>
-						해당 글이 없습니다 </span>
-				</c:if>
+					<span><i
+							class="fas fa-chevron-up px-3"></i> <i class="pr-4">다음글</i>
+							해당 글이 없습니다 </span>
+				</c:if> 
 			</div>
 			<div class="border-t-4 border-b border-indigo-100 py-3">
 
 				<!-- 이전글이 있으면? -->
 				<c:if test="${ before != null}">
 					<a
-						href="boardView.do?BO_NUM=${bcont.getBO_NUM() -1 }&page=${startPage}&state=cont"><span><i
+						href="boardView.do?B_NUM=${bcont.getB_NUM() -1 }&page=${startPage}&state=cont"><span><i
 							class="fas fa-chevron-down px-3"></i> <i class="pr-4">이전글</i>
-							${before.getBO_TITLE() } </span></a>
+							${before.getB_TITLE() } </span></a>
 				</c:if>
 				<!-- 이전글이 없으면?-->
 				<c:if test="${ before == null}">
-					<span><i class="fas fa-chevron-down px-3"></i> <i
-						class="pr-4">이전글</i> 해당 글이 없습니다</span>
+					<span><i class="fas fa-chevron-down px-3"></i> <i class="pr-4">이전글</i> 해당
+							글이 없습니다</span>
 				</c:if>
 
 
