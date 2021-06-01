@@ -47,11 +47,17 @@
                                  
                                 <div class="mb-4 text-white font-samibold"><span class="text-black mr-2">게임 종류</span>
                                 	<select id="G_TYPE" name="G_TYPE" class="py-1 px-4 rounded border bg-indigo-400 focus:outline-none"> 
-                                		<option>없음</option>
-                                		<option>Action</option>
-                                		<option>Sports</option>
-                                		<option>RPG</option>
-                                		<option>Docu</option>
+                                		<option class=" text-right">Action</option> 
+										<option class=" text-right">Action Rogue_like</option>
+										<option class=" text-right">Adventure RPG</option>
+										<option class=" text-right">Arcade and Rhythm</option>
+										<option class=" text-right">Beat Em Up</option>
+										<option class=" text-right">Card board</option>
+										<option class=" text-right">City setlement</option>
+										<option class=" text-right">Life & Immersive Sims</option>
+										<option class=" text-right">Role-Playing</option>
+										<option class=" text-right">Strategy</option>
+										<option class=" text-right">sport</option> 
                                 	</select>
                                 </div>                         
                                 
@@ -63,11 +69,11 @@
                                         required></input>
                                         
                                 </div>
-                                <div class="mb-4">  
-                                    <textarea name="B_CONTENT" id="B_CONTENT" rows="6" cols="117" style="resize:none" 
-                                    		class="border border-indigo-600 rounded my-3 focus:outline-none py-4 px-4">               	 
-                                    </textarea>
-                                    <input type="file"  class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02"> 
+                                <div class="mb-4">   
+                                    <textarea name="B_CONTENT" id="B_CONTENT" rows="6" cols="117" style="resize:none"class="p-7 border border-indigo-600 rounded my-3 focus:outline-none"></textarea> 
+                                    		               	 
+                                     
+                                    <input type="file"  class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02" required="required"> 
                                 </div>
                                 <div class="flex justify-end mb-10">
                                     <button class="bg-gray-100 px-3 py-1 rounded border-2 hover:bg-white" id="cancle">취소</button>

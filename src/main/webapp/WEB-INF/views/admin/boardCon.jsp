@@ -11,7 +11,7 @@
 function del(bnum){
 	var check  = confirm("삭제하시겠습니까?");
 	if(check){
-		location.href="boardDel.do?BO_NUM="+bnum;
+		location.href="boardDel.do?B_NUM="+bnum;
 	}else{
 		alert("취소하였습니다.");
 		return false;
@@ -121,7 +121,7 @@ function del(bnum){
 
 								<td
 									class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-									<div class="text-center text-sm leading-5 text-gray-900"><a class="hover:text-indigo-500" href="boardView.do?BO_NUM=${board.getB_NUM() }&page=${page }&state=cont" >${board.getB_TITLE()}</a></div>
+									<div class="text-center text-sm leading-5 text-gray-900"><a class="hover:text-indigo-500" href="boardView.do?B_NUM=${board.getB_NUM() }&page=${page }&state=cont" >${board.getB_TITLE()}</a></div>
 								</td>
 
 								<td
@@ -138,7 +138,7 @@ function del(bnum){
 
 								<td
 									class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-									<a href="boardView.do?BO_NUM=${board.getB_NUM() }&page=${page }&state=edit"><i
+									<a href="boardView.do?B_NUM=${board.getB_NUM() }&page=${page }&state=edit"><i
 										class="fas fa-edit text-indigo-500 pr-2"></i></a> 
 										
 									<a href="javascript:del('${board.getB_NUM()}')">

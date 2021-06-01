@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comments">
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="cmResult"          type="comments">
+		<result property="C_NUM"	  column="C_NUM" />
+		<result property="C_ID"    	  column="C_ID" />
+		<result property="C_DATE"     column="C_DATE" />
+		<result property="C_IMG"      column="C_IMG" />
+		<result property="C_POINT"    column="C_POINT" />
+		<result property="B_NUM"      column="B_NUM" />
+		<result property="C_CONTENT"  column="C_CONTENT" />
+	</resultMap>
+	 
+	<insert id="insert" parameterType="comments">
+		<selectKey keyProperty="C_NUM" order="BEFORE" resultType="int">
+			select nvl(max(C_NUM),0) + 1 from comments
+		</selectKey>
+		insert into comments values (
+		  #{C_NUM}
+		, #{C_ID}
+		, sysdate
+		, #{C_IMG, jdbcType=VARCHAR}
+		, 0
+		, #{B_NUM} 
+		, #{C_CONTENT}
+		)
+	</insert>
+	
+	<select id="list" parameterType="int" resultType="comments">
+		select * from comments where B_NUM = #{B_NUM} order by C_NUM
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from comments where C_NUM=#{C_NUM} 
+	</delete>
+
+</mapper>

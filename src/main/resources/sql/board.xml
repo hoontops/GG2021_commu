@@ -31,21 +31,9 @@
 	<!-- 게시판 목록  -->
 	<select id="boardList" parameterType="int" resultType="board">
 	<![CDATA[
-	select * from (select rownum rnum 
-		, B_NUM 		AS BO_NUM
-		, B_TITLE 		AS BO_TITLE
-		, B_CONTENT 	AS BO_CONTENT
-		, B_IMG 		AS BO_IMG
-		, B_VIEW 		AS BO_VIEW
-		, B_GOOD		AS BO_GOOD
-		, B_BAD 		AS BO_BAD
-		, B_DATE 		AS BO_DATE
-		, B_NOTICE1 	AS BO_NOTICE1
-		, M_ID 			AS MO_ID
-		, G_NAME 		AS GO_NAME
-		, G_TYPE		AS GO_TYPE   					
-	from (select * from board order by B_NUM desc))       
-	where rnum>=((#{page}-1)*10+1) and rnum<=(#{page}*10)
+		select * from (select rownum rnum, board.* 
+		from (select * from board order by B_NUM desc) board)       
+		where rnum>=((#{page}-1)*10+1) and rnum<=(#{page}*10)
 	]]>
 	</select>
 	
@@ -57,20 +45,7 @@
 	
 	<!-- 게시판 상세 --> 
 	<select id="boardView" parameterType="int" resultType="board">
-	select   B_NUM       AS BO_NUM
-	       , B_TITLE     AS BO_TITLE
-	       , B_CONTENT   AS BO_CONTENT
-	       , B_IMG       AS BO_IMG
-	       , B_VIEW      AS BO_VIEW
-	       , B_GOOD      AS BO_GOOD
-	       , B_BAD       AS BO_BAD
-	       , B_DATE      AS BO_DATE
-	       , B_NOTICE1   AS BO_NOTICE1
-	       , M_ID        AS MO_ID
-	       , G_NAME      AS GO_NAME
-	       , G_TYPE		 AS GO_TYPE
-	from board 
-	where B_NUM = #{BO_NUM}     
+		select * from board where B_NUM = #{B_NUM}     
 	</select>
 	
 	<!-- 게시글 수정  -->
@@ -80,7 +55,7 @@
 		, B_CONTENT=#{B_CONTENT, jdbcType=VARCHAR}
 		, B_IMG=#{B_IMG, jdbcType=VARCHAR}
 		, G_TYPE=#{G_TYPE, jdbcType=VARCHAR} 
-	where B_NUM=#{BO_NUM} 	 
+	where B_NUM=#{B_NUM} 	 
 	</update> 
 	
 	<!-- 게시글 삭제 -->
@@ -93,12 +68,12 @@
 	<update id="boardThumbsUp" parameterType="int">
 		update board set 
 		B_GOOD=B_GOOD+1
-		where B_NUM = #{BO_NUM}
+		where B_NUM = #{B_NUM}
 	</update>
 	<!-- 싫어요 -->
 	<update id="boardThumbsDown" parameterType="int">
 		update board set B_BAD = B_BAD+1
-		where B_NUM = #{BO_NUM}
+		where B_NUM = #{B_NUM} 
 		
 	<!-- 	update board set B_VIEW = B_VIEW+1    
 	where B_NUM = #{B_NUM}    -->

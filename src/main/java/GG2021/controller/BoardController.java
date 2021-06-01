@@ -116,23 +116,24 @@ public class BoardController {
 
 	// 게시판 상세
 	@RequestMapping(value = "boardView.do")
-	public String boardView(@RequestParam("BO_NUM") int BO_NUM, @RequestParam("page") int page,
+	public String boardView(@RequestParam("B_NUM") int B_NUM, @RequestParam("page") int page,
 			@RequestParam("state") String state, Model model) throws Exception {
 		if (state.equals("cont")) {
-			service.hit(BO_NUM);
+			service.hit(B_NUM);
 		}
-		Board board = service.boardView(BO_NUM);
+		Board board = service.boardView(B_NUM);
 		
 		
 		
 		//전, 후 글 객체생성
-		Board before = service.boardView(BO_NUM-1);
+		Board before = service.boardView(B_NUM-1);
 		System.out.println("before객체 : "+before);
-		Board after = service.boardView(BO_NUM+1);
+		Board after = service.boardView(B_NUM+1);
 		System.out.println("after객체 : "+after);
 		
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
 		
+		model.addAttribute("cont", state); 
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("before", before);
 		model.addAttribute("after", after);
@@ -147,7 +148,7 @@ public class BoardController {
 		} else if (state.equals("reply")) {
 			return "";
 		}
-		return "null";
+		return null; 
 	}
 
 	// 글 수정
@@ -187,16 +188,16 @@ public class BoardController {
 		
 		b.setB_IMG(filename);  
 		service.edit(b);
-		return "redirect:boardView.do?BO_NUM=" + b.getBO_NUM() + "&page=" + page + "&state=cont";
+		return "redirect:boardView.do?B_NUM=" + b.getB_NUM() + "&page=" + page + "&state=cont";
 	}
 
 	// 게시글 삭제
 	@RequestMapping(value = "boardDel.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String boardDel(int BO_NUM, Model model)
+	public String boardDel(int B_NUM, Model model)
 			throws Exception {
-		Board board = service.boardView(BO_NUM);
+		Board board = service.boardView(B_NUM);
 
-		service.boardDel(BO_NUM);
+		service.boardDel(B_NUM);
 
 		return "board/boardDelOk";
 	}
@@ -227,21 +228,21 @@ public class BoardController {
 	}
 	
 	@RequestMapping("boardThumbsUp.do")
-	public String boardThumbsUp(int BO_NUM, int like, Model model) throws Exception {
-			service.boardThumbsUp(BO_NUM); //좋아요 1업데이트
-		Board board = service.boardView(BO_NUM); //상세정보 불러와서
-		like = board.getBO_GOOD();
+	public String boardThumbsUp(int B_NUM, int like, Model model) throws Exception {
+			service.boardThumbsUp(B_NUM); //좋아요 1업데이트
+		Board board = service.boardView(B_NUM); //상세정보 불러와서
+		like = board.getB_GOOD();
 		model.addAttribute("thumbs", like);
 		return "board/boardViewThumbs";
 	}
 	
 	@RequestMapping("boardThumbsDown.do")
-	public String boardThumbsDown(int BO_NUM, int dislike, Model model) throws Exception {
+	public String boardThumbsDown(int B_NUM, int dislike, Model model) throws Exception {
 		System.out.println("싫어요: "+ dislike);
-		System.out.println("글번호 : "+BO_NUM);
-		service.boardThumbsDown(BO_NUM); //싫어요 1업데이트 
-		Board board = service.boardView(BO_NUM); //상세정보 불러와서
-		dislike = board.getBO_BAD();
+		System.out.println("글번호 : "+B_NUM);
+		service.boardThumbsDown(B_NUM); //싫어요 1업데이트 
+		Board board = service.boardView(B_NUM); //상세정보 불러와서
+		dislike = board.getB_BAD();
 		model.addAttribute("thumbs", dislike);
 		return "board/boardViewThumbs";
 	}

@@ -33,11 +33,11 @@
                     <div class=" overflow-hidden sm:rounded-lg"> 
                         <div class=""> 
                             <form method="POST" action="boardModify.do" enctype="multipart/form-data">
-                            <input type="hidden" name="BO_NUM" value="${bcont.BO_NUM}" />
+                            <input type="hidden" name="B_NUM" value="${bcont.getB_NUM()}" />
   							<input type="hidden" name="page" value="${page}" />  
                                 <div class="mb-5 border-b-4 border-indigo-400">
                                     <span>작성자:</span>
-                                    <span>${bcont.MO_ID}</span>  
+                                    <span>${bcont.getM_ID()}</span>  
                                 </div> 
                                     
                                  <div class="mb-4 text-white font-samibold"><span class="text-black mr-2">게임 종류</span>
@@ -54,17 +54,17 @@
                                     <label class="text-xl text-gray-600">제목 <span 
                                             class="text-red-500">*</span></label></br> 
                                     <input type="text"  name="B_TITLE" id="B_TITLE" 
-                                        class="border-2 border-gray-300 p-2 w-full" value="${bcont.BO_TITLE }"
+                                        class="border-2 border-gray-300 p-2 w-full" value="${bcont.getB_TITLE() }"
                                         required></input>
                                 </div>
                                 <div class="mb-4">  
                                     <textarea name="B_CONTENT" id="B_CONTENT" rows="6" cols="117" style="resize:none" 
                                     		class="border border-indigo-600 rounded my-3 focus:outline-none py-4 px-4">
-                                    		${bcont.BO_CONTENT}            	 
-                                    </textarea>
-                                    <input type="file"  class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02">${BO_IMG} 
+                                    		${bcont.getB_CONTENT()}            	 
+                                    </textarea> 
+                                    <input type="file" required="required" class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02">${B_IMG} 
                                     				 
-                                </div>
+                                </div> 
                                 <div class="flex justify-end mb-10">
                                     <button class="bg-gray-100 px-3 py-1 rounded border-2 hover:bg-white" id="cancle">취소</button>
                                     <button role="submit" class="bg-blue-500 px-3 py-1 rounded border-2  ml-2 text-white hover:bg-blue-400"
