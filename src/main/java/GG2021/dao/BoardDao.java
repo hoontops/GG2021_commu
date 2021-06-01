@@ -29,6 +29,10 @@ public class BoardDao {
 		List<Board> list = session.selectList("boardList", page);
 		return list;
 	}
+	public List<Board> getBoardListType(String state) throws Exception {
+		List<Board> list = session.selectList("getBoardListType", state);
+		return list;
+	}
 	
 	// 조회수 증가
 	public void hit(int B_NUM) throws Exception {

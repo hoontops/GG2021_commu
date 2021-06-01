@@ -27,6 +27,9 @@ public class BoardService {
 	public List getBoardList(int page) throws Exception {
 		return dao.getBoardList(page);
 	}
+	public List getBoardListType(String state) throws Exception {
+		return dao.getBoardListType(state);
+	}
 	
 	// 조회수 증가
 	public void hit(int B_NUM) throws Exception {

@@ -217,7 +217,7 @@ public class BoardController {
 		return "board/imgBoardList";
 	}
 	
-	@RequestMapping(value = "tile.do")
+	@RequestMapping(value = "tile.do")//load
 	public String tile(String state, Model model) {
 		System.out.println("state:"+ state);
 		 List<All_Game> gameList = new ArrayList<All_Game>(); 
@@ -226,8 +226,8 @@ public class BoardController {
 		return "board/tile";
 	}
 	
-	@RequestMapping("tiler.do")
-	public String  tiler(String state, Model model) {
+	@RequestMapping("tiler.do") //post
+	public String  tiler(String state) {
 		
 		return "redirect:tile.do?state="+state;
 	}
@@ -251,5 +251,42 @@ public class BoardController {
 		model.addAttribute("thumbs", dislike);
 		return "board/boardViewThumbs";
 	}
+	
+	@RequestMapping("boardPaging.do") //load
+	public String boardPaging(String state, Model model, HttpServletRequest request) throws Exception {
+		System.out.println("state : "+state);
+		List<Board> boardlist = new ArrayList<Board>();
 
+		int page = 1;
+		int limit = 10;
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		int listcount = service.getListCount(); // 총 글 수
+		boardlist = service.getBoardListType(state); // 단순 액션 게임 리스트. 
+		System.out.println(boardlist);
+		int maxPage = (int) ((double) listcount / limit + 0.95);
+		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
+		int endPage = maxPage;
+		
+		System.out.println("제발요 " +boardlist);
+		System.out.println("게임종류 state 는?? :"+ state);
+		if (endPage > startPage + 10 - 1)
+			endPage = startPage + 10 - 1;
+
+		model.addAttribute("page", page);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("maxPage", maxPage);
+		model.addAttribute("listcount", listcount);
+		model.addAttribute("boardlist", boardlist);
+
+		return "board/list";
+	}
+	
+	@RequestMapping("boardPagingPost.do")
+	public String boardPagingPost(String state) {
+		return "redirect:boardPaging.do?state="+state;
+	}
 }

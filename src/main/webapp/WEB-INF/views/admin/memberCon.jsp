@@ -16,7 +16,7 @@
 			}else{
 				alert("취소하였습니다.");
 				return false;
-			}
+			} 
 		}
 	</script>
 
@@ -152,7 +152,7 @@
 			</c:if>
 
 					<c:if test="${page > 1 }">
-						<a href="adminMemeberCon.do?page=${page-1}">[이전]</a>&nbsp;
+						<a href="admin.do?state=member&page=${page-1}">[이전]</a>&nbsp;
 			</c:if>
 
 					<c:forEach var="a" begin="${startPage}" end="${endPage}">
@@ -160,7 +160,7 @@
 					<span class="font-bold text-indigo-600 px-1">[${a}]</span>
 				</c:if>
 						<c:if test="${a != page }">
-							<a href="adminMemeberCon.do?page=${a}">[${a}]</a>&nbsp;
+							<a href="admin.do?state=member&page=${a}">[${a}]</a>&nbsp;
 				</c:if>
 					</c:forEach>
 
@@ -168,7 +168,7 @@
 				[다음] 
 			</c:if>
 					<c:if test="${page < maxPage }">
-						<a href="adminMemeberCon.do?page=${page+1}">[다음]</a>
+						<a href="admin.do?state=member&page=${page+1}">[다음]</a>
 					</c:if>
 				</div>
 			</div>

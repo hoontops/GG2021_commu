@@ -78,6 +78,11 @@
 	<!-- 	update board set B_VIEW = B_VIEW+1    
 	where B_NUM = #{B_NUM}    -->
 	</update>
+	
+	<select id="getBoardListType" resultType="board">
+		select * from board where G_TYPE=#{state, jdbcType=VARCHAR}
+		
+	</select>
 </mapper>
 
 

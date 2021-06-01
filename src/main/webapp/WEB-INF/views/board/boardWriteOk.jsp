@@ -10,7 +10,6 @@
 <body>
 	<c:if test="${result01 ==1 }">
 	<script>
-		alert("글작성 성공!");
 		location.href="boardList.do";
 	</script> 
 	</c:if>

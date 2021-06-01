@@ -122,12 +122,12 @@
 				<div class="border-b-2 p-6">
 					<span class="font-semibold" id="thumbsUp">${bcont.getB_GOOD() }</span>
 					<button id="up" value="${bcont.getB_GOOD() }"
-						class="mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
+						class="hover:border-indigo-200 mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
 						style="width: 52px;">
 						<i class="far fa-thumbs-up"></i>
 					</button>
 					<button id="down" value="${bcont.getB_BAD() }"
-						class="mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
+						class="hover:border-indigo-200 mx-2 p-3 rounded-full bg-white focus:outline-none border-2 border-indigo-600"
 						style="width: 52px;">
 						<i class="far fa-thumbs-down"></i>
 					</button>

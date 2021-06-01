@@ -155,7 +155,7 @@ function del(bnum){
 			</c:if>
 
 					<c:if test="${page > 1 }">
-						<a href="adminBoardCon.do?page=${page-1}">[이전]</a>&nbsp;
+						<a href="admin.do?state=board&page=${page-1}">[이전]</a>&nbsp;
 			</c:if>
 
 					<c:forEach var="a" begin="${startPage}" end="${endPage}">
@@ -163,7 +163,7 @@ function del(bnum){
 					<span class="font-bold text-indigo-600 px-1">[${a}]</span>
 				</c:if>
 						<c:if test="${a != page }">
-							<a href="adminBoardCon.do?page=${a}">[${a}]</a>&nbsp;
+							<a href="admin.do?state=board&page=${a}">[${a}]</a>&nbsp;
 				</c:if>
 					</c:forEach>
 
@@ -171,7 +171,7 @@ function del(bnum){
 				[다음] 
 			</c:if>
 					<c:if test="${page < maxPage }">
-						<a href="adminBoardCon.do?page=${page+1}">[다음]</a>
+						<a href="admin.do?state=board&page=${page+1}">[다음]</a>
 					</c:if>
 				</div>
 			</div>
