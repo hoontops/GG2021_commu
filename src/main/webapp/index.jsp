@@ -8,6 +8,8 @@
 </head>
 <body>
 <script>
+
+---
 	location.href="main.do";
 </script>
 </body> 
