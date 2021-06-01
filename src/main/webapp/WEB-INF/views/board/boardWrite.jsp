@@ -47,17 +47,18 @@
                                  
                                 <div class="mb-4 text-white font-samibold"><span class="text-black mr-2">게임 종류</span>
                                 	<select id="G_TYPE" name="G_TYPE" class="py-1 px-4 rounded border bg-indigo-400 focus:outline-none"> 
-                                		<option class=" text-right">Action</option> 
-										<option class=" text-right">Action Rogue_like</option>
-										<option class=" text-right">Adventure RPG</option>
-										<option class=" text-right">Arcade and Rhythm</option>
-										<option class=" text-right">Beat Em Up</option>
-										<option class=" text-right">Card board</option>
-										<option class=" text-right">City setlement</option>
-										<option class=" text-right">Life & Immersive Sims</option>
-										<option class=" text-right">Role-Playing</option>
-										<option class=" text-right">Strategy</option>
-										<option class=" text-right">sport</option> 
+                                		<option value="Action">게임선택</option> 
+										<option value="Action" class=" text-right">Action</option> 
+										<option value="Beat_Em_Up" class=" text-right">Beat_Em_Up</option> 					
+										<option value="City_setlement" class=" text-right">City_setlement</option>					
+										<option value="Role-Playing" class=" text-right">Role-Playing</option>					
+										<option value="Action_Rogue_like" class=" text-right">Action_Rogue_like</option>
+										<option value="Card_board" class=" text-right">Card_board</option>
+										<option value="Strategy" class=" text-right">Strategy</option> 				
+										<option value="sport" class=" text-right">sport</option>					
+										<option value="Arcade_and_Rhythm" class=" text-right">Arcade_and_Rhythm</option>
+										<option value="Life_Immersive_Sims" class=" text-right">Life_Immersive_Sims</option>
+										<option value="Adventure_RPG" class=" text-right">Adventure_RPG</option> 
                                 	</select>
                                 </div>                         
                                 

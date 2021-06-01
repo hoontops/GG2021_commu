@@ -25,14 +25,14 @@
 	
 	<!-- 게시글 총 갯수 -->
 	<select id="boardCount" resultType="int">
-	select count(B_NUM) from board
+	select count(B_NUM) from board where G_TYPE=#{state, jdbcType=VARCHAR}  
 	</select>
 	
 	<!-- 게시판 목록  -->
 	<select id="boardList" parameterType="int" resultType="board">
 	<![CDATA[
 		select * from (select rownum rnum, board.* 
-		from (select * from board order by B_NUM desc) board)       
+		from (select * from board order by G_TYPE desc) board)       
 		where rnum>=((#{page}-1)*10+1) and rnum<=(#{page}*10)
 	]]>
 	</select>

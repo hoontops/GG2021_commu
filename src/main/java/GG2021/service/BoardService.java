@@ -19,8 +19,8 @@ public class BoardService {
 	}
 	
 	// 게시글 갯 수
-	public int getListCount() throws Exception {
-		return dao.getListCount();
+	public int getListCount(String state) throws Exception {
+		return dao.getListCount(state);
 	}
 	
 	// 게시판 리스트

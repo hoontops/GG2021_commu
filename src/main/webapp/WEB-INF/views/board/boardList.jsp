@@ -27,7 +27,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(function() {
-		$("#boardPaging").load("boardPaging.do?state=Action");
+		$("#boardPaging").load("boardPaging.do?state=${state}");
 
 		$("#selec").change(function(){
 			var selec = $("#selec").val();
@@ -66,23 +66,18 @@
 		<div class="mb-2">
 			<select id="selec"
 				class="focus:outline-none text-sm border-2 border-indigo-200 rounded py-2">
-				<option value="Action">게임선택</option>
-				<option value="Action" class=" text-right">Action</option>
-				<option value="Action Rogue_like" class=" text-right">Action
-					Rogue_like</option>
-				<option value="Adventure RPG" class=" text-right">Adventure
-					RPG</option>
-				<option value="Arcade and Rhythm" class=" text-right">Arcade
-					and Rhythm</option>
-				<option value="Beat Em Up" class=" text-right">Beat Em Up</option>
-				<option value="Card board" class=" text-right">Card board</option>
-				<option value="City setlement" class=" text-right">City
-					setlement</option>
-				<option value="Life & Immersive Sims" class=" text-right">Life
-					& Immersive Sims</option>
-				<option value="Role-Playing" class=" text-right">Role-Playing</option>
-				<option value="Strategy" class=" text-right">Strategy</option>
-				<option value="sport" class=" text-right">sport</option>
+				<option value="">게임선택</option>
+				<option value="Action" class=" text-right">Action</option> 
+				<option value="Beat_Em_Up" class=" text-right">Beat_Em_Up</option> 					
+				<option value="City_setlement" class=" text-right">City_setlement</option>					
+				<option value="Role-Playing" class=" text-right">Role-Playing</option>					
+				<option value="Action_Rogue_like" class=" text-right">Action_Rogue_like</option>
+				<option value="Card_board" class=" text-right">Card_board</option>
+				<option value="Strategy" class=" text-right">Strategy</option> 				
+				<option value="sport" class=" text-right">sport</option>					
+				<option value="Arcade_and_Rhythm" class=" text-right">Arcade_and_Rhythm</option>
+				<option value="Life_Immersive_Sims" class=" text-right">Life_Immersive_Sims</option>
+				<option value="Adventure_RPG" class=" text-right">Adventure_RPG</option> 
 			</select>
 			<button
 				class="border-2 py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"

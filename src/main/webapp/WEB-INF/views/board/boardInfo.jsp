@@ -120,15 +120,15 @@
 					clip-rule="evenodd" />
           </svg>
 			<option value="Action">선택</option>
-			<option value="Beat Em Up">어드벤처</option>
-			<option value="City setlement">도시건설</option>
+			<option value="Beat_Em_Up">어드벤처</option>
+			<option value="City_setlement">도시건설</option>
 			<option value="Role-Playing">롤플레잉</option>
 			<option value="Action">액션</option>
-			<option value="Action Rogue_like">로그라이크</option>
-			<option value="Card board">카드보드</option>
+			<option value="Action_Rogue_like">로그라이크</option>
+			<option value="Card_board">카드보드</option>
 			<option value="Strategy">전략</option>
 			<option value="sport">스포츠</option>
-			<option value="Arcade and Rhythm">아케이드&리듬</option>
+			<option value="Arcade_and_Rhythm">아케이드&리듬</option>
 		</select>
 	</div>
 	<div id="tile"></div>

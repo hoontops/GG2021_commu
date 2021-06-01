@@ -34,9 +34,10 @@ public class BoardController {
 
 	// 글 게시판 목록(페이지)
 	@RequestMapping(value = "boardList.do")
-	public String boardList(Model model, HttpServletRequest request) throws Exception {
+	public String boardList(Model model, String state, HttpServletRequest request) throws Exception {
 
 		List<Board> boardlist = new ArrayList<Board>();
+		List<Board> boardlists = new ArrayList<Board>();
 
 		int page = 1;
 		int limit = 10;
@@ -44,9 +45,9 @@ public class BoardController {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		int listcount = service.getListCount(); // 총 글 수
+		int listcount = service.getListCount(state); // 총 글 수 
 		boardlist = service.getBoardList(page); //
-
+		boardlists = service.getBoardListType(state); // 단순 액션 게임 리스트.
 		int maxPage = (int) ((double) listcount / limit + 0.95);
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
 		int endPage = maxPage;
@@ -54,12 +55,13 @@ public class BoardController {
 		if (endPage > startPage + 10 - 1)
 			endPage = startPage + 10 - 1;
 
+		model.addAttribute("state", state);
 		model.addAttribute("page", page);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("maxPage", maxPage);
 		model.addAttribute("listcount", listcount);
-		model.addAttribute("boardlist", boardlist);
+		model.addAttribute("boardlist", boardlists);
 
 		return "board/boardList";
 	}
@@ -73,7 +75,7 @@ public class BoardController {
 	// 글쓰기 완료
 	@RequestMapping(value = "boardWriteOk.do", method = RequestMethod.POST)
 	public String boardWriteOk(@RequestParam("B_IMG02") MultipartFile mf, Model model, Board board, String M_ID,
-			HttpServletRequest request) throws Exception {
+			String state, HttpServletRequest request) throws Exception {
 		System.out.println("mf:" + mf);
 
 		int result01 = 0;
@@ -113,6 +115,8 @@ public class BoardController {
 		board.setB_IMG(filename); 
 
 		result01 = service.insert(board);
+		
+		
 		model.addAttribute("result01", result01);
 
 		return "board/boardWriteOk";
@@ -263,7 +267,7 @@ public class BoardController {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		int listcount = service.getListCount(); // 총 글 수
+		int listcount = service.getListCount(state); // 총 글 수 
 		boardlist = service.getBoardListType(state); // 단순 액션 게임 리스트. 
 		System.out.println(boardlist);
 		int maxPage = (int) ((double) listcount / limit + 0.95);

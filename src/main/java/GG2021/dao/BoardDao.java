@@ -18,10 +18,9 @@ public class BoardDao {
 	}
 	
 	// 게시글 갯수
-	public int getListCount() throws Exception {
-		int count = 0;
-		count = ((Integer) session.selectOne("boardCount")).intValue();
-		return count;
+	public int getListCount(String state) throws Exception {
+		return session.selectOne("boardCount",state);
+	
 	}
 	
 	// 게시판 리스트
