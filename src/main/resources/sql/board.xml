@@ -32,7 +32,7 @@
 	<select id="boardList" parameterType="int" resultType="board">
 	<![CDATA[
 		select * from (select rownum rnum, board.* 
-		from (select * from board order by G_TYPE desc ) board)          
+		from (select * from board order by B_NUM desc) board)             
 		where rnum>=((#{page}-1)*10+1) and rnum<=(#{page}*10)  
 	]]>
 	</select>
@@ -79,9 +79,8 @@
 	where B_NUM = #{B_NUM}    -->
 	</update>
 	
-	<select id="getBoardListType" resultType="board">
-		select * from board where G_TYPE=#{state, jdbcType=VARCHAR}
-		
+	<select id="getBoardListType" parameterType="board" resultType="board">
+		select * from board where G_TYPE=#{state, jdbcType=VARCHAR} order by B_DATE desc		
 	</select>
 </mapper>
 

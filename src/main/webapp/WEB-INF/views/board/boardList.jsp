@@ -32,13 +32,19 @@
 		$("#selec").change(function(){
 			var selec = $("#selec").val();
 			alert(selec);
-			$("#btn").click(function(){
-				location.href='boardWrite.do?state='+selec;
-			});
 			
 			$.post("boardPagingPost.do", {"state": selec}, function(data){
 			 	$("#boardPaging").html(data);
 		 	});
+		});
+		
+		$("#btn").click(function(){
+			var selec = $("#selec").val();
+			if($("#selec").val()==""){
+				alert("커뮤니티를 선택하세요");
+			}else{
+				location.href='boardWrite.do?state='+selec;
+			}
 		});
 		
 	});
@@ -84,9 +90,9 @@
 				<option value="Life_Immersive_Sims" class=" text-right">Life_Immersive_Sims</option>
 				<option value="Adventure_RPG" class=" text-right">Adventure_RPG</option> 
 			</select>
-			<button id="btn"
+				<button id="btn"
 				class="border-2 py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
-				>글쓰기</button>
+				>글쓰기</button>			
 		</div>
 	</div>
 	<div id="boardPaging"></div>
