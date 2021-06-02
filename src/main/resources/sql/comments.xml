@@ -35,5 +35,10 @@
 	<delete id="delete" parameterType="int">
 		delete from comments where C_NUM=#{C_NUM} 
 	</delete>
+	
+	<update id="update" parameterType="comments">  
+		update comments set C_CONTENT=#{C_CONTENT} where C_NUM=#{C_NUM} 
+	</update>
+	
 
 </mapper>

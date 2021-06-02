@@ -30,23 +30,36 @@
 		$('.edit').click(function() {
 			var id = $(this).attr('id');
 			var txt = $('#div_'+id).text();     
-			$('#span'+id).html("<textarea rows='2' cols='90' id='div_"+id+"'>"+txt+"</textarea>");
-			$('#btn_'+id).html(
-					"<input type='button' class='mr-4' value='확인' onclick='up("+id+")'>"
-				   +"<input type='button' value='취소' onclick='lst()'>"); 
+			$('#span_'+id).html("<textarea rows='2' cols='90' id='div_"+id+"'>"+txt+"</textarea>"); 
+			$('#btn_'+id).html( 
+					"<input type='button' class='p-1' value='확인' onclick='up("+id+")'>"
+				   +"<input type='button' class='p-1' value='취소' onclick='can()'>");    
 		});
 	}); 
+	
+	function up(id) {
+		var c_CONTENT = $('#div_'+id).val(); 
+		var formData = "c_NUM="+id+'&c_CONTENT='+c_CONTENT+"&B_NUM=${bcont.getB_NUM()}"
+		$.post("cmUpdate.do", formData, function(data) {
+			$('#slist').html(data); 
+		});
+	}
+	
+	function can() {
+		$('#slist').load('slist.do?B_NUM=${bcont.getB_NUM()}');
+	}
 	
 
 	function del(c_NUM,b_NUM) {
 		var formData="c_NUM="+c_NUM+"&b_NUM="+b_NUM;
 		$.post("cmDelete.do", formData, function(data) {
-			if (confirm('정말 삭제하시겠습니까?')) {
-			$("#slist").html(data);
+			var result = confirm('정말 삭제하시겠습니까?');
+			if(result) {
+				$("#slist").html(data);
 			} else {
-				return false;  
-			}
-		});
+				return false; 
+			}		
+		});  
 	}
 	
 </script>
@@ -65,8 +78,8 @@
 				class="flex justify-between border-b border-gray-500 pl-12 pr-8 py-4">
 				<div>
 					<div class="font-bold  text-indigo-600">${cs.c_ID}</div>  
-					<div class="font-thin pt-3"  id="span_${cs.c_ID}"> 
-						<span class="focus:outline-none">${cs.c_CONTENT }</span>
+					<div class="font-thin pt-3">  
+						<span class="focus:outline-none" id="span_${cs.c_ID}">${cs.c_CONTENT}</span>  
 					</div>
 				</div>
 				<div class="flex items-center mt-10">  

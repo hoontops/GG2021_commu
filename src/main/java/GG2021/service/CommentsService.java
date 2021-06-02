@@ -24,5 +24,10 @@ public class CommentsService {
 	public void cmDelete(int C_NUM) {
 		dao.cmDelete(C_NUM);
 	}
-
+	
+	public void cmUpdate(Comments cs) {
+		dao.cmUpdate(cs);
+	}
+	
+	
 }

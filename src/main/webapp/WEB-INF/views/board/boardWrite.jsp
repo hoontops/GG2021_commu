@@ -9,8 +9,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
         $(function () {
-        	$("#writeBoard").submit(function(){
-        		var selec = $("#selec").val();
+         	$("#selec").submit(function(){
         		alert(selec);
         		location.href="boardWriteOk.do?state="+selec;
         	});
@@ -43,29 +42,16 @@
             <div class="mx-auto mt-10 w-10/12">
                 <div class=" max-w-6xl mx-auto sm:px-6 lg:px-8">
                     <div class=" overflow-hidden sm:rounded-lg">
-                        <div class="">
-                            <form id="writeBoard" method="POST" action="boardWriteOk.do?state=${ state}" enctype="multipart/form-data"> 
+                        <div class=""> 
+                            <form method="POST" action="boardWriteOk.do?state=${state}" enctype="multipart/form-data"> 
                                 <div class="mb-5 border-b-4 border-indigo-400"> 
                                 <input type="hidden" name="M_ID" id="M_ID" value="${id }">
                                     <span>작성자:</span>
                                     <span>${id}</span>  
                                 </div>     
-                                  
-                                <div class="mb-4 text-white font-samibold"><span class="text-black mr-2">게임 종류</span>
-                                	<select id="selec" name="state" class="py-1 px-4 rounded border bg-indigo-400 focus:outline-none"> 
-                                		<option value="Action">게임선택</option> 
-										<option value="Action" class=" text-right">Action</option> 
-										<option value="Beat_Em_Up" class=" text-right">Beat_Em_Up</option> 					
-										<option value="City_setlement" class=" text-right">City_setlement</option>					
-										<option value="Role-Playing" class=" text-right">Role-Playing</option>					
-										<option value="Action_Rogue_like" class=" text-right">Action_Rogue_like</option>
-										<option value="Card_board" class=" text-right">Card_board</option>
-										<option value="Strategy" class=" text-right">Strategy</option> 				
-										<option value="sport" class=" text-right">sport</option>					
-										<option value="Arcade_and_Rhythm" class=" text-right">Arcade_and_Rhythm</option>
-										<option value="Life_Immersive_Sims" class=" text-right">Life_Immersive_Sims</option>
-										<option value="Adventure_RPG" class=" text-right">Adventure_RPG</option> 
-                                	</select>
+                                   
+                                <div class="mb-4 text-white font-samibold"><span class="text-black mr-2">게임 종류 : ${state }</span>
+                                	<input type="hidden" value="${state}" name="G_TYPE" id="state">  
                                 </div>                         
                                 
                                 <div class="mb-4">
@@ -80,11 +66,11 @@
                                     <textarea name="B_CONTENT" id="B_CONTENT" rows="6" cols="117" style="resize:none"class="p-7 border border-indigo-600 rounded my-3 focus:outline-none"></textarea> 
                                     		               	 
                                      
-                                    <input type="file"  class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02" required="required"> 
-                                </div>
+                                    <input type="file"  class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02"> 
+                                </div> 
                                 <div class="flex justify-end mb-10"> 
                                     <button class="bg-gray-100 px-3 py-1 rounded border-2 hover:bg-white" id="cancle">취소</button>
-                                    <button id="writeBoard" value=${state }class="bg-blue-500 px-3 py-1 rounded border-2  ml-2 text-white hover:bg-blue-400"
+                                    <button id="writeBoard" class="bg-blue-500 px-3 py-1 rounded border-2  ml-2 text-white hover:bg-blue-400"
                                         >등록</button>
                                 </div>
                             </form>

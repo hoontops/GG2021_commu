@@ -35,7 +35,7 @@ public class BoardController {
 	// 글 게시판 목록(페이지)
 	@RequestMapping(value = "boardList.do")
 	public String boardList(Model model, String state, HttpServletRequest request) throws Exception {
-
+		System.out.println("boardList.do 에서의 state 값 : " + state);
 		List<Board> boardlist = new ArrayList<Board>();
 		List<Board> boardlists = new ArrayList<Board>();
 
@@ -45,7 +45,7 @@ public class BoardController {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		int listcount = service.getListCount(state); // 총 글 수 
+		int listcount = service.getListCount(state); // 총 글 수
 		boardlist = service.getBoardList(page); //
 		boardlists = service.getBoardListType(state); // 단순 액션 게임 리스트.
 		int maxPage = (int) ((double) listcount / limit + 0.95);
@@ -69,60 +69,63 @@ public class BoardController {
 	// 글쓰기 페이지
 	@RequestMapping("boardWrite.do")
 	public String boardWrite(String state, Model model) {
-		System.out.println("state 어그로를 끌어보장 : "+ state);
+		System.out.println("boardWrite.do 에서의 state 값 : " + state);
 		model.addAttribute("state", state);
 		return "board/boardWrite";
 	}
 
 	// 글쓰기 완료
 	@RequestMapping(value = "boardWriteOk.do", method = RequestMethod.POST)
-	public String boardWriteOk(@RequestParam("B_IMG02") MultipartFile mf, Model model, Board board, String M_ID,
+	public String boardWriteNOPicOk(@RequestParam("B_IMG02") MultipartFile mf, Model model, Board board, String M_ID,
 			String state, HttpServletRequest request) throws Exception {
-		System.out.println("mf:" + mf);
-		
-		int result01 = 0;
+		System.out.println("boardWriteOk에서의 mf값 나와주세요:" + mf);
+		if (mf == null) {
+			return "main/mainPage";
+		} else {
 
-		String filename = mf.getOriginalFilename();
-		int size = (int) mf.getSize();
+			int result01 = 0;
 
-		String path = request.getRealPath("upload");
-		System.out.println("path:" + path);
-		System.out.println("filename:" + filename);
-		int result = 0;
-		String file[] = new String[2];
+			String filename = mf.getOriginalFilename();
+			int size = (int) mf.getSize();
 
-		StringTokenizer st = new StringTokenizer(filename, ".");
-		file[0] = st.nextToken();
-		file[1] = st.nextToken(); // 확장자
+			String path = request.getRealPath("upload");
+			System.out.println("path:" + path);
+			System.out.println("filename:" + filename);
+			int result = 0;
+			String file[] = new String[2];
 
-		if (size > 10000000) {
-			result = 1;
-			model.addAttribute("result", result);
+			StringTokenizer st = new StringTokenizer(filename, ".");
+			file[0] = st.nextToken();
+			file[1] = st.nextToken(); // 확장자
 
-			return "member/uploadResult";
+			if (size > 10000000) {
+				result = 1;
+				model.addAttribute("result", result);
 
-		} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
+				return "member/uploadResult";
 
-			result = 2;
-			model.addAttribute("result", result);
+			} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
 
-			return "member/uploadResult";
+				result = 2;
+				model.addAttribute("result", result);
+
+				return "member/uploadResult";
+			}
+			System.out.println("23232323file[1]:" + file[1]);
+			if (size > 0) { // 첨부파일이 전송된 경우
+				mf.transferTo(new File(path + "/" + filename));
+			}
+
+			board.setM_ID(M_ID);
+			board.setB_IMG(filename);
+
+			result01 = service.insert(board);
+
+			model.addAttribute("state", state);
+			model.addAttribute("result01", result01);
+
+			return "board/boardWriteOk";
 		}
-		System.out.println("23232323file[1]:" + file[1]);
-		if (size > 0) { // 첨부파일이 전송된 경우
-			mf.transferTo(new File(path + "/" + filename));
-		}
-
-		board.setM_ID(M_ID);
-		board.setB_IMG(filename); 
-
-		result01 = service.insert(board);
-		
-		
-		model.addAttribute("state", state);
-		model.addAttribute("result01", result01);
-
-		return "board/boardWriteOk";
 	}
 
 	// 게시판 상세
@@ -133,18 +136,16 @@ public class BoardController {
 			service.hit(B_NUM);
 		}
 		Board board = service.boardView(B_NUM);
-		
-		
-		
-		//전, 후 글 객체생성
-		Board before = service.boardView(B_NUM-1);
-		System.out.println("before객체 : "+before);
-		Board after = service.boardView(B_NUM+1);
-		System.out.println("after객체 : "+after);
-		
+
+		// 전, 후 글 객체생성
+		Board before = service.boardView(B_NUM - 1);
+		System.out.println("before객체 : " + before);
+		Board after = service.boardView(B_NUM + 1);
+		System.out.println("after객체 : " + after);
+
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
-		
-		model.addAttribute("cont", state); 
+
+		model.addAttribute("cont", state);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("before", before);
 		model.addAttribute("after", after);
@@ -159,11 +160,11 @@ public class BoardController {
 		} else if (state.equals("reply")) {
 			return "";
 		}
-		return null; 
+		return null;
 	}
 
 	// 글 수정
-	@RequestMapping(value = "boardModify.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "boardModify.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String boardModify(@RequestParam("B_IMG02") MultipartFile mf, @ModelAttribute Board b,
 			@RequestParam("page") String page, HttpServletRequest request, Model model) throws Exception {
 
@@ -196,20 +197,18 @@ public class BoardController {
 		if (size > 0) { // 첨부파일이 전송된 경우
 			mf.transferTo(new File(path + "/" + filename));
 		}
-		
-		b.setB_IMG(filename);  
+
+		b.setB_IMG(filename);
 		service.edit(b);
 		return "redirect:boardView.do?B_NUM=" + b.getB_NUM() + "&page=" + page + "&state=cont";
 	}
 
 	// 게시글 삭제
-	@RequestMapping(value = "boardDel.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String boardDel(int B_NUM, Model model)
-			throws Exception {
+	@RequestMapping(value = "boardDel.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String boardDel(int B_NUM, Model model) throws Exception {
 		Board board = service.boardView(B_NUM);
 
 		service.boardDel(B_NUM);
-		
 
 		return "board/boardDelOk";
 	}
@@ -218,50 +217,50 @@ public class BoardController {
 	public String boardInfo() {
 		return "board/boardInfo";
 	}
-	
+
 	@RequestMapping("imgBoardList.do")
 	public String imgBoardList() {
 		return "board/imgBoardList";
 	}
-	
-	@RequestMapping(value = "tile.do")//load
+
+	@RequestMapping(value = "tile.do") // load
 	public String tile(String state, Model model) {
-		System.out.println("state:"+ state);
-		 List<All_Game> gameList = new ArrayList<All_Game>(); 
-		 gameList = gservice.getGameList(state);
-		 model.addAttribute("gameList",gameList);
+		System.out.println("state:" + state);
+		List<All_Game> gameList = new ArrayList<All_Game>();
+		gameList = gservice.getGameList(state);
+		model.addAttribute("gameList", gameList);
 		return "board/tile";
 	}
-	
-	@RequestMapping("tiler.do") //post
-	public String  tiler(String state) {
-		
-		return "redirect:tile.do?state="+state;
+
+	@RequestMapping("tiler.do") // post
+	public String tiler(String state) {
+
+		return "redirect:tile.do?state=" + state;
 	}
-	
+
 	@RequestMapping("boardThumbsUp.do")
 	public String boardThumbsUp(int B_NUM, int like, Model model) throws Exception {
-			service.boardThumbsUp(B_NUM); //좋아요 1업데이트
-		Board board = service.boardView(B_NUM); //상세정보 불러와서
+		service.boardThumbsUp(B_NUM); // 좋아요 1업데이트
+		Board board = service.boardView(B_NUM); // 상세정보 불러와서
 		like = board.getB_GOOD();
 		model.addAttribute("thumbs", like);
 		return "board/boardViewThumbs";
 	}
-	
+
 	@RequestMapping("boardThumbsDown.do")
 	public String boardThumbsDown(int B_NUM, int dislike, Model model) throws Exception {
-		System.out.println("싫어요: "+ dislike);
-		System.out.println("글번호 : "+B_NUM);
-		service.boardThumbsDown(B_NUM); //싫어요 1업데이트 
-		Board board = service.boardView(B_NUM); //상세정보 불러와서
+		System.out.println("싫어요: " + dislike);
+		System.out.println("글번호 : " + B_NUM);
+		service.boardThumbsDown(B_NUM); // 싫어요 1업데이트
+		Board board = service.boardView(B_NUM); // 상세정보 불러와서
 		dislike = board.getB_BAD();
 		model.addAttribute("thumbs", dislike);
 		return "board/boardViewThumbs";
 	}
-	
-	@RequestMapping("boardPaging.do") //load
+
+	@RequestMapping("boardPaging.do") // load
 	public String boardPaging(String state, Model model, HttpServletRequest request) throws Exception {
-		System.out.println("state : "+state);
+		System.out.println("boardPaging.do state : " + state); 
 		List<Board> boardlist = new ArrayList<Board>();
 
 		int page = 1;
@@ -270,8 +269,8 @@ public class BoardController {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		int listcount = service.getListCount(state); // 총 글 수 
-		boardlist = service.getBoardListType(state); // 단순 액션 게임 리스트. 
+		int listcount = service.getListCount(state); // 총 글 수
+		boardlist = service.getBoardListType(state); // 단순 액션 게임 리스트.
 		System.out.println(boardlist);
 		int maxPage = (int) ((double) listcount / limit + 0.95);
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
@@ -288,9 +287,10 @@ public class BoardController {
 
 		return "board/list";
 	}
-	
+
 	@RequestMapping("boardPagingPost.do")
 	public String boardPagingPost(String state) {
-		return "redirect:boardPaging.do?state="+state;
+		System.out.println("boardPagingPost : "+state);
+		return "redirect:boardPaging.do?state=" + state;
 	}
 }

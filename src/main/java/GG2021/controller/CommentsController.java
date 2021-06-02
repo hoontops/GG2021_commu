@@ -33,8 +33,10 @@ public class CommentsController {
 		
 		Board board = service.boardView(B_NUM);  
 		List<Comments> slist = cms.list(B_NUM);	
+		
+		
 //		System.out.println("board:"+board); 
-//		System.out.println("slist:"+slist); 
+//		System.out.println("slist:"+slist);
 		model.addAttribute("slist", slist);
 		model.addAttribute("board", board); 
 //		model.addAttribute("page", "1"); 
@@ -49,26 +51,7 @@ public class CommentsController {
 		System.out.println("C_ID:"+cs.getC_ID()); 
 		System.out.println("B_NUM:"+cs.getB_NUM());
 		System.out.println("C_CONTENT:"+cs.getC_CONTENT()); 
-		
-		/* 
-		 * List<Comments> cmlist = new ArrayList<Comments>();
-		 * 
-		 * int page = 1; int limit = 5;
-		 * 
-		 * if(request.getParameter("page") != null) { page =
-		 * Integer.parseInt(request.getParameter("page")); } int listcount =
-		 * service.getListCount(); cmlist = service.getBoardList(page);
-		 * 
-		 * int maxPage = (int) ((double) listcount / limit + 0.95); int startPage =
-		 * (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1; int endPage = maxPage;
-		 * 
-		 * if (endPage > startPage + 10 - 1) endPage = startPage + 10 - 1;
-		 * 
-		 * model.addAttribute("page", page); model.addAttribute("startPage", startPage);
-		 * model.addAttribute("endPage", endPage); model.addAttribute("maxPage",
-		 * maxPage); model.addAttribute("listcount", listcount);
-		 * model.addAttribute("cmlist", cmlist);
-		 */ 
+				
 		
 		cms.insert(cs); 
 		return "redirect:slist.do?B_NUM=" + cs.getB_NUM(); 
@@ -78,6 +61,12 @@ public class CommentsController {
 	public String cmDelete(Comments cs, Model model) {
 		cms.cmDelete(cs.getC_NUM());
 		return "redirect:slist.do?B_NUM=" + cs.getB_NUM(); 
+	}
+	
+	@RequestMapping("cmUpdate.do")
+	public String cmUpdate(Comments cs, Model model) {
+		cms.cmUpdate(cs);
+		return "redirect:slist.do?B_NUM=" + cs.getB_NUM();
 	}
 	
 

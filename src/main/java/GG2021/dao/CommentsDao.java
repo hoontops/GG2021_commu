@@ -25,4 +25,9 @@ public class CommentsDao {
 	public void cmDelete(int C_NUM) {
 		session.delete("comments.delete", C_NUM);
 	}
+	
+	public void cmUpdate(Comments cs) {
+		session.update("comments.update", cs);
+	}
+	
 }

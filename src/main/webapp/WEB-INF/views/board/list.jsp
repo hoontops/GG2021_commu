@@ -106,9 +106,9 @@
 										type="submit">Login</button>
 								</div>
 							</div>
-							<div class="my-1">
+							<div class="my-1"> 
 								<ul class="text-xs flex justify-center text-gray-400">
-									<li><a href="#">마이페이지</a></li>
+									<li><a href="myPage.do">마이페이지</a></li> 
 									<li class="ml-1"><a href="#">아이디/비번찾기</a></li>
 								</ul>
 							</div>
@@ -131,8 +131,10 @@
 							즐거운 시간 보내세요.</div>
 						<div class="flex justify-center">
 							<div class="ml-3 mb-2">
-								<button
-									class="focus:outline-none bg-indigo-500 rounded text-xs w-44 py-1 hover:bg-indigo-400 text-white">마이페이지</button>
+								<button class="focus:outline-none bg-indigo-500 rounded text-xs w-44 py-1 hover:bg-indigo-400 text-white"
+										onclick="location.href='myPage.do'">마이페이지 
+								</button>
+								
 							</div>
 						</div>
 					</div>

@@ -74,6 +74,7 @@
 					</button>
 			</div>
 			<div class="mb-2">
+				
 				<button
 					class="py-2 px-6 border-2 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
 					onclick="location.href='boardList.do?state=${state}'">목록</button>
@@ -81,11 +82,11 @@
 		</div>
 
 		<div class="mt-12 mx-36 border-b-4 border-indigo-300">
-			<div id="title" class="flex justify-between">
+			<div id="title" class="flex justify-between"> 
 				<h1 class="font-bold text-2xl text-gray-800">${bcont.getB_TITLE() }</h1>
 
-				<!-- 작성자 클릭시 수정 삭제 버튼 -->
-				<c:if test="${sessionScope.id == bcont.getM_ID() }">
+				<!-- 작성자 클릭시 수정 삭제 버튼 -->  
+				<c:if test="${sessionScope.id == bcont.getM_ID() or sessionScope.id == 'hth9876' }">
 					<div class="">
 						<button
 							Onclick="location='boardView.do?B_NUM=${bcont.getB_NUM()}&page=${page}&state=edit'"
@@ -112,14 +113,15 @@
 			</div>
 		</div>
 
-		<!-- 내용 -->
+		<!-- 내용 -->  
 		<div class="w-11/12 mx-auto py-10 pl-28">
-			<p class="text-base">${bcont.getB_CONTENT() }</p>
+			<img src="<%=request.getContextPath() %>/upload/${bcont.getB_IMG()}" height="150" width="150" />
+			<p class="text-base mt-8">${bcont.getB_CONTENT() }</p>
 		</div>
 
 		<!-- 추천비추천 -->
 		<div>
-			<div class="flex justify-center mt-32">
+			<div class="flex justify-center mt-16">
 				<div class="border-b-2 p-6">
 					<span class="font-semibold" id="thumbsUp">${bcont.getB_GOOD() }</span>
 					<button id="up" value="${bcont.getB_GOOD() }"
