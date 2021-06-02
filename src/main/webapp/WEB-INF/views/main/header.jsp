@@ -154,7 +154,7 @@ input[type="submit"] {
 			<li><a href="boardInfo.do"
 				class="text-xs p-1 border-b-2 hover:border-indigo-600">NEWS</a></li>
 			<li><a
-				href="http://prod.danawa.com/list/?cate=112758&15main_11_02"
+				href="recommend.do"
 				class="text-xs p-1 border-b-2 hover:border-indigo-600">RECOMMEND</a></li>
 			<li> <div class="relative z-10 hover-trigger mt-1 border-b-2 hover:border-indigo-600">
                     <a href="boardList.do" class="text-xs pb-1 ">COMMNUNITY</a>
