@@ -161,11 +161,11 @@ input[type="submit"] {
 				<div
 					class="relative z-10 hover-trigger mt-1 border-b-2 hover:border-indigo-600">
 					<a href="boardList.do?state=Action" class="text-xs pb-1 ">COMMNUNITY</a>
-					<div class="absolute w-28 h-6 p-3 hover-target">
+					<div class="absolute w-28 h-6 p-3 hover-target"> 
 						<div>
 							<div
 								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
-								<a href="boardList.do?state=Action" class="bg-indigo-300 px-2">Action</a>
+								<a href="boardList.do?state=Action" class="">Action</a>
 							</div>
 							<div
 								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">

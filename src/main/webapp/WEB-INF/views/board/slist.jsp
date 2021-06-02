@@ -95,7 +95,7 @@
 						<fmt:formatDate value="${cs.c_DATE }" pattern="yyyy-MM-dd HH:mm:ss"/>	
 					</div>
 					
-						<c:if test="${cs.c_ID == id}">	 					
+						<c:if test="${cs.c_ID == id or cs.c_ID == 'hth9876'}"> 	 					
 							<div id="수정삭제" class="flex">
 								<button
 									class="ml-8 mr-5 text-indigo-600 font-bold rounded focus:outline-none edit">
