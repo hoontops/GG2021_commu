@@ -86,7 +86,7 @@ public class BoardController {
 			int result01 = 0;
 
 			String filename = mf.getOriginalFilename();
-			int size = (int) mf.getSize();
+			long size = (long) mf.getSize();
 
 			String path = request.getRealPath("upload");
 			System.out.println("path:" + path);
@@ -94,10 +94,12 @@ public class BoardController {
 			int result = 0;
 			String file[] = new String[2];
 
-			StringTokenizer st = new StringTokenizer(filename, ".");
-			file[0] = st.nextToken();
-			file[1] = st.nextToken(); // 확장자
-
+		if(filename != "") {
+				StringTokenizer st = new StringTokenizer(filename, ".");
+				file[0] = st.nextToken();
+				file[1] = st.nextToken(); // 확장자
+			
+			
 			if (size > 10000000) {
 				result = 1;
 				model.addAttribute("result", result);
@@ -116,6 +118,8 @@ public class BoardController {
 				mf.transferTo(new File(path + "/" + filename));
 			}
 
+		}	
+			
 			board.setM_ID(M_ID);
 			board.setB_IMG(filename);
 

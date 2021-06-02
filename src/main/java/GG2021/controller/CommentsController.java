@@ -27,7 +27,7 @@ public class CommentsController {
 	@Autowired
 	private BoardService service;
 
-	@RequestMapping("slist.do")      
+	@RequestMapping("slist.do")     //load 
 	public String slist(@RequestParam("B_NUM") int B_NUM, Model model) throws Exception {
 		System.out.println("B_NUM:"+B_NUM); 
 		
@@ -45,7 +45,7 @@ public class CommentsController {
 	}	
 	
 	
-	@RequestMapping("sInsert.do")   
+	@RequestMapping("sInsert.do")   //post
 		public String sInsert(Comments cs, Model model, HttpServletRequest request) throws Exception {
 
 		System.out.println("C_ID:"+cs.getC_ID()); 
@@ -55,7 +55,7 @@ public class CommentsController {
 		
 		cms.insert(cs); 
 		return "redirect:slist.do?B_NUM=" + cs.getB_NUM(); 
-	}
+	}				
 	
 	@RequestMapping("cmDelete.do")
 	public String cmDelete(Comments cs, Model model) {

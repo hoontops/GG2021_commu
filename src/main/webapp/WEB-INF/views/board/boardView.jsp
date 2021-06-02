@@ -18,7 +18,7 @@
 	} 
 	
 	$(function() {
-		$('#slist').load('slist.do?B_NUM=${bcont.getB_NUM()}') 
+		$('#slist').load('slist.do?B_NUM=${bcont.getB_NUM()}');
 		$('#repInsert').click(function() {
 			if(!frm.C_CONTENT.value) {
 				alert('댓글 입력후에 클릭 하세요.');
@@ -28,8 +28,8 @@
 			var frmData = $('form').serialize();
 			$.post('sInsert.do', frmData, function(data) {
 				$('#slist').html(data);
-				frm.C_CONTENT.value = '';
-			});
+/* 				frm.C_CONTENT.value = '';
+ */			});
 		});
 	});
 	
@@ -111,11 +111,16 @@
 					<i class="far fa-eye pr-2"></i>${bcont.getB_VIEW() }
 				</div>
 			</div>
-		</div>
-
+		</div>   
+		
 		<!-- 내용 -->  
 		<div class="w-11/12 mx-auto py-10 pl-28">
-			<img src="<%=request.getContextPath() %>/upload/${bcont.getB_IMG()}" height="150" width="150" />
+			<c:if test="${empty bcont.getB_IMG()}">
+	       		&nbsp;
+	       </c:if> 
+	       <c:if test="${!empty bcont.getB_IMG()}">
+	       		<img src="<%=request.getContextPath() %>/upload/${bcont.getB_IMG()}" height="250" width="250" />
+	       </c:if>		
 			<p class="text-base mt-8">${bcont.getB_CONTENT() }</p>
 		</div>
 
