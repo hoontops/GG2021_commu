@@ -31,14 +31,18 @@
 
 	$(function() {
 		$('.edit').click(function() {
+			
 			var id = $(this).attr('id');
 			console.log(id);
-			var txt = $('#div_'+id).text();     
+			var txt = $('#div_'+id).text();    
 			$('#span_'+id).html("<textarea rows='3' cols='70' id='tt_"+id+"'>"+txt+"</textarea>"); 
 			$('#btn_'+id).html( 
-					"<input type='button' class='p-1' value='확인' onclick='up("+id+")'>"
-				   +"<input type='button' class='p-1' value='취소' onclick='can()'>");    
+					"<input type='button' class='p-1' value='수정' onclick='up("+id+")'>"
+				   +"<input type='button' class='p-1' value='취소' onclick='can()'>");     
 		});
+			/* if("#btn_${cs.c_NUM}").click(function(){
+				$("#editBtn").hide();
+			}); */
 	}); 
 	
 	function up(id) {
@@ -49,7 +53,7 @@
 //		var formData = "C_NUM="+id+'&C_CONTENT='+c_CONTENT 
 		var formData = "C_NUM="+id+'&C_CONTENT='+c_CONTENT+"&B_NUM=${board.getB_NUM()}"
 		$.post("${path}/cmUpdate.do", formData, function(data) {
-			$('#slist').html(data); 
+			$('#slist').html(data);  
 		});
 	}
 	

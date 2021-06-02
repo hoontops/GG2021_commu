@@ -90,7 +90,7 @@
 				<option value="Life_Immersive_Sims" class=" text-right">Life_Immersive_Sims</option>
 				<option value="Adventure_RPG" class=" text-right">Adventure_RPG</option> 
 			</select>
-				<button id="btn"
+				<button id="btn"  
 				class="border-2 py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
 				>글쓰기</button>			
 		</div>

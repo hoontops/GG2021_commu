@@ -160,58 +160,59 @@ input[type="submit"] {
 			<li>
 				<div
 					class="relative z-10 hover-trigger mt-1 border-b-2 hover:border-indigo-600">
-					<a href="boardList.do?state=Action" class="text-xs pb-1 ">COMMNUNITY</a>
-					<div class="absolute w-28 h-6 p-3 hover-target"> 
-						<div>
+					<a href="boardList.do?state=Action" class="text-xs">COMMNUNITY</a>
+					<div class="absolute w-28 h-6 p-3 hover-target">    
+						<div class="flex p-1 
+						">
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Action" class="">Action</a>
 							</div>
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Action_Rogue_like" class="">Action_Rogue_like</a> 
 									 			
 							</div> 
 							<div 
-								class="bg-gray-100 text-xs p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Adventure_RPG" class="">Adventure_RPG</a>
 					
 							</div>
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Arcade_and_Rhythm" class="">Arcade_and_Rhythm</a>
 					
 							</div>
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Beat_Em_Up" class="">Beat_Em_Up</a>
 							</div>
 
 						</div>
-						<div>
+						<div class="flex">
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Card_board" class="">Card_board</a>
 							</div> 
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Arcade_and_Rhythm">Arcade_and_Rhythm</a>
 							</div>
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Life_Immersive_Sims">Life_Immersive_Sims</a>
 					
 							</div>  
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Role-Playing">Role-Playing</a>
 							</div>
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Strategy">Strategy</a>
 							</div> 
 							<div
-								class="bg-gray-100 text-xs  p-1 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
+								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=sport">sport</a>
 							</div>
 						</div>
