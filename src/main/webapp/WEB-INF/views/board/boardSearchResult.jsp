@@ -44,19 +44,7 @@
 	<div
 		class="flex justify-between mx-36 w-auto mt-10 border-b border-grey-light">
 		<div class="flex">
-			<div
-				class="focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">검색결과</div>
-		</div>
-		<div class="mb-2">
-			<select class="focus:outline-none text-sm pr-4">
-				<option>수정예정</option>
-				<option class=" text-right">롤</option>
-				<option class=" text-right">배틀그라운드</option>
-				<option class=" text-right">오버워치</option>
-			</select>
-			<button
-				class="py-2 px-6 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
-				onclick="location.href='boardWrite.do'">수정예정</button>
+			<div class="focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">검색결과</div>
 		</div>
 	</div>
 
@@ -65,25 +53,20 @@
 
 	<!-- 테이블 -->
 
-	<article class="bg-white mb-20">
-		<div class="bg-white flex w-11/12  h-full mx-auto">
-			<div id="Left_board" class="w-9/12 h-96 ml-10">
+	<article class="bg-white mb-20" style="overflow: auto">
+		<div class="bg-white flex w-full  h-full mx-auto">
+			<div id="Left_board" class="w-11/12 h-96 ml-10">
 				<div id="table" class="pt-10 w-11/12 mx-auto">
-
-					<div class="mb-8">
-						<h2 class="text-4xl font-bold text-gray-600 px-4 py-4">검색결과</h2>
-					</div>
-
 
 					<!-- 검색결과 테이블 -->
 					<div>
 						<div class="mt-3 mb-5 flex ml-12 py-5">
-							<table class=" w-11/12">
+							<table class=" w-full">
 								<thead>
 									<tr class="bg-indigo-200 fong-bold">
 										<th class="w-1/12 py-2 text-indigo-700">번호</th>
-										<th class="w-5/12 py-2 text-indigo-700">장르</th>
-										<th class="w-2/12 py-2 text-indigo-700">게임명</th>
+										<th class="w-3/12 py-2 text-indigo-700">장르</th>
+										<th class="w-5/12 py-2 text-indigo-700">게임명</th>
 										<th class="w-2/12 py-2 text-indigo-700">출시일</th>
 										<th class="w-1/12 py-2 text-indigo-700">가격</th>
 									</tr>
@@ -122,9 +105,9 @@
 	</article>
 
 	<!-- 페이지번호 -->
-	<div class="flex justify-center mb-16">
+	<ul class="flex justify-center mb-16">
 		<c:if test="${page <=1 }">  
-				이전</i>&nbsp;
+				이전&nbsp;
 			</c:if>
 
 		<c:if test="${page > 1 }">
@@ -146,7 +129,7 @@
 		<c:if test="${page < maxPage }">
 			<a href="keyword.do?pageNum=${page+1}&keyword=${keyword}">다음</a>
 		</c:if>
-	</div>
+	</ul>
 </body>
 </html>
 <%@ include file="../main/footer.jsp"%>
