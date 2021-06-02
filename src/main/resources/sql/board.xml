@@ -60,7 +60,7 @@
 	
 	<!-- 게시글 삭제 -->
 	<delete id="boardDel" parameterType="int">
-	delete from board where B_NUM=#{B_NUM} 
+		delete from board where B_NUM=#{B_NUM}
 	</delete>
 	
 	

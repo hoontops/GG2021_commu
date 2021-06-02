@@ -51,15 +51,15 @@
 	
 
 	function del(c_NUM,b_NUM) {
-		var formData="c_NUM="+c_NUM+"&b_NUM="+b_NUM;
-		$.post("cmDelete.do", formData, function(data) {
 			var result = confirm('정말 삭제하시겠습니까?');
-			if(result) {
-				$("#slist").html(data);
+			 if(result) {
+				var formData="c_NUM="+c_NUM+"&b_NUM="+b_NUM;
+				$.post("cmDelete.do", formData, function(data) {			
+					$("#slist").html(data);	
+				});  
 			} else {
-				return false; 
-			}		
-		});  
+					return false; 
+			}	 
 	}
 	
 </script>

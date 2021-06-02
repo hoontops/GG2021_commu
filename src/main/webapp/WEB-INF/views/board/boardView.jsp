@@ -74,10 +74,10 @@
 					</button>
 			</div>
 			<div class="mb-2">
-				
-				<button
+				 
+				<button 
 					class="py-2 px-6 border-2 bg-white hover:bg-indigo-300 focus:outline-none text-black text-1xl font-bold rounded-md"
-					onclick="location.href='boardList.do?state=${state}'">목록</button>
+					onclick="location.href='boardList.do?state=Action'">목록</button>  
 			</div>
 		</div>
 

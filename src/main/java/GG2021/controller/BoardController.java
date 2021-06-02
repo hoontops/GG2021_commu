@@ -184,7 +184,7 @@ public class BoardController {
 		file[0] = st.nextToken();
 		file[1] = st.nextToken(); // 확장자
 
-		if (size > 10000000) {
+		if (size > 10000000) { 
 			result = 1;
 			model.addAttribute("result", result);
 

@@ -5,5 +5,5 @@
 <script>
 	alert("삭제 성공")
 	self.close();
-	opener.location.href="boardList.do";  
+	opener.location.href="boardList.do";   
 </script> 
