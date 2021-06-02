@@ -85,8 +85,8 @@
 			<div id="title" class="flex justify-between"> 
 				<h1 class="font-bold text-2xl text-gray-800">${bcont.getB_TITLE() }</h1>
 
-				<!-- 작성자 클릭시 수정 삭제 버튼 -->  
-				<c:if test="${sessionScope.id == bcont.getM_ID() or sessionScope.id == 'hth9876' }">
+				<!-- 작성자 클릭시 수정 삭제 버튼 -->   
+				<c:if test="${sessionScope.id == bcont.getM_ID() || sessionScope.id == 'hth9876' }">
 					<div class="">
 						<button
 							Onclick="location='boardView.do?B_NUM=${bcont.getB_NUM()}&page=${page}&state=edit'"

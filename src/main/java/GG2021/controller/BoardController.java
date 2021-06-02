@@ -57,11 +57,11 @@ public class BoardController {
 
 		model.addAttribute("state", state);
 		model.addAttribute("page", page);
-		model.addAttribute("startPage", startPage);
+		model.addAttribute("startPage", startPage); 
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("maxPage", maxPage);
 		model.addAttribute("listcount", listcount);
-		model.addAttribute("boardlist", boardlists);
+		model.addAttribute("boardlist", boardlists); 
 
 		return "board/boardList";
 	}

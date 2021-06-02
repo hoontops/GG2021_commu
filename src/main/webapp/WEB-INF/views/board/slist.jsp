@@ -42,19 +42,19 @@
 	}); 
 	
 	function up(id) {
-		alert(id);
+//		alert(id);
 		var c_CONTENT = $('#tt_'+id).val();  
-		alert(c_CONTENT);
-		alert(${bcont.getB_NUM()});
-		var formData = "C_NUM="+id+'&C_CONTENT='+c_CONTENT
-//		var formData = "C_NUM="+id+'&C_CONTENT='+c_CONTENT+"&B_NUM=${bcont.getB_NUM()}"
+//		alert(c_CONTENT);
+//		alert(${board.getB_NUM()});    
+//		var formData = "C_NUM="+id+'&C_CONTENT='+c_CONTENT 
+		var formData = "C_NUM="+id+'&C_CONTENT='+c_CONTENT+"&B_NUM=${board.getB_NUM()}"
 		$.post("${path}/cmUpdate.do", formData, function(data) {
 			$('#slist').html(data); 
 		});
 	}
 	
 	function can() {
-		$('#slist').load('slist.do?B_NUM=${bcont.getB_NUM()}');
+		$('#slist').load('slist.do?B_NUM=${board.getB_NUM()}');
 	}
 	
 
@@ -94,8 +94,8 @@
 					<div id="date" class="text-gray-500 text-sm">
 						<fmt:formatDate value="${cs.c_DATE }" pattern="yyyy-MM-dd HH:mm:ss"/>	
 					</div>
-					
-						<c:if test="${cs.c_ID == id or cs.c_ID == 'hth9876'}"> 	 					
+					 
+						<c:if test="${cs.c_ID == id or id == 'hth9876'}"> 	 					
 							<div id="수정삭제" class="flex">
 								<button
 									class="ml-8 mr-5 text-indigo-600 font-bold rounded focus:outline-none edit">

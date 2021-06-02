@@ -39,7 +39,7 @@
 								<c:set var="num" value="${listcount-(page-1)*10}" />
 								<tbody>
 									<!-- 반복문 시작 -->
-									<c:forEach var="b" items="${boardlist}">
+									<c:forEach var="b" items="${boardlist}"> 
 										<tr class="border-b text-center">
 											<td class="w-1/12 py-2"><c:out value="${num}" /> <c:set
 													var="num" value="${num-1}" /></td>

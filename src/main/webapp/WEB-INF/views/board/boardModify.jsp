@@ -40,15 +40,6 @@
                                     <span>${bcont.getM_ID()}</span>  
                                 </div> 
                                     
-                                 <div class="mb-4 text-white font-samibold"><span class="text-black mr-2">게임 종류</span>
-                                	<select id="G_TYPE" name="G_TYPE" class="py-1 px-4 rounded border bg-indigo-400 focus:outline-none"> 
-                                		<option>없음</option>
-                                		<option>Action</option>
-                                		<option>Sports</option> 
-                                		<option>RPG</option>
-                                		<option>Docu</option>
-                                	</select>
-                                </div>
                                     
                                 <div class="mb-4"> 
                                     <label class="text-xl text-gray-600">제목 <span 

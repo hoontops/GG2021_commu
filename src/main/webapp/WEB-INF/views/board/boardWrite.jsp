@@ -63,7 +63,7 @@
                                         
                                 </div>
                                 <div class="mb-4">   
-                                    <textarea name="B_CONTENT" id="B_CONTENT" rows="6" cols="117" style="resize:none"class="p-7 border border-indigo-600 rounded my-3 focus:outline-none"></textarea> 
+                                    <textarea name="B_CONTENT" id="B_CONTENT" rows="6" cols="113" style="resize:none"class="p-7 border border-indigo-600 rounded my-3 focus:outline-none"></textarea> 
                                     		               	 
                                      
                                     <input type="file"  class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02"> 
