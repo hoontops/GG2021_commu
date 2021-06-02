@@ -109,7 +109,12 @@ public class BoardController {
 
 			return "board/boardSearchResult";
 		}
-
+		
+	// 검색상세 페이지
+	@RequestMapping("boardDetailPage.do")
+	public String boardDetailPage() {
+		return "board/boardDetailPage";
+	}
 		
 	// 글쓰기 페이지
 	@RequestMapping("boardWrite.do")

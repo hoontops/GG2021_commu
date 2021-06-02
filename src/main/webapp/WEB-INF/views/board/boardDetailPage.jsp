@@ -7,33 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<style>
-.dropdown:focus-within .dropdown-menu {
-	opacity: 1;
-	transform: translate(0) scale(1);
-	visibility: visible;
-}
-
-#checked {
-	width: 400px; /* 너비는 변경될수 있습니다. */
-	text-overflow: ellipsis; /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
-	white-space: nowrap; /* 줄바꿈을 하지 않습니다. */
-	overflow: hidden; /* 내용이 길면 감춤니다 */
-	display: block; /* ie6이상 현재요소를 블럭처리합니다. */
-}
-</style>
-<script>
- function moveUrl(getG_URL()){
-	 location.href = getG_URL();
-	 return true;
- }
-</script>
 </head>
 <body>
 
-
-	<!-- 최상단 이미지  -->
+<!-- 최상단 이미지  -->
 	<div
 		class="container bg-grey-lightest mx-auto shadow rounded mt-8 pb-4 bg-cover"
 		style="color: #606F7B; background-color: rgb(165, 182, 198); background-image: url('https://68.media.tumblr.com/f6a4004f3092b0d664daeabb95d5d195/tumblr_oduyciOJNb1uhjffgo1_500.gif');">
@@ -45,20 +22,10 @@
 
 	</div>
 
-	<!-- 분류  -->
-	<div
-		class="flex justify-between mx-36 w-auto mt-10 border-b border-grey-light">
-		<div class="flex">
-			<div class="focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">검색결과</div>
-		</div>
-	</div>
-
-
-
-
+		
 	<!-- 테이블 -->
 
-	<article class="bg-white mb-20" style="overflow: auto">
+	<article class="bg-white mb-20">
 		<div class="bg-white flex w-full  h-full mx-auto">
 			<div id="Left_board" class="w-11/12 h-96 ml-10">
 				<div id="table" class="pt-10 w-11/12 mx-auto">
@@ -108,33 +75,6 @@
 		</div>
 
 	</article>
-
-	<!-- 페이지번호 -->
-	<ul class="flex justify-center mb-16">
-		<c:if test="${page <=1 }">  
-				이전&nbsp;
-			</c:if>
-
-		<c:if test="${page > 1 }">
-			<a href="keyword.do?pageNum=${page-1}&keyword=${keyword}">이전</a>
-		</c:if>
-
-		<c:forEach var="a" begin="${startPage}" end="${endPage}">
-			<c:if test="${a == page }">
-					${a}
-				</c:if>
-			<c:if test="${a != page }">   
-					<a href="keyword.do?pageNum=${a}&keyword=${keyword}">[${a}]</a>&nbsp;
-				</c:if>
-		</c:forEach>
-
-		<c:if test="${page >= maxPage }">
-				다음 
-			</c:if>
-		<c:if test="${page < maxPage }">
-			<a href="keyword.do?pageNum=${page+1}&keyword=${keyword}">다음</a>
-		</c:if>
-	</ul>
 </body>
 </html>
 <%@ include file="../main/footer.jsp"%>

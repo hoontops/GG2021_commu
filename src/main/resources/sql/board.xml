@@ -40,7 +40,8 @@
 			from (select * from All_Game
 		<where>
 			<if test="keyword != null">
-				G_TYPE like '%'||#{keyword}||'%'
+				G_TYPE like '%'||#{keyword}||'%' or
+				G_NAME like '%'||#{keyword}||'%'
 			</if>			
 		</where>	
 		order by g_name asc) game)       
