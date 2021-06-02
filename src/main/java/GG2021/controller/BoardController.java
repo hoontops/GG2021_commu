@@ -209,8 +209,10 @@ public class BoardController {
 
 	// 게시글 삭제
 	@RequestMapping(value = "boardDel.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String boardDel(int B_NUM, Model model) throws Exception {
+	public String boardDel(int B_NUM, Model model, String state) throws Exception {
 		Board board = service.boardView(B_NUM);
+		
+		model.addAttribute("state", state); 
 
 		service.boardDel(B_NUM);
 

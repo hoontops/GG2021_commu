@@ -65,6 +65,10 @@ public class CommentsController {
 	
 	@RequestMapping("cmUpdate.do")
 	public String cmUpdate(Comments cs, Model model) {
+		System.out.println("c_NUM:"+cs.getC_NUM());
+		System.out.println("b_NUM:"+cs.getB_NUM());
+		System.out.println("c_CONTENT:"+cs.getC_CONTENT());
+		
 		cms.cmUpdate(cs);
 		return "redirect:slist.do?B_NUM=" + cs.getB_NUM();
 	}

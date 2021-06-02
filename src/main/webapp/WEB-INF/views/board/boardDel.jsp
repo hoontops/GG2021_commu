@@ -19,8 +19,8 @@
 	<div class="flex justify-center"> 
 	</div>  
 	
-	<div class="w-8/12 flex justify-center items-center my-8 ml-32"> 
-		<form method="post" action="boardDel.do" enctype="multipart/form-data"
+	<div class="w-8/12 flex justify-center items-center my-8 ml-32">  
+		<form method="post" action="boardDel.do?state=${state}" enctype="multipart/form-data"
 			class="px-20 py-8 bg-indigo-50 rounded flex justify-center items-center flex-col shadow-md">
 		<input type="hidden" name="B_NUM" value="${bcont.getB_NUM()}" />
 		<input type="hidden" name="page" value="${page}" />

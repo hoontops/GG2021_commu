@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+
+<c:set var="path" value="${pageContext.request.contextPath }" />
+  
 <!DOCTYPE html>
 <html> 
 <head>
@@ -29,8 +32,9 @@
 	$(function() {
 		$('.edit').click(function() {
 			var id = $(this).attr('id');
+			console.log(id);
 			var txt = $('#div_'+id).text();     
-			$('#span_'+id).html("<textarea rows='2' cols='90' id='div_"+id+"'>"+txt+"</textarea>"); 
+			$('#span_'+id).html("<textarea rows='3' cols='70' id='tt_"+id+"'>"+txt+"</textarea>"); 
 			$('#btn_'+id).html( 
 					"<input type='button' class='p-1' value='확인' onclick='up("+id+")'>"
 				   +"<input type='button' class='p-1' value='취소' onclick='can()'>");    
@@ -38,9 +42,13 @@
 	}); 
 	
 	function up(id) {
-		var c_CONTENT = $('#div_'+id).val(); 
-		var formData = "c_NUM="+id+'&c_CONTENT='+c_CONTENT+"&B_NUM=${bcont.getB_NUM()}"
-		$.post("cmUpdate.do", formData, function(data) {
+		alert(id);
+		var c_CONTENT = $('#tt_'+id).val();  
+		alert(c_CONTENT);
+		alert(${bcont.getB_NUM()});
+		var formData = "C_NUM="+id+'&C_CONTENT='+c_CONTENT
+//		var formData = "C_NUM="+id+'&C_CONTENT='+c_CONTENT+"&B_NUM=${bcont.getB_NUM()}"
+		$.post("${path}/cmUpdate.do", formData, function(data) {
 			$('#slist').html(data); 
 		});
 	}
@@ -78,8 +86,8 @@
 				class="flex justify-between border-b border-gray-500 pl-12 pr-8 py-4">
 				<div>
 					<div class="font-bold  text-indigo-600">${cs.c_ID}</div>  
-					<div class="font-thin pt-3">  
-						<span class="focus:outline-none" id="span_${cs.c_ID}">${cs.c_CONTENT}</span>  
+					<div class="font-thin pt-3" id="span_${cs.c_NUM}">   
+						<span class="focus:outline-none" id="div_${cs.c_NUM}">${cs.c_CONTENT}</span>  
 					</div>
 				</div>
 				<div class="flex items-center mt-10">  
