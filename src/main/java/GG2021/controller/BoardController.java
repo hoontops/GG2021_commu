@@ -33,7 +33,7 @@ public class BoardController {
 	private CommentsService cms;
 
 	
-	@RequestMapping("boardPaging.do") // load
+	@RequestMapping("boardPaging.do") // load 
 	public String boardPaging(String state, Model model, HttpServletRequest request) throws Exception {
 		System.out.println("boardPaging.do state : " + state); 
 		List<Board> boardlists = new ArrayList<Board>();
@@ -46,24 +46,24 @@ public class BoardController {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		int listcount = service.getListCount(state); // 총 글 수
-		boardlists = service.getBoardListType(state); // 단순 액션 게임 리스트.
-		boardlist = service.getBoardList(page);
+		//boardlists = service.getBoardListType(state); // 단순 액션 게임 리스트.
+		boardlist = service.getBoardList(page); 
 		System.out.println("bo:"+boardlist);
 		int maxPage = (int) ((double) listcount / limit + 0.95);
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
 		int endPage = maxPage;
 		
 		if (endPage > startPage + 10 - 1)
-			endPage = startPage + 10 - 1;
+			endPage = startPage + 10 - 1; 
 				 
-		model.addAttribute("boli", boardlist);  
 		model.addAttribute("state", state);
 		model.addAttribute("page", page);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("maxPage", maxPage);
 		model.addAttribute("listcount", listcount);
-		model.addAttribute("boardlist", boardlists);
+		//model.addAttribute("boardlists", boardlists);
+		model.addAttribute("boardlist", boardlist);
 		
 		return "board/list";
 	}
@@ -82,6 +82,7 @@ public class BoardController {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
+		System.out.println("page:"+page);
 		int listcount = service.getListCount(state); // 총 글 수
 		boardlist = service.getBoardList(page); //
 		boardlists = service.getBoardListType(state); // 단순 액션 게임 리스트.
@@ -101,7 +102,7 @@ public class BoardController {
 		model.addAttribute("boardlists", boardlists);
 		model.addAttribute("boardlist", boardlist);
 
-		return "board/boardList";
+		return "board/boardList"; 
 	}
 
 	// 글쓰기 페이지

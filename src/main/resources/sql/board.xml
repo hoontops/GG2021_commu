@@ -43,7 +43,7 @@
 	<![CDATA[
 		select * from (select rownum rnum, board.* 
 		from (select * from board order by B_NUM desc) board)             
-		where rnum>=((#{page}-1)*10+1) and rnum<=(#{page}*10)  
+		where rnum >= ((#{page}-1)*10+1) and rnum <= (#{page}*10)  
 	]]>
 	</select>
 
@@ -91,8 +91,7 @@
 		<!-- update board set B_VIEW = B_VIEW+1 where B_NUM = #{B_NUM} -->
 	</update>
 
-	<select id="getBoardListType" parameterType="board"
-		resultType="board">
+	<select id="getBoardListType" parameterType="board"	resultType="board">
 		select * from board where G_TYPE=#{state, jdbcType=VARCHAR}
 		order by B_DATE desc
 	</select>

@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">  
 
 <!-- 파비콘.ico-->
 <link rel="shortcut icon" href="img/GG_Logo.ico">

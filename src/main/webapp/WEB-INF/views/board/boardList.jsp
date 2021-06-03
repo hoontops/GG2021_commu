@@ -91,8 +91,12 @@
 				>글쓰기</button>			
 		</div>
 	</div>
-	<div id="boardPaging">
-	</div>
+	
+	 
+	<div id="boardPaging"></div> 
+	
+	 
+	
 	<!-- 글 리스트 --> 
 </body> 
 </html> 

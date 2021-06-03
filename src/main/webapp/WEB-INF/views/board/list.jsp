@@ -40,8 +40,8 @@
 								<!-- 화면 출력 번호 -->
 								<c:set var="num" value="${listcount-(page-1)*10}" />
 								<tbody>
-									<!-- 반복문 시작 -->
-									<c:forEach var="b" items="${boardlist}"> 
+									<!-- 반복문 시작 -->  
+									<c:forEach var="b" items="${boardlist}">    
 										<tr class="border-b text-center">
 											<td class="w-1/12 py-2"><c:out value="${num}" /> <c:set
 													var="num" value="${num-1}" /></td>
@@ -63,28 +63,28 @@
 					<!-- 페이지번호 -->
 					<div>
 						<div class="flex justify-center mb-16">
-							<c:if test="${page <=1 }">  
+							<c:if test="${page <=1 }">   
 				이전&nbsp; 
 			</c:if>
-
+ 
 							<c:if test="${page > 1 }">
-								<a href="boardPaging.do?page=${page-1}">이전</a>
+								<a href="boardList.do?state=${state}&page=${page-1}">이전</a>
 							</c:if>
-
+ 
 							<c:forEach var="a" begin="${startPage}" end="${endPage}">
 								<c:if test="${a == page }">
 					${a}
-				</c:if>
+				</c:if> 
 								<c:if test="${a != page }">
-									<a href="boardPaging.do?page=${a}">[${a}]</a>&nbsp;
+									<a href="boardList.do?state=${state}&page=${a}">[${a}]</a>&nbsp;
 				</c:if>
-							</c:forEach>
+							</c:forEach> 
 
-							<c:if test="${page >= maxPage }">
+							<c:if test="${page >= maxPage }"> 
 				다음 
 			</c:if>
 							<c:if test="${page < maxPage }">
-								<a href="boardPaging.do?page=${page+1}">다음</a> 
+								<a href="boardList.do?state=${state}&page=${page+1}">다음</a> 
 							</c:if>
 						</div>
 					</div>
