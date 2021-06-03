@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -249,12 +250,15 @@ public class BoardController {
 
 	// 게시글 삭제
 	@RequestMapping(value = "boardDel.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String boardDel(int B_NUM, Model model, String state) throws Exception {
+	public String boardDel(int B_NUM, Model model, String state, HttpSession session) throws Exception {
 		Board board = service.boardView(B_NUM);
-		
+		String id = (String) session.getAttribute("id");
 		model.addAttribute("state", state); 
 
 		service.boardDel(B_NUM);
+		if(id.equals("hth9876")) {
+			return "redirect:admin.do?state=board";
+		}
 
 		return "board/boardDelOk";
 	}
