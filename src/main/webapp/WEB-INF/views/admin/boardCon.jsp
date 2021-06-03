@@ -50,17 +50,18 @@
 
 			<div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
 				<div
-					class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white" style="
-    height: 101px;
-">
+					class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
+					style="height: 101px;">
 					<div class="p-3 rounded-full bg-pink-600 bg-opacity-75">
 						<i class="fas fa-comments text-white text-3xl"></i>
 					</div>
 
-					<div class="mx-5">
-						<h4 class="text-2xl font-semibold text-gray-700 ">${commentsCount }</h4>
-						<div class="text-gray-500 W-20">댓글 수</div>
+
+					<div class="mx-5 w-20">
+						<h4 class="text-2xl font-semibold text-gray-700">${commentsCount }</h4>
+						<div class="text-gray-500 w-20">댓글 수</div>
 					</div>
+
 				</div>
 			</div>
 
@@ -83,7 +84,7 @@
 								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 								아이디</th>
 							<th
-								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+								class="px-5 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 								제목</th>
 							<th
 								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -91,7 +92,8 @@
 							<th
 								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 								작성일</th>
-							<th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+							<th
+								class="px-10 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
 						</tr>
 					</thead>
 
@@ -102,7 +104,7 @@
 							<c:set var="mid" value="${board.getB_NUM() }" />
 							<tr>
 								<td
-									class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+									class="px-6 py-3 whitespace-no-wrap border-b border-gray-200">
 									<div class="flex items-center">
 										<div class="flex-shrink-0 h-10 w-10">
 											<!-- 번호 출력 부분 -->
@@ -117,7 +119,7 @@
 								</td>
 
 								<td
-									class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+									class="px-2 py-4 whitespace-no-wrap border-b border-gray-200">
 									<div class="text-center text-sm leading-5 text-gray-900">
 										<div class="txt_line">
 											<a class="hover:text-indigo-500"
@@ -138,7 +140,7 @@
 										pattern="yyy-MM-dd HH:mm:ss" />
 								</td>
 
-								<td
+								<td style="padding-right: 25px;"
 									class="px-1 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
 									<a
 									href="boardView.do?B_NUM=${board.getB_NUM() }&page=${page }&state=edit"><i

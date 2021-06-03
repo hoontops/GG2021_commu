@@ -58,7 +58,6 @@ public class AdminController {
 		int endPage = maxPage;
 		if (endPage > startPage + 10 - 1)
 			endPage = startPage + 10 - 1;
-		System.out.println("state:" + state);
 		model.addAttribute("page", page);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
