@@ -16,4 +16,9 @@ public class GameDao {
 	public List<All_Game> getGameList(String state){
 		return session.selectList("getGameList",state);
 	}
+	
+
+	public List<All_Game> getGameListz()	{
+		return session.selectList("game_list");
+	}
 }

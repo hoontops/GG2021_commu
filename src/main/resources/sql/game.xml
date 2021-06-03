@@ -7,6 +7,18 @@
 		select * from ALL_GAME where G_TYPE=#{state} 
 	</select>
 
+
+	<select id="game_list" resultType="game" >
+	<![CDATA[
+			select * from
+		(select rownum rn, GAMES.* from
+		(select * from ALL_GAME where G_NO in
+		(select G_NO from ALL_GAME) order by dbms_random.random) GAMES) 
+		where rn <= 6
+	]]>
+	</select>
+
+
 </mapper>
 
 

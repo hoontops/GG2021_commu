@@ -11,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import GG2021.model.All_Game;
+import GG2021.model.Board;
 import GG2021.model.Member;
 import GG2021.service.AdminService;
+import GG2021.service.BoardService;
+import GG2021.service.GameService;
 import GG2021.service.MemberService;
 
 @Controller
@@ -21,11 +24,35 @@ public class MainController {
 	private MemberService service;
 	@Autowired
 	private AdminService aservice;
-
+	@Autowired
+	private GameService gservice;
+	@Autowired
+	private BoardService bservice;
+	
+	
 	@RequestMapping("main.do")
 	public String main(Model model) {
 		String link= aservice.getlink();
 		model.addAttribute("link", link);
+		
+		List<All_Game> gameList = gservice.getGameListz();
+//		System.out.println("game :"+gameList);
+		model.addAttribute("gameList", gameList);
+		
+		List<Board> boardList = bservice.getBoardListz();
+//		System.out.println("board :"+boardList);
+		model.addAttribute("boardList",boardList);
+	
+		
+		System.out.println("보여줘 제발..=" + boardList.get(0));
+		System.out.println("2젠..보여줘 제발..=" + gameList.get(0));
+		
+		
+		
+		
+		
+		
+		
 		return "main/mainPage";
 		/* return "redirect:gameinfo.do"; */
 	}

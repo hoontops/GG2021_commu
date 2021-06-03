@@ -13,6 +13,12 @@ public class BoardService {
 	@Autowired
 	private BoardDao dao;
 	
+
+	public List<Board> getBoardListz(){
+		return dao.getBoardListz();
+	}
+
+	
 	// 글쓰기 완료 
 	public int insert(Board board) throws Exception {
 		return dao.insert(board); 

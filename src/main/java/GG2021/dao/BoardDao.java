@@ -59,4 +59,8 @@ public class BoardDao {
 	public void boardThumbsDown(int B_NUM) {
 		session.update("boardThumbsDown", B_NUM);
 	}
+
+	public List<Board> getBoardListz() {
+		return session.selectList("boards.board_list");
+	}
 }

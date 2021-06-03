@@ -15,5 +15,12 @@ public class GameService {
 	
 	public List<All_Game> getGameList(String state){
 		return dao.getGameList(state);
+		
 	}
+
+		public List<All_Game> getGameListz()	{
+			return dao.getGameListz();
+
+	}
+	
 }
