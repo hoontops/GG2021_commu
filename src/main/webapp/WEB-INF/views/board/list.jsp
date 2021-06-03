@@ -62,7 +62,7 @@
 					<div>
 						<div class="flex justify-center mb-16">
 							<c:if test="${page <=1 }">  
-				이전</i>&nbsp;
+				이전&nbsp; 
 			</c:if>
 
 							<c:if test="${page > 1 }">
@@ -177,6 +177,6 @@
 		</div>
 
 	</article>
-
-</body>
+</body> 
 </html>
+<%@ include file="../main/footer.jsp"%> 

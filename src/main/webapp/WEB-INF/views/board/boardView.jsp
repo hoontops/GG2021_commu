@@ -215,7 +215,7 @@
 				</div>
 
 			</div> -->
-		</div> --%>
+		</div> --%> 
 
 		<!-- 	페이징 
 		<div class="flex justify-center mb-16 mt-20">
@@ -251,7 +251,7 @@
 				<!-- 이전글이 없으면?-->
 				<c:if test="${ before == null}">
 					<span><i class="fas fa-chevron-down px-3"></i> <i class="pr-4">이전글</i> 해당
-							글이 없습니다</span>
+							글이 없습니다</span> 
 				</c:if>
 
 
@@ -264,6 +264,6 @@
 
 
 	</div>
-</body>
+</body>  
 </html>
-<%@ include file="../main/footer.jsp"%>
+<%@ include file="../main/footer.jsp"%> 

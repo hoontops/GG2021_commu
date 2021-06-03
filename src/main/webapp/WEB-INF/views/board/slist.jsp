@@ -35,14 +35,14 @@
 			var id = $(this).attr('id');
 			console.log(id);
 			var txt = $('#div_'+id).text(); 			
-			$('#span_'+id).html("<textarea rows='3' cols='70' id='tt_"+id+"'>"+txt+"</textarea>"); 
+			$('#span_'+id).html("<textarea class='resize-none mr-2' rows='3' cols='70' id='tt_"+id+"'>"+txt+"</textarea>"); 
 			$('#btn_'+id).html( 
-					"<input type='button' class='p-1 m-1' value='수정' onclick='up("+id+")'>"
-				   +"<input type='button' class='p-1 m-1 ' value='취소' onclick='can()'>");     
+					"<div class='flex'><input type='button' class='px-2 py-1 m-2 bg-indigo-100 rounded cursor-pointer' value='수정' onclick='up("+id+")'>"
+				   +"<input type='button' class='px-2 py-1 m-2 bg-indigo-100 rounded cursor-pointer' value='취소' onclick='can()'></div>");
+			$('#btn_'+id).removeClass("far fa-edit");
+			$('#delt').hide();  
 		});
-			/* if("#btn_${cs.c_NUM}").click(function(){
-				$("#editBtn").hide();
-			}); */
+			
 	}); 
 	
 	function up(id) {
@@ -109,8 +109,8 @@
 								</button>						
 								<button
 									class="text-indigo-600 font-bold rounded focus:outline-none">
-									<div class="del" onclick="del(${cs.c_NUM},${cs.b_NUM})">
-										<i class="far fa-window-close"></i>
+									<div class="del" id="delt" onclick="del(${cs.c_NUM},${cs.b_NUM})">
+										<i class="far fa-window-close"></i> 
 									</div>
 								</button>						
 							</div>

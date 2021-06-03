@@ -159,7 +159,7 @@ input[type="submit"] {
 			<li>
 				<div
 					class="relative z-10 hover-trigger mt-1 border-b-2 hover:border-indigo-600">
-					<a class="text-xs">COMMNUNITY</a>
+					<a class="text-xs cursor-pointer">COMMNUNITY</a> 
 					<div class="absolute w-28 h-6 p-3 hover-target">
 						<div class="flex 
 						">

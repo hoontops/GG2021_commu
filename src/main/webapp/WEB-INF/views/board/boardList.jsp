@@ -93,7 +93,6 @@
 	</div>
 	<div id="boardPaging"></div>
 	<!-- 글 리스트 -->
-</body>
-</html>
-<%@ include file="../main/footer.jsp"%>
+</body> 
+</html> 
 
