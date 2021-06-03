@@ -300,4 +300,55 @@ public class BoardController {
 		System.out.println("boardPagingPost : "+state);
 		return "redirect:boardPaging.do?state=" + state;
 	}
+	
+	// 검색목록 페이지
+    @RequestMapping(value = "keyword.do")
+    public String search(String pageNum, All_Game game,Model model, HttpServletRequest request) throws Exception {
+       System.out.println("keyword:"+game.getKeyword());
+
+       final int limit = 10; // 화면에 출력할 데이터 갯수
+       if(pageNum == null || pageNum.equals("")) {
+          pageNum = "1";
+       }
+       int currentPage = Integer.parseInt(pageNum);
+
+
+       List<All_Game> boardlist = new ArrayList<All_Game>();
+
+
+       int startRow = (currentPage -1) * limit +1;
+       int endRow = startRow + limit -1;
+
+       game.setStartRow(startRow);
+       game.setEndRow(endRow);         
+
+       int listcount = service.getKeywordCount(game.getKeyword()); // 총 글 수
+       boardlist = service.getResultList(game); //
+       System.out.println("listcount:"+listcount);
+       System.out.println("boardlist:"+boardlist);
+
+
+       int maxPage = (int) ((double) listcount / limit + 0.95);
+       int startPage = (((int) ((double) currentPage / 10 + 0.9)) - 1) * 10 + 1;
+       int endPage = maxPage;
+
+       if (endPage > startPage + 10 - 1)
+          endPage = startPage + 10 - 1;
+
+       model.addAttribute("page", currentPage);
+       model.addAttribute("startPage", startPage);
+       model.addAttribute("endPage", endPage);
+       model.addAttribute("maxPage", maxPage);
+       model.addAttribute("listcount", listcount);
+       model.addAttribute("boardlist", boardlist);
+       model.addAttribute("keyword", game.getKeyword());
+
+       return "board/boardSearchResult";
+    }
+
+ // 검색상세 페이지
+ @RequestMapping("boardDetailPage.do")
+ public String boardDetailPage() {
+    return "board/boardDetailPage";
+ }
 }

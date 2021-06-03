@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="boardrns">   
-	<resultMap type="board" id="boardResult">
-		<result property="B_NUM"		column="B_NUM"/>
-		<result property="B_TITLE"		column="B_TITLE"/>
-		<result property="B_CONTENT"	column="B_CONTENT"/>
-		<result property="B_IMG"		column="B_IMG"/>
-		<result property="B_VIEW"		column="B_VIEW"/>
-		<result property="B_GOOD"		column="B_GOOD"/>
-		<result property="B_BAD"		column="B_BAD"/>
-		<result property="B_DATE"		column="B_DATE"/>
-		<result property="B_NOTICE1"	column="B_NOTICE1"/>
-		<result property="M_ID"			column="M_ID"/>
-		<result property="G_NAME"		column="G_NAME"/>
-	</resultMap>
+   <resultMap type="board" id="boardResult">
+      <result property="B_NUM"      column="B_NUM"/>
+      <result property="B_TITLE"      column="B_TITLE"/>
+      <result property="B_CONTENT"   column="B_CONTENT"/>
+      <result property="B_IMG"      column="B_IMG"/>
+      <result property="B_VIEW"      column="B_VIEW"/>
+      <result property="B_GOOD"      column="B_GOOD"/>
+      <result property="B_BAD"      column="B_BAD"/>
+      <result property="B_DATE"      column="B_DATE"/>
+      <result property="B_NOTICE1"   column="B_NOTICE1"/>
+      <result property="M_ID"         column="M_ID"/>
+      <result property="G_NAME"      column="G_NAME"/>
+   </resultMap>
 
-
-<!-- 메인에서사용 -->
-	<select id="board_list" resultType="board" >
+	<!-- 메인에서사용 -->
+	<select id="board_list" resultType="board">
 	<![CDATA[
 			select * from
 		(select rownum rn, BOARDS.* from
@@ -28,18 +26,19 @@
 	]]>
 	</select>
 	<!-- 게시판 저장 -->
-	<insert id="boardInsert" parameterType="board">     
-	insert into board values(b_num_seq.nextval, #{B_TITLE}, #{B_CONTENT},
-		#{B_IMG, jdbcType=VARCHAR}, 0, 0, 0, sysdate, #{B_NOTICE1, jdbcType=VARCHAR}, #{M_ID, jdbcType=VARCHAR}, 
-		#{G_NAME, jdbcType=VARCHAR},#{G_TYPE, jdbcType=VARCHAR})        
+	<insert id="boardInsert" parameterType="board">
+		insert into board values(b_num_seq.nextval, #{B_TITLE}, #{B_CONTENT},
+		#{B_IMG, jdbcType=VARCHAR}, 0, 0, 0, sysdate, #{B_NOTICE1,
+		jdbcType=VARCHAR}, #{M_ID, jdbcType=VARCHAR},
+		#{G_NAME, jdbcType=VARCHAR},#{G_TYPE, jdbcType=VARCHAR})
 	</insert>
-	
+
 	<!-- 게시글 총 갯수 -->
 	<select id="boardCount" resultType="int">
-	select count(B_NUM) from board where G_TYPE=#{state, jdbcType=VARCHAR}  
+		select count(B_NUM) from board where G_TYPE=#{state, jdbcType=VARCHAR}
 	</select>
-	
-	<!-- 게시판 목록  -->
+
+	<!-- 게시판 목록 -->
 	<select id="boardList" parameterType="int" resultType="board">
 	<![CDATA[
 		select * from (select rownum rnum, board.* 
@@ -47,54 +46,82 @@
 		where rnum>=((#{page}-1)*10+1) and rnum<=(#{page}*10)  
 	]]>
 	</select>
-	
+
 	<!-- 조회수 증가 -->
-	<update id="hit" parameterType="int">  
-	update board set B_VIEW = B_VIEW+1    
-	where B_NUM = #{B_NUM}   
+	<update id="hit" parameterType="int">
+		update board set B_VIEW = B_VIEW+1
+		where B_NUM = #{B_NUM}
 	</update>
-	
-	<!-- 게시판 상세 --> 
+
+	<!-- 게시판 상세 -->
 	<select id="boardView" parameterType="int" resultType="board">
-		select * from board where B_NUM = #{B_NUM}     
+		select *
+		from board where B_NUM = #{B_NUM}
 	</select>
-	
-	<!-- 게시글 수정  -->
+
+	<!-- 게시글 수정 -->
 	<update id="edit" parameterType="board">
-	update board set 
-		  B_TITLE=#{B_TITLE, jdbcType=VARCHAR} 
+		update board set
+		B_TITLE=#{B_TITLE, jdbcType=VARCHAR}
 		, B_CONTENT=#{B_CONTENT, jdbcType=VARCHAR}
-		, B_IMG=#{B_IMG, jdbcType=VARCHAR}
-		, G_TYPE=#{G_TYPE, jdbcType=VARCHAR} 
-	where B_NUM=#{B_NUM} 	 
-	</update> 
-	
+		, B_IMG=#{B_IMG,
+		jdbcType=VARCHAR}
+		, G_TYPE=#{G_TYPE, jdbcType=VARCHAR}
+		where B_NUM=#{B_NUM}
+	</update>
+
 	<!-- 게시글 삭제 -->
 	<delete id="boardDel" parameterType="int">
-		delete from board where B_NUM=#{B_NUM}
+		delete from board where
+		B_NUM=#{B_NUM}
 	</delete>
-	
-	
+
+
 	<!-- 좋아요 -->
 	<update id="boardThumbsUp" parameterType="int">
-		update board set 
+		update board set
 		B_GOOD=B_GOOD+1
 		where B_NUM = #{B_NUM}
 	</update>
 	<!-- 싫어요 -->
 	<update id="boardThumbsDown" parameterType="int">
 		update board set B_BAD = B_BAD+1
-		where B_NUM = #{B_NUM} 
-		
-	<!-- 	update board set B_VIEW = B_VIEW+1    
-	where B_NUM = #{B_NUM}    -->
+		where B_NUM = #{B_NUM}
+
+		<!-- update board set B_VIEW = B_VIEW+1 where B_NUM = #{B_NUM} -->
 	</update>
-	
-	<select id="getBoardListType" parameterType="board" resultType="board">
-		select * from board where G_TYPE=#{state, jdbcType=VARCHAR} order by B_DATE desc		
+
+	<select id="getBoardListType" parameterType="board"
+		resultType="board">
+		select * from board where G_TYPE=#{state, jdbcType=VARCHAR}
+		order by B_DATE desc
+	</select>
+
+
+
+
+	<!-- 검색결과 총 갯수 -->
+	<select id="keywordCount" parameterType="String"
+		resultType="int">
+		select count(*) from All_Game where G_TYPE like '%' || #{keyword} || '%'
+	</select>
+
+
+	<!-- 검색 목록 -->
+	<select id="getResultList" parameterType="game"
+		resultType="game">
+		select * from (select rownum rnum, game.*
+		from (select * from All_Game
+		<where>
+			<if test="keyword != null">
+				G_TYPE like '%'||#{keyword}||'%' or
+				G_NAME like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		order by g_name asc) game)
+		where rnum between #{startRow} and #{endRow}
 	</select>
 </mapper>
-
 
 
 

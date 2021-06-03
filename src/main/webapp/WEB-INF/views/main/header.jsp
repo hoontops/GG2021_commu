@@ -95,19 +95,18 @@ input[type="submit"] {
 			<c:if
 				test="${sessionScope.id == 'hth9876' && sessionScope.id !=null}">
 				<div id="searchBar" class="mt-5 ml-32">
-					<form method="POST" action="#">
-						<input type="text"
+					<form method="POST" action="keyword.do">
+						<input type="text" name="keyword"
 							class="bg-gray-100 text-gray-800 font-bold rounded  px-10 py-1 focus:outline-none shadow-lg"
 							size="30" placeholder="search" autofocus> <input
 							type="submit" value="&#xf002;" class="cursor-pointer">
-
 					</form>
 				</div>
 			</c:if>
 			<c:if test="${sessionScope.id != 'hth9876'}">
 				<div id="searchBar" class="mt-5 ml-5">
-					<form method="POST" action="#">
-						<input type="text"
+					<form method="POST" action="keyword.do">
+						<input type="text" name="keyword"
 							class="bg-gray-100 text-gray-800 font-bold rounded  px-10 py-1 focus:outline-none shadow-lg"
 							size="30" placeholder="search" autofocus> <input
 							type="submit" value="&#xf002;" class="cursor-pointer">
@@ -160,8 +159,8 @@ input[type="submit"] {
 			<li>
 				<div
 					class="relative z-10 hover-trigger mt-1 border-b-2 hover:border-indigo-600">
-					<a class="text-xs">COMMNUNITY</a>  
-					<div class="absolute w-28 h-6 p-3 hover-target">     
+					<a class="text-xs">COMMNUNITY</a>
+					<div class="absolute w-28 h-6 p-3 hover-target">
 						<div class="flex 
 						">
 							<div
@@ -170,18 +169,18 @@ input[type="submit"] {
 							</div>
 							<div
 								class="bg-gray-100 text-xs p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
-								<a href="boardList.do?state=Action_Rogue_like" class="">Action_Rogue_like</a> 
-									 			
-							</div> 
-							<div 
+								<a href="boardList.do?state=Action_Rogue_like" class="">Action_Rogue_like</a>
+
+							</div>
+							<div
 								class="bg-gray-100 text-xs p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Adventure_RPG" class="">Adventure_RPG</a>
-					
+
 							</div>
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Arcade_and_Rhythm" class="">Arcade_and_Rhythm</a>
-					
+
 							</div>
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
@@ -193,7 +192,7 @@ input[type="submit"] {
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Card_board" class="">Card_board</a>
-							</div> 
+							</div>
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Arcade_and_Rhythm">Arcade_and_Rhythm</a>
@@ -201,8 +200,8 @@ input[type="submit"] {
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Life_Immersive_Sims">Life_Immersive_Sims</a>
-					
-							</div>  
+
+							</div>
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Role-Playing">RolePlay</a>
@@ -210,7 +209,7 @@ input[type="submit"] {
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Strategy">Strategy</a>
-							</div> 
+							</div>
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=sport">sport</a>
