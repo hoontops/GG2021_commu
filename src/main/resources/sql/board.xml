@@ -16,6 +16,17 @@
 		<result property="G_NAME"		column="G_NAME"/>
 	</resultMap>
 
+
+<!-- 메인에서사용 -->
+	<select id="board_list" resultType="board" >
+	<![CDATA[
+			select * from
+		(select rownum rn, BOARDS.* from
+		(select * from BOARD where B_NUM in
+		(select B_NUM from BOARD) order by dbms_random.random) BOARDS) 
+		where rn <= 4
+	]]>
+	</select>
 	<!-- 게시판 저장 -->
 	<insert id="boardInsert" parameterType="board">     
 	insert into board values(b_num_seq.nextval, #{B_TITLE}, #{B_CONTENT},

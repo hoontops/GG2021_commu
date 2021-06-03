@@ -44,10 +44,6 @@ public class MainController {
 		model.addAttribute("boardList",boardList);
 	
 		
-		System.out.println("보여줘 제발..=" + boardList.get(0));
-		System.out.println("2젠..보여줘 제발..=" + gameList.get(0));
-		
-		
 		
 		
 		

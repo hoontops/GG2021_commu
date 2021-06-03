@@ -299,7 +299,7 @@
 
 <div class="flex">
 
-<c:forEach var="game" items="${gameLis }"> 
+<c:forEach var="game" items="${gameList }"> 
 <div class="p-1 md:w-1/3 flex-auto">
         <div class="h-full border-2 border-gray-200 rounded-lg overflow-hidden">
           <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="${game.getG_IMG() }" alt="img">

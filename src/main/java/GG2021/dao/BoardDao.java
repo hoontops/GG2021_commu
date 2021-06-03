@@ -61,6 +61,6 @@ public class BoardDao {
 	}
 
 	public List<Board> getBoardListz() {
-		return session.selectList("boards.board_list");
+		return session.selectList("board_list");
 	}
 }
