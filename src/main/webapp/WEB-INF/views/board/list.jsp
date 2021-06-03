@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+	rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -66,7 +68,7 @@
 			</c:if>
 
 							<c:if test="${page > 1 }">
-								<a href="boardList.do?page=${page-1}">이전</a>
+								<a href="boardPaging.do?page=${page-1}">이전</a>
 							</c:if>
 
 							<c:forEach var="a" begin="${startPage}" end="${endPage}">
@@ -74,7 +76,7 @@
 					${a}
 				</c:if>
 								<c:if test="${a != page }">
-									<a href="boardList.do?page=${a}">[${a}]</a>&nbsp;
+									<a href="boardPaging.do?page=${a}">[${a}]</a>&nbsp;
 				</c:if>
 							</c:forEach>
 
@@ -82,7 +84,7 @@
 				다음 
 			</c:if>
 							<c:if test="${page < maxPage }">
-								<a href="boardList.do?page=${page+1}">다음</a>
+								<a href="boardPaging.do?page=${page+1}">다음</a> 
 							</c:if>
 						</div>
 					</div>
@@ -175,8 +177,11 @@
 				</div> -->
 			</div>
 		</div>
-
-	</article>
-</body> 
+	</article> 
+	<div class="p-40"></div> 
+	
+ 
+	
+</body>  
 </html>
-<%@ include file="../main/footer.jsp"%> 
+<%@ include file="../main/footer.jsp"%>

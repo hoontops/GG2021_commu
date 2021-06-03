@@ -35,7 +35,7 @@
 
 	<!-- 게시글 총 갯수 -->
 	<select id="boardCount" resultType="int">
-		select count(B_NUM) from board where G_TYPE=#{state, jdbcType=VARCHAR}
+		select count(B_NUM) from board where G_TYPE=#{state, jdbcType=VARCHAR}  
 	</select>
 
 	<!-- 게시판 목록 -->
