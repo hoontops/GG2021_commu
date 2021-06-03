@@ -34,9 +34,9 @@
 						<i class="fas fa-users text-white text-2xl"></i>
 					</div>
 
-					<div class="mx-5">
+					<div class="mx-5 w-20">
 						<h4 class="text-2xl font-semibold text-gray-700">${memberCount }</h4>
-						<div class="text-gray-500">회원 수</div>
+						<div class="text-gray-500 w-20">회원 수</div>
 					</div>
 				</div>
 			</div>
@@ -48,8 +48,8 @@
 					</div>
 
 					<div class="mx-5">
-						<h4 class="text-2xl font-semibold text-gray-200">200,521</h4>
-						<div class="text-gray-200">게시글 수</div>
+						<h4 class="text-2xl font-semibold text-gray-200"></h4>
+						<div class="text-gray-200"></div>
 					</div>
 				</div>
 			</div>
@@ -61,8 +61,8 @@
 					</div>
 
 					<div class="mx-5">
-						<h4 class="text-2xl font-semibold text-gray-200">215,542</h4>
-						<div class="text-gray-200">댓글 수</div>
+						<h4 class="text-2xl font-semibold text-gray-200"></h4>
+						<div class="text-gray-200"></div>
 					</div>
 				</div>
 			</div>
@@ -79,14 +79,15 @@
 				<table class="min-w-full">
 					<thead>
 						<tr>
+						
 							<th
-								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+								class="px-12 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 								아이디/이름</th>
 							<th
 								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 								이메일/비밀번호</th>
 							<th
-								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+								class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 								포인트</th>
 							<th
 								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">

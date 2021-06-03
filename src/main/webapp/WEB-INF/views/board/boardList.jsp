@@ -31,7 +31,6 @@
 
 		$("#selec").change(function(){
 			var selec = $("#selec").val();
-			alert(selec);
 			
 			$.post("boardPagingPost.do", {"state": selec}, function(data){
 			 	$("#boardPaging").html(data);

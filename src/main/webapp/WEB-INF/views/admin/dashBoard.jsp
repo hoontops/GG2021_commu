@@ -19,7 +19,7 @@
 						<i class="fas fa-users text-white text-2xl"></i>
 					</div>
 
-					<div class="mx-3">
+					<div class="mx-3 w-20">
 						<h4 class="text-2xl font-semibold text-gray-700">${memberCount }</h4>
 						<div class="text-gray-500">회원 수</div>
 					</div>
@@ -33,7 +33,7 @@
 						<i class="far fa-list-alt text-white text-3xl"></i>
 					</div>
 
-					<div class="mx-1">
+					<div class="mx-1 w-20">
 						<h4 class="text-2xl font-semibold text-gray-700">${boardCount }</h4>
 						<div class="text-gray-500">게시글 수</div>
 					</div>
@@ -47,7 +47,7 @@
 						<i class="fas fa-comments text-white text-3xl"></i>
 					</div>
 
-					<div class="mx-3">
+					<div class="mx-3 w-20">
 						<h4 class="text-2xl font-semibold text-gray-700">${commentsCount }</h4>
 						<div class="text-gray-500">댓글 수</div>
 					</div>

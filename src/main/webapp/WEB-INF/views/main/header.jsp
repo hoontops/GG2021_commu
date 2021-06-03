@@ -162,7 +162,7 @@ input[type="submit"] {
 					class="relative z-10 hover-trigger mt-1 border-b-2 hover:border-indigo-600">
 					<a href="boardList.do?state=Action" class="text-xs">COMMNUNITY</a>
 					<div class="absolute w-28 h-6 p-3 hover-target">    
-						<div class="flex p-1 
+						<div class="flex 
 						">
 							<div
 								class="bg-gray-100 text-xs p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
@@ -189,7 +189,7 @@ input[type="submit"] {
 							</div>
 
 						</div>
-						<div class="flex">
+						<div class="flex h-10">
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
 								<a href="boardList.do?state=Card_board" class="">Card_board</a>
@@ -205,7 +205,7 @@ input[type="submit"] {
 							</div>  
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">
-								<a href="boardList.do?state=Role-Playing">Role-Playing</a>
+								<a href="boardList.do?state=Role-Playing">RolePlay</a>
 							</div>
 							<div
 								class="bg-gray-100 text-xs  p-3 border-b-2 hover:border-indigo-600 hover:bg-indigo-100">

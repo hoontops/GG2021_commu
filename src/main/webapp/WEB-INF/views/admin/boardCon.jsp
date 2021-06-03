@@ -7,18 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-function del(bnum){
-	var check  = confirm("삭제하시겠습니까?");
-	if(check){
-		location.href="boardDel.do?B_NUM="+bnum;
-	}else{
-		alert("취소하였습니다.");
-		return false;
-	}
+<style>
+.txt_line {
+	width: 150px;
+	padding: 0 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
-
-	</script>
+</style>
+<script type="text/javascript">
+	function del(bnum) {
+		var check = confirm("삭제하시겠습니까?");
+		if (check) {
+			location.href = "boardDel.do?B_NUM=" + bnum;
+		} else {
+			alert("취소하였습니다.");
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
 	<%@ include file="adminCase.jsp"%>
@@ -33,40 +41,29 @@ function del(bnum){
 						<i class="far fa-list-alt text-white text-3xl"></i>
 					</div>
 
-					<div class="mx-5">
+					<div class="mx-5 w-20">
 						<h4 class="text-2xl font-semibold text-gray-700">${boardCount }</h4>
-						<div class="text-gray-500">게시글 수</div>
+						<div class="text-gray-500 w-20">게시글 수</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="w-full px-6 sm:w-1/2 xl:w-1/3">
-				<div class="flex items-center px-5 py-6  rounded-md bg-gray-200">
-					<div class="p-3 rounded-full bg-gray-200 bg-opacity-75">
-						<i class="fas fa-users text-gray-200 text-2xl"></i>
-					</div>
-
-					<div class="mx-5">
-						<h4 class="text-2xl font-semibold text-gray-200">8,282</h4>
-						<div class="text-gray-200">회원 수</div>
-					</div>
-				</div>
-			</div>
-
-
 
 			<div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
-				<div class="flex items-center px-5 py-6   rounded-md bg-gray-200">
-					<div class="p-3 rounded-full bg-gray-200 bg-opacity-75">
-						<i class="fas fa-comments text-gray-200 text-3xl"></i>
+				<div
+					class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white" style="
+    height: 101px;
+">
+					<div class="p-3 rounded-full bg-pink-600 bg-opacity-75">
+						<i class="fas fa-comments text-white text-3xl"></i>
 					</div>
 
 					<div class="mx-5">
-						<h4 class="text-2xl font-semibold text-gray-200">215,542</h4>
-						<div class="text-gray-200">댓글 수</div>
+						<h4 class="text-2xl font-semibold text-gray-700 ">${commentsCount }</h4>
+						<div class="text-gray-500 W-20">댓글 수</div>
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
 
@@ -81,7 +78,7 @@ function del(bnum){
 				<table class="min-w-full">
 					<thead>
 						<tr>
-							
+
 							<th
 								class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 								아이디</th>
@@ -113,7 +110,7 @@ function del(bnum){
 											<c:set var="num" value="${num-1}" />
 										</div>
 
-										<div class="ml-4 ">
+										<div class=" ">
 											<div class="text-sm leading-5  font-medium text-gray-900">${board.getM_ID() }</div>
 										</div>
 									</div>
@@ -121,7 +118,12 @@ function del(bnum){
 
 								<td
 									class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-									<div class="text-center text-sm leading-5 text-gray-900"><a class="hover:text-indigo-500" href="boardView.do?B_NUM=${board.getB_NUM() }&page=${page }&state=cont" >${board.getB_TITLE()}</a></div>
+									<div class="text-center text-sm leading-5 text-gray-900">
+										<div class="txt_line">
+											<a class="hover:text-indigo-500"
+												href="boardView.do?B_NUM=${board.getB_NUM() }&page=${page }&state=cont">${board.getB_TITLE()}</a>
+										</div>
+									</div>
 								</td>
 
 								<td
@@ -137,13 +139,13 @@ function del(bnum){
 								</td>
 
 								<td
-									class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-									<a href="boardView.do?B_NUM=${board.getB_NUM() }&page=${page }&state=edit"><i
-										class="fas fa-edit text-indigo-500 pr-2"></i></a> 
-										
-									<a href="javascript:del('${board.getB_NUM()}')">
-									 	<i class="far fa-trash-alt text-red-600"></i>
-									 </a>
+									class="px-1 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+									<a
+									href="boardView.do?B_NUM=${board.getB_NUM() }&page=${page }&state=edit"><i
+										class="fas fa-edit text-indigo-500 pr-2"></i></a> <a
+									href="javascript:del('${board.getB_NUM()}')"> <i
+										class="far fa-trash-alt text-red-600"></i>
+								</a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -160,8 +162,8 @@ function del(bnum){
 
 					<c:forEach var="a" begin="${startPage}" end="${endPage}">
 						<c:if test="${a == page }">
-					<span class="font-bold text-indigo-600 px-1">[${a}]</span>
-				</c:if>
+							<span class="font-bold text-indigo-600 px-1">[${a}]</span>
+						</c:if>
 						<c:if test="${a != page }">
 							<a href="admin.do?state=board&page=${a}">[${a}]</a>&nbsp;
 				</c:if>

@@ -8,17 +8,19 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(function() {
- 	
- 	$("#tile").load("tile.do?state=Action");
-	
- 	$("#sel").change(function(){
- 		var sel = $("#sel").val()
- 		
- 		$.post("tiler.do", {"state": sel}, function(data){
- 		 	$("#tile").html(data);
- 	 	} );
- 	});
- 	
+
+		$("#tile").load("tile.do?state=Action");
+
+		$("#sel").change(function() {
+			var sel = $("#sel").val()
+
+			$.post("tiler.do", {
+				"state" : sel
+			}, function(data) {
+				$("#tile").html(data);
+			});
+		});
+
 	});
 </script>
 </head>
@@ -88,24 +90,10 @@
 		<div
 			class="text-center flex flex-col p-1 md:text-left md:flex-row md:items-center md:justify-between md:p-4 bg-indigo-200"
 			id="messageModal">
-			<div class="text-sm font-semibold">
+			<div class="text-sm font-semibold h-5">
 				<div class="text-gray-900">
-					공지사항- 뿌뿌뿌뿌 <b class="text-purple-500 text-center"> 여기에 커뮤니티
-						공지사항을 노출</b>
+					<b class="text-purple-500  text-center"> </b>
 				</div>
-			</div>
-
-			<div class="mt-3 md:mt-0 md:ml-2">
-				<button
-					class="inline-block rounded-md text-lg font-semibold py-2 px-4 text-white bg-purple-500"
-					onclick="window.open('https://google.com')">
-					<i class="fas fa-user"></i> 이벤트게시판?
-				</button>
-				<button
-					class="inline-block rounded-md text-lg font-semibold py-2 px-4 text-black bg-gray-300"
-					onclick="document.getElementById('messageModal').style.display = 'none'">
-					<i class="fas fa-times"></i>
-				</button>
 			</div>
 		</div>
 	</div>
@@ -119,7 +107,7 @@
 					d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
 					clip-rule="evenodd" />
           </svg>
-			<option value="Action">선택</option>
+			<option value="Action">NEWS ▼</option>
 			<option value="Beat_Em_Up">어드벤처</option>
 			<option value="City_setlement">도시건설</option>
 			<option value="Role-Playing">롤플레잉</option>
