@@ -61,7 +61,7 @@ public class BoardController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("maxPage", maxPage);
 		model.addAttribute("listcount", listcount);
-		model.addAttribute("boardlist", boardlists); 
+		model.addAttribute("boardlist", boardlists);
 
 		return "board/boardList";
 	}
@@ -127,6 +127,7 @@ public class BoardController {
 
 			model.addAttribute("state", state);
 			model.addAttribute("result01", result01);
+			System.out.println("state:"+state);
 
 			return "board/boardWriteOk";
 		}
@@ -137,7 +138,7 @@ public class BoardController {
 	public String boardView(@RequestParam("B_NUM") int B_NUM, @RequestParam("page") int page,
 			@RequestParam("state") String state, Model model) throws Exception {
 		if (state.equals("cont")) {
-			service.hit(B_NUM);
+			service.hit(B_NUM); 
 		}
 		Board board = service.boardView(B_NUM);
 

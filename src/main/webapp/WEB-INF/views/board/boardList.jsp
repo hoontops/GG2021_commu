@@ -67,11 +67,8 @@
 	<!-- 분류  -->
 	<div
 		class="flex justify-between mx-36 w-auto mt-10 border-b border-grey-light">
-		<div class="flex">
-			<button
-				class="focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">자유게시판</button>
-			<button
-				class="focus:outline-none py-2 px-6 hover:bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">이미지게시판</button>
+		<div class="flex focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">
+			자유게시판
 		</div>
 		<div class="mb-2">
 			<select id="selec"

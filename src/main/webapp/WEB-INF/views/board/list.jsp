@@ -140,7 +140,7 @@
 					</div>
 				</c:if>
 
-				<div id="latest_views" class="mt-5 h-64 mb-5 border-2">
+				<!-- <div id="latest_views" class="mt-5 h-64 mb-5 border-2">
 					<div class="p-2">최근 읽은 글</div>
 					<div class="ml-2">
 						<div class="flex items-center">
@@ -172,7 +172,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
