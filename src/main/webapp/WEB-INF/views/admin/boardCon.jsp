@@ -20,7 +20,7 @@
 	function del(bnum) {
 		var check = confirm("삭제하시겠습니까?");
 		if (check) {
-			location.href = "boardDel.do?B_NUM=" + bnum;
+			location.href = "boardDel.do?state=board&B_NUM=" + bnum;
 		} else {
 			alert("취소하였습니다.");
 			return false;

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../main/header.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -33,21 +33,21 @@
 			class="flex mx-auto bg-gray-50 justify-center items-center border-2 shadow p-10 rounded-lg w-7/12 h-96">
 			<div
 				class="hover:bg-indigo-100 bg-indigo-200 w-40 h-40 rounded-full overflow-hidden flex items-center">
-
-			  <!-- 프로필  -->
- 			  <c:if test="${empty M_IMG}">
-			        <div> 
- 			  		<a href="memberModify.do">
-				        <span class="ml-9 w-full h-full">
-					   	   <i class="fas fa-user-plus fa-5x"></i>
-					    </span>   
-			  		</a>
-			        </div>
-		       </c:if>
-		       <c:if test="${!empty M_IMG}">
-			       <img src="<%=request.getContextPath() %>/upload/${M_IMG}" class="w-full f-full container object-cover" />  
-		       </c:if>
+				<!-- 프로필  -->
+				<c:if test="${empty M_IMG}">
+					<div>
+						<a href="memberModify.do"> <span class="ml-9 w-full h-full">
+								<i class="fas fa-user-plus fa-5x"></i>
+						</span>
+						</a>
+					</div>
+				</c:if>
+				<c:if test="${!empty M_IMG}">
+					<img src="<%=request.getContextPath() %>/upload/${M_IMG}"
+						class="w-full f-full" />
+				</c:if>
 			</div>
+
 
 			<div class="ml-10">
 				<div class="flex items-center pb-5">
@@ -67,7 +67,7 @@
 					</div>
 					<div class="ml-5">
 						가입일:<span class="font-bold ml-1"> <fmt:formatDate
-								value="${subDate}" pattern="yyyy-MM-dd" /></span> 
+								value="${subDate}" pattern="yyyy-MM-dd" /></span>
 					</div>
 				</div>
 				<div class="flex justify-between leading-10">
