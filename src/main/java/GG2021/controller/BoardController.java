@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,25 +30,30 @@ public class BoardController {
 	private BoardService service;
 	@Autowired
 	private GameService gservice;
-	@Autowired
+	@Autowired                                                                                                   
 	private CommentsService cms;
-
-	
+                                                                                                                                                                                                                                                                                                                            
+           	                                                                     
 	@RequestMapping("boardPaging.do") // load 
 	public String boardPaging(String state, Model model, HttpServletRequest request) throws Exception {
 		System.out.println("boardPaging.do state : " + state); 
 		List<Board> boardlists = new ArrayList<Board>();
 		List<Board> boardlist = new ArrayList<Board>();
-		
-		int page = 1; 
-		int limit = 10;
+		                                            
+		int page = 1;            
+		int limit = 10;                       
 		
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		int listcount = service.getListCount(state); // 총 글 수
 		//boardlists = service.getBoardListType(state); // 단순 액션 게임 리스트.
-		boardlist = service.getBoardList(page); 
+		
+		Board board = new Board(); 
+		board.setGO_TYPE(state);
+		board.setPage(page);
+		
+		boardlist = service.getBoardList(board); 
 		System.out.println("bo:"+boardlist);
 		int maxPage = (int) ((double) listcount / limit + 0.95);
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
@@ -83,8 +89,13 @@ public class BoardController {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		System.out.println("page:"+page);
-		int listcount = service.getListCount(state); // 총 글 수
-		boardlist = service.getBoardList(page); //
+	    int listcount = service.getListCount(state); // 총 글 수
+		
+	    Board board = new Board();
+		board.setGO_TYPE(state);
+		board.setPage(page);
+	     
+	    boardlist = service.getBoardList(board); //
 		boardlists = service.getBoardListType(state); // 단순 액션 게임 리스트.
 		int maxPage = (int) ((double) listcount / limit + 0.95);
 		int startPage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
@@ -220,27 +231,30 @@ public class BoardController {
 		int result = 0;
 		String file[] = new String[2];
 
-		StringTokenizer st = new StringTokenizer(filename, ".");
-		file[0] = st.nextToken();
-		file[1] = st.nextToken(); // 확장자
-
-		if (size > 10000000) { 
-			result = 1;
-			model.addAttribute("result", result);
-
-			return "member/uploadResult";
-
-		} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
-
-			result = 2;
-			model.addAttribute("result", result);
-
-			return "member/uploadResult";
-		}
-
-		if (size > 0) { // 첨부파일이 전송된 경우
-			mf.transferTo(new File(path + "/" + filename));
-		}
+		
+		if(filename != "") {	
+			StringTokenizer st = new StringTokenizer(filename, ".");
+			file[0] = st.nextToken();
+			file[1] = st.nextToken(); // 확장자
+	
+			if (size > 10000000) { 
+				result = 1;
+				model.addAttribute("result", result);
+	
+				return "member/uploadResult";
+	
+			} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
+	
+				result = 2;
+				model.addAttribute("result", result);
+	
+				return "member/uploadResult";
+			}
+	
+			if (size > 0) { // 첨부파일이 전송된 경우
+				mf.transferTo(new File(path + "/" + filename));
+			}
+		}	
 
 		b.setB_IMG(filename);
 		service.edit(b);
@@ -249,12 +263,15 @@ public class BoardController {
 
 	// 게시글 삭제
 	@RequestMapping(value = "boardDel.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String boardDel(int B_NUM, Model model, String state) throws Exception {
+	public String boardDel(int B_NUM, Model model, String state, HttpSession session) throws Exception {
 		Board board = service.boardView(B_NUM);
-		
+		String id = (String) session.getAttribute("id");
 		model.addAttribute("state", state); 
 
 		service.boardDel(B_NUM);
+		if(id.equals("hth9876")) {
+			return "redirect:admin.do?state=board";
+		}
 
 		return "board/boardDelOk";
 	}

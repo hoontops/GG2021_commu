@@ -27,7 +27,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(function() {
-		$("#boardPaging").load("boardPaging.do?state=${state}");
+		$("#boardPaging").load("boardPaging.do?state=${state}&page=${page}");
 
 		$("#selec").change(function(){
 			var selec = $("#selec").val();

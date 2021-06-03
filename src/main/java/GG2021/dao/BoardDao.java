@@ -31,6 +31,12 @@ public class BoardDao {
 		return list;
 	}
 
+	// 게시판 리스트[NEW]
+	public List<Board> getBoardList(Board map) throws Exception {
+		List<Board> list = session.selectList("boardList", map);
+		return list;
+	}
+	
 	public List<Board> getBoardListType(String state) throws Exception {
 		List<Board> list = session.selectList("getBoardListType", state);
 		return list;
@@ -90,6 +96,14 @@ public class BoardDao {
        public int getTotal(Board board) {
           return session.selectOne("boardSearch.getTotal",board);
        }
+    //내가 작성한 글 갯수
+       public int getMyBoard(String id){
+   		return session.selectOne("getMyBoard" ,id);
+   	}
     
-
+    // 내가 작성 댓글 수
+       public int getMyComment(String id) {
+    	   return session.selectOne("getMyComment", id);
+       }
+       
 }

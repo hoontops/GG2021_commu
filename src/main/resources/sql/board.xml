@@ -39,12 +39,19 @@
 	</select>
 
 	<!-- 게시판 목록 -->
-	<select id="boardList" parameterType="int" resultType="board">
-	<![CDATA[
+	<select id="boardList" parameterType="board" resultType="board">
+	
 		select * from (select rownum rnum, board.* 
-		from (select * from board order by B_NUM desc) board)             
-		where rnum >= ((#{page}-1)*10+1) and rnum <= (#{page}*10)  
-	]]>
+		from (select * 
+			    from board 
+			   where 1=1
+		<if test="GO_TYPE != null and GO_TYPE != ''">
+			AND G_TYPE = #{GO_TYPE} 
+		</if>
+	
+		 order by B_NUM desc) board)             
+	<![CDATA[	where rnum >= ((#{page}-1)*10+1) and rnum <= (#{page}*10)]]>  
+	
 	</select>
 
 	<!-- 조회수 증가 -->
@@ -120,6 +127,17 @@
 		order by g_name asc) game)
 		where rnum between #{startRow} and #{endRow}
 	</select>
+	
+	
+	<!-- 내가 작성한 글 갯수 -->
+	<select id="getMyBoard" parameterType="String" resultType="int">
+		select count(*) from board where M_ID = #{id}
+	</select>
+	
+	<select id="getMyComment" parameterType="String" resultType="int">
+		select count(*) from comments where C_ID= #{id}   
+	</select>
+	
 </mapper>
 
 

@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import GG2021.model.Member;
+import GG2021.service.BoardService;
 import GG2021.service.MemberService;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService service;
+	
 
 	// ID중복검사 ajax함수로 처리부분
 	@RequestMapping(value = "memberCheck.do", method = RequestMethod.POST)

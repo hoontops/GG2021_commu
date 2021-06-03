@@ -16,9 +16,10 @@ public class Board {
 	private String G_NAME;
 	private String G_TYPE;
 	
+	private String GO_TYPE;
+	private int page;
 	
-	
-	private int startRow;
+	private int startRow; 
 	private int endRow;  
 		
 	private String search;
@@ -120,6 +121,17 @@ public class Board {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+	public String getGO_TYPE() {
+		return GO_TYPE;
+	}
+	public void setGO_TYPE(String gO_TYPE) {
+		GO_TYPE = gO_TYPE;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
 	
 }	

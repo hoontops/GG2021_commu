@@ -48,12 +48,10 @@
                                         class="border-2 border-gray-300 p-2 w-full" value="${bcont.getB_TITLE() }"
                                         required></input>
                                 </div>
-                                <div class="mb-4">  
-                                    <textarea name="B_CONTENT" id="B_CONTENT" rows="6" cols="117" style="resize:none" 
-                                    		class="border border-indigo-600 rounded my-3 focus:outline-none py-4 px-4">
-                                    		${bcont.getB_CONTENT()}            	 
-                                    </textarea> 
-                                    <input type="file" required="required" class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02">${B_IMG} 
+                                <div class="mb-4">   
+                                    <pre><textarea name="B_CONTENT" id="B_CONTENT" rows="6" cols="117" style="resize:none" class="border border-indigo-600 rounded my-3 focus:outline-none py-4 px-4">${bcont.getB_CONTENT()}</textarea></pre> 
+
+                                    <input type="file" class="p-1 mt-1 text-white bg-indigo-400 w-full" id="B_IMG02" name="B_IMG02">${B_IMG} 
                                     				 
                                 </div> 
                                 <div class="flex justify-end mb-10">

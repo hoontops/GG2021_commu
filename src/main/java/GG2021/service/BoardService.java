@@ -33,6 +33,12 @@ public class BoardService {
 		return dao.getBoardList(page);
 	}
 
+	
+	// 게시판 리스트[NEW]
+	public List getBoardList(Board map) throws Exception {
+		return dao.getBoardList(map);
+	}
+	
 	public List getBoardListType(String state) throws Exception {
 		return dao.getBoardListType(state);
 	}
@@ -91,5 +97,12 @@ public class BoardService {
 	public int getTotal(Board board) {
 		return dao.getTotal(board);
 	}
-
+	
+	public int getMyBoard(String id){
+		return dao.getMyBoard(id);
+	}
+	
+	public int getMyComment(String id) {
+		return dao.getMyComment(id);
+	}
 }

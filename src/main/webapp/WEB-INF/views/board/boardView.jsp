@@ -68,10 +68,8 @@
 
 		<div
 			class="flex justify-between mx-36 w-auto mt-10 border-b border-grey-light">
-			<div class="flex">
-				<button
-					class="focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">자유게시판
-					</button>
+			<div class="flex focus:outline-none py-2 px-6 bg-indigo-200 rounded-t-lg text-gray-500 bg-white font-bold">
+				자유게시판 
 			</div>
 			<div class="mb-2">
 				 
@@ -114,14 +112,14 @@
 		</div>   
 		
 		<!-- 내용 -->  
-		<div class="w-11/12 mx-auto py-10 pl-28">
+		<div class="w-11/12 mx-auto py-6 pl-28"> 
 			<c:if test="${empty bcont.getB_IMG()}">
 	       		&nbsp;
 	       </c:if> 
 	       <c:if test="${!empty bcont.getB_IMG()}">
 	       		<img src="<%=request.getContextPath() %>/upload/${bcont.getB_IMG()}" height="250" width="250" />
 	       </c:if>		
-			<p class="text-base mt-8">${bcont.getB_CONTENT() }</p>
+			<pre><p class="text-base mt-4">${bcont.getB_CONTENT() }</p></pre>
 		</div>
 
 		<!-- 추천비추천 -->

@@ -45,7 +45,7 @@
 			        </div>
 		       </c:if>
 		       <c:if test="${!empty M_IMG}">
-			       <img src="<%=request.getContextPath() %>/upload/${M_IMG}" class="w-full f-full container bg-cover" />  
+			       <img src="<%=request.getContextPath() %>/upload/${M_IMG}" class="w-full f-full container object-cover" />  
 		       </c:if>
 			</div>
 
@@ -72,10 +72,10 @@
 				</div>
 				<div class="flex justify-between leading-10">
 					<div>
-						작성한 글 수:<span class="font-bold ml-1 mr-3">5</span>
+						작성한 글 수:<span class="font-bold ml-1 mr-3">${myBoard}</span>
 					</div>
 					<div>
-						작성한 댓글 수:<span class="font-bold ml-1 mr-3">20</span>
+						작성한 댓글 수:<span class="font-bold ml-1 mr-3">${myComment }</span>
 					</div>
 					<div>
 						포인트:<span class="font-bold ml-1">${point}</span>

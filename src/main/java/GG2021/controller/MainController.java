@@ -15,6 +15,7 @@ import GG2021.model.Board;
 import GG2021.model.Member;
 import GG2021.service.AdminService;
 import GG2021.service.BoardService;
+import GG2021.service.CommentsService;
 import GG2021.service.GameService;
 import GG2021.service.MemberService;
 
@@ -28,27 +29,22 @@ public class MainController {
 	private GameService gservice;
 	@Autowired
 	private BoardService bservice;
-	
-	
+	@Autowired
+	private CommentsService cms;
+
 	@RequestMapping("main.do")
 	public String main(Model model) {
-		String link= aservice.getlink();
+		String link = aservice.getlink();
 		model.addAttribute("link", link);
-		
+
 		List<All_Game> gameList = gservice.getGameListz();
 //		System.out.println("game :"+gameList);
 		model.addAttribute("gameList", gameList);
-		
+
 		List<Board> boardList = bservice.getBoardListz();
 //		System.out.println("board :"+boardList);
-		model.addAttribute("boardList",boardList);
-	
-		
-		
-		
-		
-		
-		
+		model.addAttribute("boardList", boardList);
+
 		return "main/mainPage";
 		/* return "redirect:gameinfo.do"; */
 	}
@@ -80,16 +76,20 @@ public class MainController {
 		String email = member.getM_EMAIL();
 		Date subDate = member.getM_SUBSCRIPTION_DATE();
 		int point = member.getM_POINT();
+		int myBoard = bservice.getMyBoard(id);
+		int myComment = bservice.getMyComment(id);  
 
+		model.addAttribute("myComment", myComment); 
+		model.addAttribute("myBoard", myBoard);
 		model.addAttribute("email", email);
 		model.addAttribute("subDate", subDate);
 		model.addAttribute("point", point);
 		model.addAttribute("M_IMG", member.getM_IMG());
-
+		
+		System.out.println("myComment:"+myComment);
 		return "main/myPage";
 	}
 
-	
 	@RequestMapping("adminMain.do")
 	public String adminMain() {
 		return "redirect:admin.do?state=dash";
