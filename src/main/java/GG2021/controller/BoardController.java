@@ -169,8 +169,10 @@ public class BoardController {
 			}
 
 			board.setM_ID(M_ID);
+			System.out.println("작성자 아이디는요?? " + board.getM_ID());
 			board.setB_IMG(filename);
-
+			board.setB_NOTICE1("0");
+			System.out.println("노티스 1 들어가나요? "+board.getB_NOTICE1() );
 			result01 = service.insert(board);
 
 			model.addAttribute("state", state);

@@ -23,8 +23,8 @@
 		, sysdate
 		, #{C_IMG, jdbcType=VARCHAR}
 		, 0
-		, #{B_NUM} 
 		, #{C_CONTENT}
+		, #{B_NUM}
 		)
 	</insert>
 	
