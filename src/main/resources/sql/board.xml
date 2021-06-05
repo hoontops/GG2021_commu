@@ -27,9 +27,9 @@
 	</select>
 	<!-- 게시판 저장 -->
 	<insert id="boardInsert" parameterType="board">
-		insert into board values(b_num_seq.nextval, #{B_TITLE}, #{B_CONTENT},
+		insert into board values(board_seq.nextval, #{B_TITLE}, #{B_CONTENT},
 		#{B_IMG, jdbcType=VARCHAR}, 0, 0, 0, sysdate, #{B_NOTICE1,
-		jdbcType=VARCHAR}, #{M_ID, jdbcType=VARCHAR},
+		jdbcType=VARCHAR}, #{M_ID},
 		#{G_NAME, jdbcType=VARCHAR},#{G_TYPE, jdbcType=VARCHAR})
 	</insert>
 
